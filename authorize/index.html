@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../bootstrap/bootstrap.min.css" />
+    <link href="../fonts/focusGrotestFont/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="container text-center mt-5">
+        
+        <div class="logo">
+            <img src="../logo.png" alt="TimeFlow-logo" height="70px;" />
+            <div class="mt-4">
+                <span>Вход TimeFlow</span>
+            </div>
+        </div>
+
+        <label class="switch">
+            <input type="checkbox" />
+            <span class="slider round" data-label-on="Админ" data-label-off="Бюро"></span>
+        </label>
+
+        <form class="login-form">
+            <div class="mb-3">
+                <input class="form-control" type="email" placeholder="email" aria-label="default input example" >
+            </div>
+            <div class="mb-3">
+                <input class="form-control" type="password" placeholder="password" />
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input btn-outline-secondary"/>
+                <label class="form-check-label" style="width: 100%; text-align: left;">Запомнить меня</label>
+            </div>
+            <button type="submit" class="btn btn-secondary">Войти</button>
+        </form>
+
+        <div class="can-registration mt-2">
+            <span style="display: block;">или</span>
+            <button type="submit" class="btn btn-secondary mt-2" id="btn-registration">Зарегестрироваться</button>
+        </div>
+        
+    </div>
+
+    <script src="../bootstrap/bootstrap.min.js"></script>
+    <script src="../jquery/jquery.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
