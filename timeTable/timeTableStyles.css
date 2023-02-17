@@ -141,7 +141,9 @@ body {
 }
 
 .pair-name {
-    font-size: 15px;
+    font-size: 20px;
+    line-height: 18px;
+    padding: 0 2px;
 }
 
 .pair-room {
