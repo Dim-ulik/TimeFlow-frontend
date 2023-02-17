@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link type="Image/x-icon" href="../favicon.ico" rel="icon">
+    <title>TimeFlow</title>
+    <link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="timeTableStyles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<nav class="navbar navbar-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="./images/logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top logo">
+            <span class="navbar-name">TimeFlow</span>
+        </a>
+        <button type="button" class="btn exit-button">Выйти</button>
+    </div>
+</nav>
+<div class="container timetable mt-5">
+   <div class="row">
+       <div class="col-2 day-col" id="monday-col">
+           <div class="day-inf mb-xl-5">
+               <div class="day-name">
+                    Понедельник
+               </div>
+               <div class="day-date">
+                   13 янв.
+               </div>
+           </div>
+           <div class="pair-cell no-pair">
+               <div class="pair-time no-pair-time">
+                   8:45-10:35
+               </div>
+           </div>
+       </div>
+       <div class="col-2 day-col" id="tuesday-col">
+           <div class="day-inf mb-xl-5">
+               <div class="day-name">
+                   Вторник
+               </div>
+               <div class="day-date">
+                   14 янв.
+               </div>
+           </div>
+           <div class="pair-cell lecture-pair">
+               <div class="pair-time lecture-pair-time">
+                   8:45-10:35
+               </div>
+               <div class="pair-name lecture-pair-inf">
+                   Основы машинного обучения
+               </div>
+               <div class="pair-inf lecture-pair-inf">
+                   Лекция
+               </div>
+           </div>
+       </div>
+       <div class="col-2 day-col" id="wednesday-col">
+           <div class="day-inf mb-xl-5">
+               <div class="day-name">
+                   Среда
+               </div>
+               <div class="day-date">
+                   15 янв.
+               </div>
+           </div>
+       </div>
+       <div class="col-2 day-col" id="thursday-col">
+           <div class="day-inf mb-xl-5">
+               <div class="day-name">
+                   Четверг
+               </div>
+               <div class="day-date">
+                   16 янв.
+               </div>
+           </div>
+       </div>
+       <div class="col-2 day-col" id="friday-col">
+           <div class="day-inf mb-xl-5">
+               <div class="day-name">
+                   Пятница
+               </div>
+               <div class="day-date">
+                   17 янв.
+               </div>
+           </div>
+       </div>
+       <div class="col-2 day-col" id="saturday-col">
+           <div class="day-inf mb-xl-5">
+               <div class="day-name">
+                   Суббота
+               </div>
+               <div class="day-date">
+                   18 янв.
+               </div>
+           </div>
+       </div>
+   </div>
+</div>
+</body>
+
+<script src="/jquery/jquery.js"></script>
+<script src="/bootstrap/bootstrap.min.js"></script>
+<script src="timeTableScript.js"></script>
+</html>
