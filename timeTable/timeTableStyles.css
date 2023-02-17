@@ -43,3 +43,75 @@ body {
     outline:none;
     transform: scale(95%);
 }
+
+.timetable {
+    align-items: center;
+}
+
+.day-col {
+    text-align: center;
+    width: 16%;
+    margin: 0 auto;
+}
+
+.day-inf, .pair-cell {
+    font-family: 'Raleway', sans-serif;
+}
+
+.day-inf {
+    font-size: 20px;
+    height: 65px;
+    align-items: center;
+    color: #424147;
+    background: rgb(163,182,238);
+    background: linear-gradient(47deg, rgba(163,182,238,1) 0%, rgba(181,196,238,1) 100%);
+    border-radius: 10px 10px 0 0;
+    -webkit-box-shadow: 6px 4px 19px 10px rgba(163, 182, 238, 0.45);
+    -moz-box-shadow: 6px 4px 19px 10px rgba(163, 182, 238, 0.45);
+    box-shadow: 6px 4px 19px 10px rgba(163, 182, 238, 0.45);
+}
+
+.day-date {
+    color: #ffffff;
+    font-size: 18px;
+}
+
+.pair-cell {
+    margin-top: 15px;
+    height: 150px;
+    background-color: #0a58ca;
+    border-radius: 0 20px 0 20px;
+}
+
+.pair-time {
+    text-align: center;
+    padding: 5px;
+    border-radius: 0 20px 0 0;
+}
+
+.no-pair {
+    background: rgba(167, 167, 169, 0.13);
+    border-radius: 0;
+}
+
+.no-pair-time {
+    color: rgb(155, 155, 155);
+    border-radius: 0;
+}
+
+.lecture-pair {
+    background: rgb(236,41,0);
+    background: linear-gradient(39deg, rgba(236,41,0,1) 0%, rgba(164,20,0,1) 100%);
+    color: #e7e7e7;
+    -webkit-box-shadow: 0px 18px 35px -1px rgba(195, 0, 0, 0.42);
+    -moz-box-shadow: 0px 18px 35px -1px rgba(195, 0, 0, 0.42);
+    box-shadow: 0px 18px 35px -1px rgba(195, 0, 0, 0.42);
+}
+
+.lecture-pair-time {
+    background-color: #9f1200;
+}
+
+.lecture-pair:hover {
+    //тень
+}
