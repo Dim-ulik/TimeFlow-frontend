@@ -23,7 +23,7 @@ body{
     border-radius: 34px;;
 }
 
-#btn-registration{
+.btn-green{
     background-color: var(--color-custom-green);
 }
 
@@ -35,13 +35,14 @@ body{
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
 }
 
-.login-form{
+.login-form, .register-form{
     margin: 0 auto;
     width:fit-content
 }
 
-.form-control{
+.form-control, .form-label{
     width: 400px;
+	text-align: start;
 }
 
 .switch {

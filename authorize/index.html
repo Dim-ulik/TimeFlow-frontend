@@ -27,7 +27,7 @@
 
         <form class="login-form">
             <div class="mb-3">
-                <input class="form-control" type="email" placeholder="email" aria-label="default input example" >
+                <input class="form-control" type="email@example.com" placeholder="email" aria-label="default input example" >
             </div>
             <div class="mb-3">
                 <input class="form-control" type="password" placeholder="password" />
@@ -41,8 +41,44 @@
 
         <div class="can-registration mt-2">
             <span style="display: block;">или</span>
-            <button type="submit" class="btn btn-secondary mt-2" id="btn-registration">Зарегестрироваться</button>
+            <button class="btn btn-secondary mt-2 btn-green" id="btn-registration">Зарегестрироваться</button>
         </div>
+
+        <form class="register-form d-none">
+            <div class="mb-3">
+                <label class="form-label">Фамилия</label>
+                <input class="form-control" placeholder="Иванов">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Имя</label>
+                <input class="form-control" placeholder="Иван">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Отчество</label>
+                <input class="form-control" placeholder="Иванович">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Пол</label>
+                <select class="form-select" aria-label="Default select example">
+                    <option value="0">Мужской</option>
+                    <option value="1">Женский</option>
+                </select>
+            </div>
+            <div class="mb-5">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="email@example.com">
+            </div>
+            <div class="mb-1">
+              <label class="form-label">Пароль</label>
+              <input type="password" class="form-control">
+            </div>
+            <div class="mb-5">
+                <label class="form-label">Пароль еще раз</label>
+                <input type="password" class="form-control">
+            </div>
+            
+            <button type="submit" class="btn btn-secondary btn-green mt-2">Зарегестрироваться</button>
+          </form>
         
     </div>
 
