@@ -21,12 +21,36 @@
             <img src="./images/logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top logo">
             <span class="navbar-name">TimeFlow</span>
         </a>
-        <button type="button" class="btn exit-button">Выйти</button>
+        <button type="button" class="btn time-flow-button">Выйти</button>
     </div>
 </nav>
 <div class="container timetable mt-5">
+    <form class="row mb-5">
+        <div class="col-2">
+            <select class="form-select" aria-label="Default select example">
+            <option selected>Номер группы</option>
+            <option value="972101">972101</option>
+            <option value="972102">972102</option>
+            <option value="972103">972103</option>
+            </select>
+        </div>
+        <div class="col-3">
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Текущая неделя</option>
+                <option value="1">20.02.2023 - 25.02.2023</option>
+                <option value="2">27.02.2023 - 04.03.2023</option>
+                <option value="3">06.03.2023 - 12.03.2023</option>
+            </select>
+        </div>
+        <div class="col-1">
+            <button type="submit" class="btn time-flow-button">Показать</button>
+        </div>
+        <div class="col-1">
+            <button type="submit" class="btn time-flow-button">Редактировать</button>
+        </div>
+    </form>
    <div class="row">
-       <div class="col-2 day-col" id="monday-col">
+       <div class="col-xl-2 day-col" id="monday-col">
            <div class="day-inf mb-xl-5">
                <div class="day-name">
                     Понедельник
@@ -36,12 +60,36 @@
                </div>
            </div>
            <div class="pair-cell no-pair">
-               <div class="pair-time no-pair-time">
-                   8:45-10:35
+               <div class="pair-inf no-pair-inf">
+                   8:45 - 10:20
+               </div>
+           </div>
+           <div class="pair-cell practice-pair">
+               <div class="pair-inf practice-pair-inf">
+                   <div class="pair-name">
+                       10:35 - 12:10
+                   </div>
+                   <div class="pair-type practice-pair-type">
+                       Практическое занятие
+                   </div>
+               </div>
+               <div class="pair-name practice-pair-name text-start ps-2">
+                   Элективные дисциплины по физической культуре и спорту
+               </div>
+               <div class="pair-room text-start ps-2">
+                   Спортивный зал 97 (14)
+               </div>
+               <div class="text-start teacher ps-2">
+                   <div>
+                       Преподаватель:
+                   </div>
+                   <div>
+                       Путин Владимир Владимирович
+                   </div>
                </div>
            </div>
        </div>
-       <div class="col-2 day-col" id="tuesday-col">
+       <div class="col-xl-2 day-col" id="tuesday-col">
            <div class="day-inf mb-xl-5">
                <div class="day-name">
                    Вторник
@@ -51,18 +99,60 @@
                </div>
            </div>
            <div class="pair-cell lecture-pair">
-               <div class="pair-time lecture-pair-time">
-                   8:45-10:35
+               <div class="pair-inf lecture-pair-inf">
+                   <div class="pair-time">
+                       8:45 - 10:20
+                   </div>
+                   <div class="pair-type lecture-pair-type">
+                       Лекция
+                   </div>
                </div>
-               <div class="pair-name lecture-pair-inf">
+               <div class="pair-name lecture-pair-name text-start ps-2">
                    Основы машинного обучения
                </div>
-               <div class="pair-inf lecture-pair-inf">
-                   Лекция
+               <div class="pair-room text-start ps-2">
+                   Ауд. 302 (2)
+               </div>
+               <div class="text-start teacher ps-2">
+                   <div>
+                       Преподаватель:
+                   </div>
+                   <div>
+                       Красавин Дмитрий Сергеевич
+                   </div>
+               </div>
+           </div>
+           <div class="pair-cell seminar-pair">
+               <div class="pair-inf seminar-pair-inf">
+                   <div class="pair-name">
+                       10:35 - 12:10
+                   </div>
+                   <div class="pair-type seminar-pair-type">
+                       Семинар
+                   </div>
+               </div>
+               <div class="pair-name seminar-pair-name text-start ps-2">
+                   Иностранный язык
+               </div>
+               <div class="pair-room text-start ps-2">
+                   Ауд. 214 (2)
+               </div>
+               <div class="text-start teacher ps-2">
+                   <div>
+                       Преподаватель:
+                   </div>
+                   <div>
+                       Шилова Татьяна Валерьевна
+                   </div>
+               </div>
+           </div>
+           <div class="pair-cell no-pair">
+               <div class="pair-inf no-pair-inf">
+                   12:25 - 14:00
                </div>
            </div>
        </div>
-       <div class="col-2 day-col" id="wednesday-col">
+       <div class="col-xl-2 day-col" id="wednesday-col">
            <div class="day-inf mb-xl-5">
                <div class="day-name">
                    Среда
@@ -71,8 +161,32 @@
                    15 янв.
                </div>
            </div>
+           <div class="pair-cell laboratory-pair">
+               <div class="pair-inf laboratory-pair-inf">
+                   <div class="pair-name">
+                       8:45 - 10:20
+                   </div>
+                   <div class="pair-type laboratory-pair-type">
+                       Лабораторная
+                   </div>
+               </div>
+               <div class="pair-name laboratory-pair-name text-start ps-2">
+                   Математика для компьютерных наук ч.3
+               </div>
+               <div class="pair-room text-start ps-2">
+                   Ауд. 216 (2)
+               </div>
+               <div class="text-start teacher ps-2">
+                   <div>
+                       Преподаватель:
+                   </div>
+                   <div>
+                       Даммер Диана Дамировна
+                   </div>
+               </div>
+           </div>
        </div>
-       <div class="col-2 day-col" id="thursday-col">
+       <div class="col-xl-2 day-col" id="thursday-col">
            <div class="day-inf mb-xl-5">
                <div class="day-name">
                    Четверг
@@ -81,8 +195,32 @@
                    16 янв.
                </div>
            </div>
+           <div class="pair-cell exam-pair">
+               <div class="pair-inf exam-pair-inf">
+                   <div class="pair-name">
+                       8:45 - 10:20
+                   </div>
+                   <div class="pair-type exam-pair-type">
+                       Экзамен
+                   </div>
+               </div>
+               <div class="pair-name exam-pair-name text-start ps-2">
+                   ООП
+               </div>
+               <div class="pair-room text-start ps-2">
+                   Ауд. 302 (2)
+               </div>
+               <div class="text-start teacher ps-2">
+                   <div>
+                       Преподаватель:
+                   </div>
+                   <div>
+                       Змеев Денис Олегович
+                   </div>
+               </div>
+           </div>
        </div>
-       <div class="col-2 day-col" id="friday-col">
+       <div class="col-xl-2 day-col" id="friday-col">
            <div class="day-inf mb-xl-5">
                <div class="day-name">
                    Пятница
@@ -92,7 +230,7 @@
                </div>
            </div>
        </div>
-       <div class="col-2 day-col" id="saturday-col">
+       <div class="col-xl-2 day-col" id="saturday-col">
            <div class="day-inf mb-xl-5">
                <div class="day-name">
                    Суббота
