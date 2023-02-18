@@ -26,7 +26,7 @@
 </nav>
 <div class="container timetable mt-5">
     <form class="row mb-5">
-        <div class="col-2">
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
             <select class="form-select" aria-label="Default select example">
             <option selected>Номер группы</option>
             <option value="972101">972101</option>
@@ -34,7 +34,7 @@
             <option value="972103">972103</option>
             </select>
         </div>
-        <div class="col-3">
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-sm-0 col-12 mt-2">
             <select class="form-select" aria-label="Default select example">
                 <option selected>Текущая неделя</option>
                 <option value="1">20.02.2023 - 25.02.2023</option>
@@ -42,16 +42,16 @@
                 <option value="3">06.03.2023 - 12.03.2023</option>
             </select>
         </div>
-        <div class="col-1">
-            <button type="submit" class="btn time-flow-button">Показать</button>
+        <div class="col-xl-1 col-lg-2 col-md-2 col-sm-2 col-3">
+            <button type="submit" class="btn time-flow-button ms-lg-4 ms-xl-0 mt-lg-0 mt-md-3 mt-sm-3 mt-3">Показать</button>
         </div>
-        <div class="col-1">
-            <button type="submit" class="btn time-flow-button">Редактировать</button>
+        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6">
+            <button type="submit" class="btn time-flow-button ms-xl-2 mt-lg-0 mt-md-3 ms-md-0 ms-sm-4 mt-sm-3 mt-3 ms-3">Редактировать</button>
         </div>
     </form>
    <div class="row">
-       <div class="col-xl-2 day-col" id="monday-col">
-           <div class="day-inf mb-xl-5">
+       <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12 day-col" id="monday-col">
+           <div class="day-inf mb-xl-5 mb-lg-4 mb-md-4 mb-sm-3 mb-4">
                <div class="day-name">
                     Понедельник
                </div>
@@ -59,12 +59,12 @@
                    13 янв.
                </div>
            </div>
-           <div class="pair-cell no-pair">
+           <div class="pair-cell no-pair mb-4">
                <div class="pair-inf no-pair-inf">
                    8:45 - 10:20
                </div>
            </div>
-           <div class="pair-cell practice-pair">
+           <div class="pair-cell practice-pair mb-4">
                <div class="pair-inf practice-pair-inf">
                    <div class="pair-time">
                        10:35 - 12:10
@@ -89,8 +89,8 @@
                </div>
            </div>
        </div>
-       <div class="col-xl-2 day-col" id="tuesday-col">
-           <div class="day-inf mb-xl-5">
+       <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12 day-col" id="tuesday-col">
+           <div class="day-inf mb-xl-5 mb-lg-4 mb-md-4 mb-sm-3 mb-4 mt-sm-0 mt-4">
                <div class="day-name">
                    Вторник
                </div>
@@ -98,7 +98,7 @@
                    14 янв.
                </div>
            </div>
-           <div class="pair-cell lecture-pair">
+           <div class="pair-cell lecture-pair mb-4">
                <div class="pair-inf lecture-pair-inf">
                    <div class="pair-time">
                        8:45 - 10:20
@@ -122,7 +122,7 @@
                    </div>
                </div>
            </div>
-           <div class="pair-cell seminar-pair">
+           <div class="pair-cell seminar-pair mb-4">
                <div class="pair-inf seminar-pair-inf">
                    <div class="pair-time">
                        10:35 - 12:10
@@ -146,14 +146,14 @@
                    </div>
                </div>
            </div>
-           <div class="pair-cell no-pair">
+           <div class="pair-cell no-pair mb-4">
                <div class="pair-inf no-pair-inf">
                    12:25 - 14:00
                </div>
            </div>
        </div>
-       <div class="col-xl-2 day-col" id="wednesday-col">
-           <div class="day-inf mb-xl-5">
+       <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12 day-col" id="wednesday-col">
+           <div class="day-inf mb-xl-5 mb-lg-4 mb-md-4 mb-sm-3 mb-4 mt-sm-0 mt-4">
                <div class="day-name">
                    Среда
                </div>
@@ -161,7 +161,7 @@
                    15 янв.
                </div>
            </div>
-           <div class="pair-cell laboratory-pair">
+           <div class="pair-cell laboratory-pair mb-4">
                <div class="pair-inf laboratory-pair-inf">
                    <div class="pair-time">
                        8:45 - 10:20
@@ -186,8 +186,8 @@
                </div>
            </div>
        </div>
-       <div class="col-xl-2 day-col" id="thursday-col">
-           <div class="day-inf mb-xl-5">
+       <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12 day-col" id="thursday-col">
+           <div class="day-inf mb-xl-5 mb-lg-4 mb-md-4 mb-sm-3 mb-4 mt-sm-0 mt-4">
                <div class="day-name">
                    Четверг
                </div>
@@ -195,7 +195,7 @@
                    16 янв.
                </div>
            </div>
-           <div class="pair-cell exam-pair">
+           <div class="pair-cell exam-pair mb-4">
                <div class="pair-inf exam-pair-inf">
                    <div class="pair-time">
                        8:45 - 10:20
@@ -220,8 +220,8 @@
                </div>
            </div>
        </div>
-       <div class="col-xl-2 day-col" id="friday-col">
-           <div class="day-inf mb-xl-5">
+       <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12 day-col" id="friday-col">
+           <div class="day-inf mb-xl-5 mb-lg-4 mb-md-4 mb-sm-3 mb-4 mt-sm-0 mt-4">
                <div class="day-name">
                    Пятница
                </div>
@@ -230,8 +230,8 @@
                </div>
            </div>
        </div>
-       <div class="col-xl-2 day-col" id="saturday-col">
-           <div class="day-inf mb-xl-5">
+       <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12 day-col" id="saturday-col">
+           <div class="day-inf mb-xl-5 mb-lg-4 mb-md-4 mb-sm-3 mb-4 mt-sm-0 mt-4">
                <div class="day-name">
                    Суббота
                </div>
