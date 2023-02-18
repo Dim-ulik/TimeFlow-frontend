@@ -59,35 +59,6 @@
                    13 янв.
                </div>
            </div>
-           <div class="pair-cell no-pair mb-4">
-               <div class="pair-inf no-pair-inf">
-                   8:45 - 10:20
-               </div>
-           </div>
-           <div class="pair-cell practice-pair mb-4">
-               <div class="pair-inf practice-pair-inf">
-                   <div class="pair-time">
-                       10:35 - 12:10
-                   </div>
-                   <div class="pair-type practice-pair-type">
-                       Практическое занятие
-                   </div>
-               </div>
-               <div class="pair-name practice-pair-name text-start ps-2">
-                   Элективные дисциплины по физической культуре и спорту
-               </div>
-               <div class="pair-room text-start ps-2">
-                   Спортивный зал 97 (14)
-               </div>
-               <div class="text-start teacher ps-2">
-                   <div>
-                       Преподаватель:
-                   </div>
-                   <div>
-                       Путин Владимир Владимирович
-                   </div>
-               </div>
-           </div>
        </div>
        <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12 day-col" id="tuesday-col">
            <div class="day-inf mb-xl-5 mb-lg-4 mb-md-4 mb-sm-3 mb-4 mt-sm-0 mt-4">
@@ -96,59 +67,6 @@
                </div>
                <div class="day-date">
                    14 янв.
-               </div>
-           </div>
-           <div class="pair-cell lecture-pair mb-4">
-               <div class="pair-inf lecture-pair-inf">
-                   <div class="pair-time">
-                       8:45 - 10:20
-                   </div>
-                   <div class="pair-type lecture-pair-type">
-                       Лекция
-                   </div>
-               </div>
-               <div class="pair-name lecture-pair-name text-start ps-2">
-                   Основы машинного обучения
-               </div>
-               <div class="pair-room text-start ps-2">
-                   Ауд. 302 (2)
-               </div>
-               <div class="text-start teacher ps-2">
-                   <div>
-                       Преподаватель:
-                   </div>
-                   <div>
-                       Красавин Дмитрий Сергеевич
-                   </div>
-               </div>
-           </div>
-           <div class="pair-cell seminar-pair mb-4">
-               <div class="pair-inf seminar-pair-inf">
-                   <div class="pair-time">
-                       10:35 - 12:10
-                   </div>
-                   <div class="pair-type seminar-pair-type">
-                       Семинар
-                   </div>
-               </div>
-               <div class="pair-name seminar-pair-name text-start ps-2">
-                   Иностранный язык
-               </div>
-               <div class="pair-room text-start ps-2">
-                   Ауд. 214 (2)
-               </div>
-               <div class="text-start teacher ps-2">
-                   <div>
-                       Преподаватель:
-                   </div>
-                   <div>
-                       Шилова Татьяна Валерьевна
-                   </div>
-               </div>
-           </div>
-           <div class="pair-cell no-pair mb-4">
-               <div class="pair-inf no-pair-inf">
-                   12:25 - 14:00
                </div>
            </div>
        </div>
@@ -161,30 +79,6 @@
                    15 янв.
                </div>
            </div>
-           <div class="pair-cell laboratory-pair mb-4">
-               <div class="pair-inf laboratory-pair-inf">
-                   <div class="pair-time">
-                       8:45 - 10:20
-                   </div>
-                   <div class="pair-type laboratory-pair-type">
-                       Лабораторная
-                   </div>
-               </div>
-               <div class="pair-name laboratory-pair-name text-start ps-2">
-                   Математика для компьютерных наук ч.3
-               </div>
-               <div class="pair-room text-start ps-2">
-                   Ауд. 216 (2)
-               </div>
-               <div class="text-start teacher ps-2">
-                   <div>
-                       Преподаватель:
-                   </div>
-                   <div>
-                       Даммер Диана Дамировна
-                   </div>
-               </div>
-           </div>
        </div>
        <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12 day-col" id="thursday-col">
            <div class="day-inf mb-xl-5 mb-lg-4 mb-md-4 mb-sm-3 mb-4 mt-sm-0 mt-4">
@@ -193,30 +87,6 @@
                </div>
                <div class="day-date">
                    16 янв.
-               </div>
-           </div>
-           <div class="pair-cell exam-pair mb-4">
-               <div class="pair-inf exam-pair-inf">
-                   <div class="pair-time">
-                       8:45 - 10:20
-                   </div>
-                   <div class="pair-type exam-pair-type">
-                       Экзамен
-                   </div>
-               </div>
-               <div class="pair-name exam-pair-name text-start ps-2">
-                   ООП
-               </div>
-               <div class="pair-room text-start ps-2">
-                   Ауд. 302 (2)
-               </div>
-               <div class="text-start teacher ps-2">
-                   <div>
-                       Преподаватель:
-                   </div>
-                   <div>
-                       Змеев Денис Олегович
-                   </div>
                </div>
            </div>
        </div>
@@ -242,9 +112,42 @@
        </div>
    </div>
 </div>
+
+<!-- Шаблон для свободного дня-->
+<div class="pair-cell free-day-cell no-pair d-none mb-4" id="free-day-template">
+    <div class="pair-inf no-pair-inf">
+        <div>На сегодня пар нет!</div>
+    </div>
+</div>
+
+<!-- Шаблон для "Нет пары" -->
+<div class="pair-cell no-pair mb-4 d-none" id="no-pair-template">
+    <div class="pair-inf no-pair-inf">
+        <div class="pair-time"></div>
+        <div>Пары нет</div>
+    </div>
+</div>
+
+<!-- Шаблон -->
+<div class="pair-cell d-none mb-4" id="pair-template">
+    <div class="pair-inf">
+        <div class="pair-time"></div>
+        <div class="pair-type"></div>
+    </div>
+    <div class="pair-name text-start ps-2"></div>
+    <div class="pair-room text-start ps-2"></div>
+    <div class="text-start teacher ps-2">
+        <div>
+            Преподаватель:
+        </div>
+        <div class="teacher-name"></div>
+    </div>
+</div>
+
 </body>
 
 <script src="/jquery/jquery.js"></script>
 <script src="/bootstrap/bootstrap.min.js"></script>
+<script src="baseFunctions.js"></script>
 <script src="timeTableScript.js"></script>
 </html>

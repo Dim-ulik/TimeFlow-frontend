@@ -54,12 +54,6 @@ body {
 
 .day-col {
     text-align: center;
-    transition: 1s;
-}
-
-.day-col:hover {
-    transform: translateY(-3px);
-    transition: 1s;
 }
 
 .day-inf, .pair-cell {
@@ -91,6 +85,11 @@ body {
     border-radius: 0 20px 0 20px;
 }
 
+.free-day-cell {
+    height: 150px;
+    padding: 55px 0;
+}
+
 .pair-inf {
     text-align: center;
     padding: 5px;
@@ -106,6 +105,7 @@ body {
 .no-pair {
     background: rgba(167, 167, 169, 0.13);
     border-radius: 0;
+    min-height: 32px;
 }
 
 .no-pair-inf {
