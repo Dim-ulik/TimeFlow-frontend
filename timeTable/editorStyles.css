@@ -1,0 +1,53 @@
+.group-information {
+    font-size: 19px;
+    color: #424147;
+}
+
+#group-dates, #group-number {
+    color: #A3B6EE;
+}
+
+.add-pair-cell {
+    background-color: #c9d2ec;
+    moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+
+.add-pair-cell:hover {
+    background-color: #a5b7ed;
+}
+
+.add-pair-cell:active {
+    transform: scale(97%);
+}
+
+.add-pair-plus {
+    font-size: 100px;
+}
+
+.pencil-img:hover {
+    transform: rotate(360deg);
+    transition: 0.5s;
+}
+
+.delete-button {
+    background-color: #be0000;
+    color: #ffffff;
+    border-radius: 14px;
+    font-size: 15px;
+    -webkit-box-shadow: 5px 4px 20px -7px rgb(206, 100, 100);
+    -moz-box-shadow: 5px 4px 20px -7px rgba(206, 100, 100);
+    box-shadow: 5px 4px 20px -7px rgba(206, 100, 100);
+}
+
+.delete-button:hover {
+    transform: scale(102%);
+    background-color: #8f0000;
+    color: white;
+}
+
+.delete-button:active {
+    outline:none;
+    transform: scale(95%);
+}

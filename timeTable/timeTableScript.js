@@ -1,22 +1,5 @@
 const pairsOnDayAmount = 7;
 
-const chooseDay = (day) => {
-    switch (day) {
-        case 1:
-            return "#monday-col";
-        case 2:
-            return "#tuesday-col";
-        case 3:
-            return "#wednesday-col";
-        case 4:
-            return "#thursday-col";
-        case 5:
-            return "#friday-col";
-        case 6:
-            return "#saturday-col";
-    }
-}
-
 const addPair = (pair, day) => {
     let dayId = chooseDay(day);
     $(dayId).append(pair);
@@ -34,7 +17,7 @@ const getPairTypeInf = (pairType) => {
             pairTypeInf.typeString = "Лекция";
             break;
         case "SEMINAR":
-            pairTypeInf.pairClass = "practice-pair";
+            pairTypeInf.pairClass = "seminar-pair";
             pairTypeInf.typeString = "Семинар";
             break;
         case "PRACTICAL-LESSON":
@@ -69,7 +52,7 @@ const createPair = (pairType, pairPlace, pairTime, pairName, pairRoom, teacherNa
 
     setText(pair.find(".pair-time"), pairTime);
     let pairId = pairPlace.day.toString() + "." + pairPlace.number.toString();
-    pair.attr("pair-id", pairId);
+    pair.attr("id", pairId);
 
     if (pairType !== 0) {
         setText(pair.find(".pair-type"), pairTypeString);
@@ -133,7 +116,7 @@ let timeTable972101 = [
 let timeTable972102 = [
     [],
     [
-        {pairType: "LECTURE", pairTime: "8:45 - 10:20", pairName: "Основы машинного обучения", pairRoom: "Ауд. 328 (2)", teacherName: "Красавин Дмитрий Сергеевич"},
+        {pairType: "SEMINAR", pairTime: "8:45 - 10:20", pairName: "Основы машинного обучения", pairRoom: "Ауд. 328 (2)", teacherName: "Красавин Дмитрий Сергеевич"},
         {pairType: 0, pairTime: "8:45 - 10:20"},
         {pairType: "PRACTICAL-LESSON", pairTime: "10:35 - 12:10", pairName: "Основы машинного обучения", pairRoom: "Ауд. 214 (2)", teacherName: "Красавин Дмитрий Сергеевич"}
     ],
@@ -150,4 +133,3 @@ let timeTable972102 = [
     ]
 ]
 
-createTimetable(timeTable972102);

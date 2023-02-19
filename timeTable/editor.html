@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link type="Image/x-icon" href="images/favicon.ico" rel="icon">
+    <title>TimeFlow - editor</title>
+    <link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="timeTableStyles.css">
+    <link rel="stylesheet" href="editorStyles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="./images/logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top logo">
+            <span class="navbar-name">TimeFlow</span>
+        </a>
+        <button type="button" class="btn time-flow-button">Выйти</button>
+    </div>
+</nav>
+<div>
+    <div class="container">
+        <div class="row group-information mt-4">
+            <div class="col-xl-5 col-lg-7">
+                <span>Редактирование расписания для группы: </span>
+                <span id="group-number">972101</span>
+            </div>
+            <div class="col-xl-5 col-lg-5">
+                <span>Неделя: </span>
+                <span id="group-dates">20.02.2023 - 26.02.2023</span>
+            </div>
+        </div>
+        <div class="mt-2">
+            <button class="btn time-flow-button">Выйти из режима редактирования</button>
+        </div>
+        <div class="row mt-4">
+            <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12 day-col" id="monday-col">
+                <div class="day-inf mb-xl-5 mb-lg-4 mb-md-4 mb-sm-3 mb-4">
+                    <div class="day-name">
+                        Понедельник
+                    </div>
+                    <div class="day-date" id="day-date-monday">
+                        13 янв.
+                    </div>
+                </div>
+                <div class="pair-cell pair-cell-hover lecture-pair mb-4" id="pair-template">
+                    <div class="pair-inf">
+                        <div class="pair-time">8:45 - 10:20</div>
+                        <div class="pair-type">Лекция</div>
+                    </div>
+                    <div class="pair-name text-start ps-2">ООП</div>
+                    <div class="pair-room text-start ps-2">Ауд. 324 (2)</div>
+                    <div class="text-start teacher ps-2">
+                        <div>
+                            Преподаватель:
+                        </div>
+                        <div class="teacher-name">Змеев Денис Олегович</div>
+                    </div>
+                    <div class="pencil" data-bs-toggle="modal" data-bs-target="#editModal"><span><img class="pencil-img" src="images/pencil.png" width="30" height="30"></span></div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12 day-col" id="tuesday-col">
+                <div class="day-inf mb-xl-5 mb-lg-4 mb-md-4 mb-sm-3 mb-4 mt-sm-0 mt-4">
+                    <div class="day-name">
+                        Вторник
+                    </div>
+                    <div class="day-date" id="day-date-tuesday">
+                        14 янв.
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12 day-col" id="wednesday-col">
+                <div class="day-inf mb-xl-5 mb-lg-4 mb-md-4 mb-sm-3 mb-4 mt-sm-0 mt-4">
+                    <div class="day-name">
+                        Среда
+                    </div>
+                    <div class="day-date" id="day-date-wednesday">
+                        15 янв.
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12 day-col" id="thursday-col">
+                <div class="day-inf mb-xl-5 mb-lg-4 mb-md-4 mb-sm-3 mb-4 mt-sm-0 mt-4">
+                    <div class="day-name">
+                        Четверг
+                    </div>
+                    <div class="day-date" id="day-date-thursday">
+                        16 янв.
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12 day-col" id="friday-col">
+                <div class="day-inf mb-xl-5 mb-lg-4 mb-md-4 mb-sm-3 mb-4 mt-sm-0 mt-4">
+                    <div class="day-name">
+                        Пятница
+                    </div>
+                    <div class="day-date" id="day-date-friday">
+                        17 янв.
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12 day-col" id="saturday-col">
+                <div class="day-inf mb-xl-5 mb-lg-4 mb-md-4 mb-sm-3 mb-4 mt-sm-0 mt-4">
+                    <div class="day-name">
+                        Суббота
+                    </div>
+                    <div class="day-date" id="day-date-saturday">
+                        18 янв.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<!-- Шаблон для Создания пары -->
+<div class="add-pair-cell pair-cell mb-4 d-none" id="add-pair-template" data-bs-toggle="modal" data-bs-target="#createModal">
+    <div class="pair-inf no-pair-inf">
+        <div class="add-pair-plus">+</div>
+    </div>
+</div>
+
+<!-- Шаблон -->
+<div class="pair-cell pair-cell-hover d-none mb-4" id="pair-template">
+    <div class="pair-inf">
+        <div class="pair-time"></div>
+        <div class="pair-type"></div>
+    </div>
+    <div class="pair-name text-start ps-2"></div>
+    <div class="pair-room text-start ps-2"></div>
+    <div class="text-start teacher ps-2">
+        <div>
+            Преподаватель:
+        </div>
+        <div class="teacher-name"></div>
+    </div>
+    <div class="pencil" data-bs-toggle="modal" data-bs-target="#editModal"><span><img src="images/pencil.png" class="pencil-img" width="30" height="30"></span></div>
+</div>
+
+<!-- Модальное окно изменения -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Изменить информацию о паре</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn delete-button">Удалить пару</button>
+                <button type="button" class="btn time-flow-button">Применить изменения</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно создания -->
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createModalLabel">Создать пару</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn time-flow-button">Применить изменения</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/jquery/jquery.js"></script>
+<script src="/bootstrap/bootstrap.min.js"></script>
+<script src="baseFunctions.js"></script>
+<script src="timeTableScript.js"></script>
+<script src="editorScript.js"></script>
+</html>
