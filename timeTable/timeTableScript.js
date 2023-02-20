@@ -1,4 +1,22 @@
-const pairsOnDayAmount = 7;
+let pairsOnDayAmount = 0;
+let timeslotsList = [];
+
+let response = [
+    {sequenceNumber: 1, beginTime: "8:45", endTime: "10:20"},
+    {sequenceNumber: 2, beginTime: "10:35", endTime: "12:10"},
+    {sequenceNumber: 3, beginTime: "12:25", endTime: "14:00"},
+    {sequenceNumber: 4, beginTime: "14:45", endTime: "16:20"},
+    {sequenceNumber: 5, beginTime: "16:35", endTime: "18:10"},
+    {sequenceNumber: 6, beginTime: "18:25", endTime: "20:00"},
+]
+
+const createTimeslotsList = (response, timeslotsList) => {
+    pairsOnDayAmount = response.length;
+
+    for (let i = 0; i < pairsOnDayAmount; i++) {
+        timeslotsList[i] = response[i].beginTime + " - " + response[i].endTime;
+    }
+}
 
 const addPair = (pair, day) => {
     let dayId = chooseDay(day);
@@ -133,3 +151,6 @@ let timeTable972102 = [
     ]
 ]
 
+createTimeslotsList(response);
+
+console.log(timeslotsList);
