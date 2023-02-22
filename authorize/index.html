@@ -15,15 +15,10 @@
         
         <div class="logo">
             <img src="../logo.png" alt="TimeFlow-logo" height="70px;" />
-            <div class="mt-4">
+            <div class="m-3">
                 <span>Вход TimeFlow</span>
             </div>
         </div>
-
-        <label class="switch">
-            <input type="checkbox" />
-            <span class="slider round" data-label-on="Админ" data-label-off="Бюро"></span>
-        </label>
 
         <form class="login-form">
             <div class="mb-3">
@@ -37,12 +32,10 @@
                 <label class="form-check-label" style="width: 100%; text-align: left;">Запомнить меня</label>
             </div>
             <button type="submit" class="btn btn-secondary">Войти</button>
-        </form>
-
-        <div class="can-registration mt-2">
-            <span style="display: block;">или</span>
+            <span class="mt-2" style="display: block;">или</span>
             <button class="btn btn-secondary mt-2 btn-green" id="btn-registration">Зарегестрироваться</button>
-        </div>
+
+        </form>
 
         <form class="register-form d-none">
             <div class="mb-3">
@@ -78,6 +71,11 @@
             </div>
             
             <button type="submit" class="btn btn-secondary btn-green mt-2">Зарегестрироваться</button>
+            <span class="m-2" style="display: block;">
+                Уже есть аккаунт?
+                <a id="go_to_login" href="">Войти</a>
+            </span>
+
           </form>
         
     </div>

@@ -29,104 +29,25 @@ body{
 
 .container{
     position: relative;
+	margin-bottom: 30px;
+	margin-top: 30px;
     background-color: white;
     border-radius: 20px;
-    padding: 20px;
+    padding: 40px;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
 }
 
 .login-form, .register-form{
-    margin: 0 auto;
-    width:fit-content
+    width: 100%;
 }
 
-.form-control, .form-label{
-    width: 400px;
+.form-control, .form-label, .form-check, .form-select{
+	margin: 0 auto;
+	max-width: 400px;
+	width: 100%;
 	text-align: start;
 }
 
-.switch {
-    margin-top: 20px;
-	display: inline-block;    
-	height: 100px;    
-	position: relative;
-	vertical-align: middle;
-	font-size: 24px;
-	user-select: none;	
-    line-height: 50px;
+a {
+	text-decoration: none;
 }
-
-.switch .slider {
-	display: inline-block;	
-	height: 50px;
-	width: 500px;
-    border-radius: 34px;
-	box-sizing: border-box;
-	position: relative;	
-	background: var(--color-custom-green);
-	transition: background-color 0.3s cubic-bezier(0, 1, 0.5, 1);
-}
-.switch .slider:before {
-	content: attr(data-label-on);
-	display: inline-block;
-	box-sizing: border-box;		
-	width: 400px;	
-	position: absolute;
-	top: 0;
-	left: 100px;	
-	text-transform: uppercase;
-	text-align: center;
-	color: white;
-	line-height: 50px;
-}
-.switch .slider:after {
-	content: attr(data-label-off);
-	display: inline-block;
-	box-sizing: border-box;	
-	width: 250px;	
-	border-radius: 34px;;	
-	position: absolute;
-	top: 2px;
-	left: 2px;	
-	z-index: 5;
-	text-transform: uppercase;
-	text-align: center;
-	background: white;
-	line-height: 45px;
-	color: var(--color-background-dark);	
-	transition: transform 0.3s cubic-bezier(0, 1, 0.5, 1);
-}
-.switch input[type="checkbox"] {
-	display: block;	
-	width: 0;
-	height: 0;	
-	position: absolute;
-	z-index: -1;
-	opacity: 0;
-}
-
-.switch input[type="checkbox"]:checked + .slider:before {
-	content: attr(data-label-off);
-	left: 0;
-}
-.switch input[type="checkbox"]:checked + .slider:after {
-	content: attr(data-label-on);
-	color: var(--color-background-dark);
-	transform: translate3d(245px, 0, 0);
-}
- 
-.switch input[type="checkbox"]:not(:disabled) + .slider:hover {
-	cursor: pointer;
-}
-.switch input[type="checkbox"]:not(:disabled) + .slider:hover:after {
-	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
-}
- 
-.switch input[type=checkbox]:disabled + .slider {
-	opacity: 0.6;   
-	filter: grayscale(50%);
-}
- 
-/* .switch input[type="checkbox"]:checked + .slider {
-	можно изменить цвет слайдера при переключении
-} */
