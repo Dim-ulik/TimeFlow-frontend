@@ -1,16 +1,16 @@
 let pairsOnDayAmount = 7;
-let timeslotsList = [];
+let timesList = [];
 
-const createTimeslotsList = (response, timeslotsList) => {
+const createTimesList = (response, timesList) => {
     pairsOnDayAmount = response.length;
 
     for (let i = 0; i < pairsOnDayAmount; i++) {
-        timeslotsList[i] = response[i].beginTime + " - " + response[i].endTime;
+        timesList[i] = response[i].beginTime + " - " + response[i].endTime;
     }
 }
 
 const getPairTime = (pairNumber) => {
-    return timeslotsList[pairNumber-1];
+    return timesList[pairNumber-1];
 }
 
 function setText(elem, text) {
@@ -92,8 +92,7 @@ const createPair = (pairType, pairNumber, pairDay, pairName, pairRoom, teacherNa
     }
 
     setText(pair.find(".pair-time"), getPairTime(pairNumber));
-    let pairId = pairDay.toString() + "." + pairNumber.toString();
-    pair.attr("id", pairId);
+    pair.removeAttr('id');
 
     if (pairType !== 0) {
         setText(pair.find(".pair-type"), pairTypeString);
@@ -155,4 +154,4 @@ let timeTable972102 = [
     ]
 ]
 
-createTimeslotsList(response, timeslotsList);
+createTimesList(response, timesList);
