@@ -7,6 +7,18 @@
     color: #A3B6EE;
 }
 
+.pair-cell {
+    min-height: 230px;
+    position:relative;
+}
+
+.pencil {
+    position:absolute;
+    top: 3%;
+    right: 3%;
+    height: 32px;
+}
+
 .add-pair-cell {
     background-color: #c9d2ec;
     moz-user-select: none;
