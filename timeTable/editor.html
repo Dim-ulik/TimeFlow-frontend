@@ -106,10 +106,10 @@
 </body>
 
 <!-- Шаблон таймслота -->
-<div class="d-none" id="timeslot-template"></div>
+<div class="d-none timeslot" id="timeslot-template"></div>
 
 <!-- Шаблон для Создания пары -->
-<div class="add-pair-cell pair-cell mb-4 d-none" id="add-pair-template" data-bs-toggle="modal" data-bs-target="#createModal">
+<div class="add-pair-cell pair-cell mb-4 d-none" id="add-pair-template" data-bs-toggle="modal" data-bs-target="#editModal">
     <div class="pair-inf no-pair-inf">
         <div class="pair-time"></div>
         <div class="add-pair-plus">+</div>
@@ -133,40 +133,63 @@
     <div class="pencil" data-bs-toggle="modal" data-bs-target="#editModal"><span><img src="images/pencil.png" class="pencil-img" width="30" height="30"></span></div>
 </div>
 
-<!-- Модальное окно изменения -->
+<!-- Модальное окно -->
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <form class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="editModalLabel">Изменить информацию о паре</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                ...
+                <div class="mb-3">
+                    <label for="select-pair-type" class="form-label">Тип пары</label>
+                    <select id="select-pair-type" class="form-select">
+                        <option id="LECTURE">Лекция</option>
+                        <option id="SEMINAR">Семинар</option>
+                        <option id="PRACTICAL-LESSON">Практика</option>
+                        <option id="LABORATORY-LESSON">Лабораторная</option>
+                        <option id="EXAM">Экзамен</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="select-pair-name" class="form-label">Предмет</label>
+                    <select id="select-pair-name" class="form-select">
+                        <option>Пример 1</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="select-pair-room" class="form-label">Аудитория</label>
+                    <select id="select-pair-room" class="form-select">
+                        <option>Пример 1</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="select-teacher" class="form-label">Учитель</label>
+                    <select id="select-teacher" class="form-select">
+                        <option>Пример 1</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="repeat-check">
+                        <label class="form-check-label" for="repeat-check">
+                            Повторять пару
+                        </label>
+                    </div>
+                </div>
+                <div class="mb-3 d-none repeat-block">
+                    <label for="select-repeat" class="form-label">Как часто повторять</label>
+                    <select id="select-repeat" class="form-select">
+                        <option>Пример 1</option>
+                    </select>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn delete-button">Удалить пару</button>
                 <button type="button" class="btn time-flow-button">Применить изменения</button>
             </div>
-        </div>
-    </div>
-</div>
-
-<!-- Модальное окно создания -->
-<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="createModalLabel">Создать пару</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn time-flow-button">Применить изменения</button>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
 

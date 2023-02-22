@@ -9,13 +9,22 @@ const createFreeDay = (day) => {
     addPair(cell, day);
 }
 
+const checkLastEmptyPair = (matrix, i, j) => {
+    let emptyCount = 0;
+    for(let x = j+1; x < matrix[i].length; x++) {
+        if (jQuery.isEmptyObject(matrix[i][x])) emptyCount++;
+    }
+    return (emptyCount + j) === (matrix[i].length - 1);
+}
+
 const showTimetable = (matrix) => {
     for (let i = 0; i < 6; i++) {
         if (matrix[i].length !== 0) {
             for (let j = 0; j < matrix[i].length; j++) {
-                if (matrix[i][j].pairType === 0) {
-                    let currentPair = createPair(0, matrix[i][j].pairNumber, matrix[i][j].pairDay, matrix[i][j].pairTime);
-                    addPair(currentPair, matrix[i][j].pairDay);
+                if (jQuery.isEmptyObject(matrix[i][j])) {
+                    if (checkLastEmptyPair(matrix, i, j)) continue;
+                    let currentPair = createPair(0, j+1, i+1);
+                    addPair(currentPair, i+1);
                 }
                 else {
                     let currentPair = createPair(matrix[i][j].pairType, matrix[i][j].pairNumber, matrix[i][j].pairDay, matrix[i][j].pairName, matrix[i][j].pairRoom, matrix[i][j].teacherName, "#pair-template");
