@@ -49,21 +49,6 @@
                         13 янв.
                     </div>
                 </div>
-                <div class="pair-cell pair-cell-hover lecture-pair mb-4" id="pair-template">
-                    <div class="pair-inf">
-                        <div class="pair-time">8:45 - 10:20</div>
-                        <div class="pair-type">Лекция</div>
-                    </div>
-                    <div class="pair-name text-start ps-2">ООП</div>
-                    <div class="pair-room text-start ps-2">Ауд. 324 (2)</div>
-                    <div class="text-start teacher ps-2">
-                        <div>
-                            Преподаватель:
-                        </div>
-                        <div class="teacher-name">Змеев Денис Олегович</div>
-                    </div>
-                    <div class="pencil" data-bs-toggle="modal" data-bs-target="#editModal"><span><img class="pencil-img" src="images/pencil.png" width="30" height="30"></span></div>
-                </div>
             </div>
             <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12 day-col" id="tuesday-col">
                 <div class="day-inf mb-xl-5 mb-lg-4 mb-md-4 mb-sm-3 mb-4 mt-sm-0 mt-4">
@@ -120,16 +105,19 @@
 </div>
 </body>
 
+<!-- Шаблон таймслота -->
+<div class="d-none" id="timeslot-template"></div>
+
 <!-- Шаблон для Создания пары -->
 <div class="add-pair-cell pair-cell mb-4 d-none" id="add-pair-template" data-bs-toggle="modal" data-bs-target="#createModal">
     <div class="pair-inf no-pair-inf">
-        <div class="pair-time">8:45 - 10:20</div>
+        <div class="pair-time"></div>
         <div class="add-pair-plus">+</div>
     </div>
 </div>
 
 <!-- Шаблон -->
-<div class="pair-cell pair-cell-hover d-none mb-4" id="pair-template">
+<div class="pair-cell pair-cell-hover d-none mb-4" id="pair-template-with-edit">
     <div class="pair-inf">
         <div class="pair-time"></div>
         <div class="pair-type"></div>
@@ -185,6 +173,5 @@
 <script src="/jquery/jquery.js"></script>
 <script src="/bootstrap/bootstrap.min.js"></script>
 <script src="baseFunctions.js"></script>
-<script src="timeTableScript.js"></script>
 <script src="editorScript.js"></script>
 </html>
