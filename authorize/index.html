@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../bootstrap/bootstrap.min.css" />
+    <link href="../fonts/focusGrotestFont/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="container text-center mt-5">
+        
+        <div class="logo">
+            <img src="../logo.png" alt="TimeFlow-logo" height="70px;" />
+            <div class="m-3">
+                <span>Вход TimeFlow</span>
+            </div>
+        </div>
+
+        <form class="login-form">
+            <div class="mb-3">
+                <input class="form-control" type="email@example.com" placeholder="email" aria-label="default input example" >
+            </div>
+            <div class="mb-3">
+                <input class="form-control" type="password" placeholder="password" />
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input btn-outline-secondary"/>
+                <label class="form-check-label" style="width: 100%; text-align: left;">Запомнить меня</label>
+            </div>
+            <button type="submit" class="btn btn-secondary">Войти</button>
+            <span class="mt-2" style="display: block;">или</span>
+            <button class="btn btn-secondary mt-2 btn-green" id="btn-registration">Зарегестрироваться</button>
+
+        </form>
+
+        <form class="register-form d-none">
+            <div class="mb-3">
+                <label class="form-label">Фамилия</label>
+                <input class="form-control" placeholder="Иванов">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Имя</label>
+                <input class="form-control" placeholder="Иван">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Отчество</label>
+                <input class="form-control" placeholder="Иванович">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Пол</label>
+                <select class="form-select" aria-label="Default select example">
+                    <option value="0">Мужской</option>
+                    <option value="1">Женский</option>
+                </select>
+            </div>
+            <div class="mb-5">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="email@example.com">
+            </div>
+            <div class="mb-1">
+              <label class="form-label">Пароль</label>
+              <input type="password" class="form-control">
+            </div>
+            <div class="mb-5">
+                <label class="form-label">Пароль еще раз</label>
+                <input type="password" class="form-control">
+            </div>
+            
+            <button type="submit" class="btn btn-secondary btn-green mt-2">Зарегестрироваться</button>
+            <span class="m-2" style="display: block;">
+                Уже есть аккаунт?
+                <a id="go_to_login" href="">Войти</a>
+            </span>
+
+          </form>
+        
+    </div>
+
+    <script src="../bootstrap/bootstrap.min.js"></script>
+    <script src="../jquery/jquery.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

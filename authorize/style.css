@@ -1,0 +1,53 @@
+:root {
+    --color-background-light: #eae9eb;
+    --color-background-gray: #DEDDE3;
+    --color-background-dark: #91939F;
+    --color-custom-yellow: #FEC461;
+    --color-custom-pink: #EDB3A5;
+    --color-custom-blue: #A3B6EE;
+    --color-custom-green: #89A6A2;
+    --color-text: #424147;
+}
+
+body{
+    background-color: var(--color-background-light);
+}
+
+.logo span {
+    font-size: 24px;;
+}
+
+.btn{
+    background-color: var(--color-background-dark);
+    width: 250px;
+    border-radius: 34px;;
+}
+
+.btn-green{
+    background-color: var(--color-custom-green);
+}
+
+.container{
+    position: relative;
+	margin-bottom: 30px;
+	margin-top: 30px;
+    background-color: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.login-form, .register-form{
+    width: 100%;
+}
+
+.form-control, .form-label, .form-check, .form-select{
+	margin: 0 auto;
+	max-width: 400px;
+	width: 100%;
+	text-align: start;
+}
+
+a {
+	text-decoration: none;
+}
