@@ -1,4 +1,4 @@
-let pairsOnDayAmount = 7;
+let pairsOnDayAmount = 0;
 let timesList = [];
 
 const createTimesList = (response, timesList) => {
@@ -77,7 +77,7 @@ const createTimetableMatrix = (responseArray) => {
     return timetableMatrix;
 }
 
-const createPair = (pairType, pairNumber, pairDay, pairName, pairRoom, teacherName, templateCellId) => {
+const createPair = (pairType, pairNumber, pairDay, pairName, pairRoom, teacherName, templateCellId, timeslotId) => {
     let pair;
     let pairTypeInf = getPairTypeInf(pairType);
     let pairTypeString = pairTypeInf.typeString;
@@ -96,11 +96,15 @@ const createPair = (pairType, pairNumber, pairDay, pairName, pairRoom, teacherNa
 
     if (pairType !== 0) {
         setText(pair.find(".pair-type"), pairTypeString);
-        setText(pair.find(".pair-name"), pairName);
-        setText(pair.find(".pair-room"), pairRoom);
-        setText(pair.find(".teacher-name"), teacherName);
+        setText(pair.find(".pair-name"), pairName.name);
+        pair.find(".pair-name").attr('pair-name-id', pairName.id);
+        setText(pair.find(".pair-room"), pairRoom.number);
+        pair.find(".pair-room").attr('pair-room-id', pairRoom.id)
+        setText(pair.find(".teacher-name"), teacherName.name);
+        pair.find(".teacher-name").attr('pair-teacher-id', teacherName.id)
     }
 
+    pair.attr('timeslot-id', timeslotId);
     pair.removeClass("d-none");
     return pair;
 }
@@ -112,46 +116,40 @@ let response = [
     {sequenceNumber: 4, beginTime: "14:45", endTime: "16:20"},
     {sequenceNumber: 5, beginTime: "16:35", endTime: "18:10"},
     {sequenceNumber: 6, beginTime: "18:25", endTime: "20:00"},
+    {sequenceNumber: 7, beginTime: "20:15", endTime: "21:50"},
 ]
 
 let timeTable972101 = [
     [
-        {pairNumber: 1, pairDay: 1, pairType: "LECTURE", pairTime: "8:45 - 10:20", pairName: "Основы машинного обучения", pairRoom: "Ауд. 328 (2)", teacherName: "Красавин Дмитрий Сергеевич"},
-        {pairNumber: 2, pairDay: 1, pairType: 0, pairTime: "8:45 - 10:20"},
-        {pairNumber: 3, pairDay: 1, pairType: "PRACTICAL-LESSON", pairTime: "10:35 - 12:10", pairName: "Основы машинного обучения", pairRoom: "Ауд. 214 (2)", teacherName: "Красавин Дмитрий Сергеевич"}
+        {pairNumber: 1, pairDay: 1, pairType: "LECTURE", pairName: {name: "Основы машинного обучения", id: 5}, pairRoom: {number: "Ауд. 328 (2)", id: 2}, teacherName: {name: "Красавин Дмитрий Сергеевич", id: 4}, timeslotId: 11},
+        {},
+        {pairNumber: 3, pairDay: 1, pairType: "PRACTICAL-LESSON", pairName: {name: "Основы машинного обучения", id: 5}, pairRoom: {number:"Ауд. 214 (2)", id: 3}, teacherName: {name: "Красавин Дмитрий Сергеевич", id: 4}, timeslotId: 13},
+        {},
+        {},
+        {},
+        {}
     ],
     [],
     [
-        {pairNumber: 1, pairDay: 3, pairType: "EXAM", pairTime: "8:45 - 10:20", pairName: "Тестирование программного обеспечения", pairRoom: "Ауд. 216 (2)", teacherName: "Волков Максим Николаевич"},
-        {pairNumber: 2, pairDay: 3, pairType: "PRACTICAL-LESSON", pairTime: "12:25 - 14:00", pairName: "ООП", pairRoom: "Ауд. 101 (2)", teacherName: "Змеев Денис Олегович"},
-        {pairNumber: 3, pairDay: 3, pairType: 0, pairTime: "14:45 - 16:20"},
-        {pairNumber: 4, pairDay: 3, pairType: "LABORATORY-LESSON", pairTime: "16:35 - 18:10", pairName: "ООП", pairRoom: "Ауд. 202 (2)", teacherName: "Змеев Денис Олегович"},
+        {pairNumber: 1, pairDay: 3, pairType: "EXAM", pairName: {name: "Тестирование программного обеспечения", id: 17}, pairRoom: {number: "Ауд. 216 (2)", id: 4}, teacherName: {name: "Волков Максим Николаевич", id: 45}, timeslotId: 31},
+        {pairNumber: 2, pairDay: 3, pairType: "PRACTICAL-LESSON", pairName: {name: "ООП", id: 90}, pairRoom: {number: "Ауд. 101 (2)", id: 67}, teacherName: {name: "Змеев Денис Олегович", id: 8}, timeslotId: 32},
+        {},
+        {pairNumber: 4, pairDay: 3, pairType: "LABORATORY-LESSON", pairName: {name: "ООП", id: 90}, pairRoom: {number: "Ауд. 202 (2)", id: 45}, teacherName: {name: "Змеев Денис Олегович", id: 8}, timeslotId: 34},
+        {},
+        {},
+        {}
     ],
     [],
     [
-        {pairNumber: 1, pairDay: 5, pairType: "LABORATORY-LESSON", pairTime: "8:45 - 10:20", pairName: "Математика для компьютерных наук ч.3", pairRoom: "Ауд. 216 (2)", teacherName: "Даммер Диана Дамировна"},
+        {pairNumber: 1, pairDay: 5, pairType: "LABORATORY-LESSON", pairName: {name: "Математика для компьютерных наук ч.3", id: 12}, pairRoom: {number: "Ауд. 216 (2)", id: 4}, teacherName: {name: "Даммер Диана Дамировна", id: 18}, timeslotId: 51},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {}
     ],
     []
-]
-
-let timeTable972102 = [
-    [],
-    [
-        {pairNumber: 1, pairDay: 2, pairType: "SEMINAR", pairTime: "8:45 - 10:20", pairName: "Основы машинного обучения", pairRoom: "Ауд. 328 (2)", teacherName: "Красавин Дмитрий Сергеевич"},
-        {pairNumber: 2, pairDay: 2, pairType: 0, pairTime: "8:45 - 10:20"},
-        {pairNumber: 3, pairDay: 2, pairType: "PRACTICAL-LESSON", pairTime: "10:35 - 12:10", pairName: "Основы машинного обучения", pairRoom: "Ауд. 214 (2)", teacherName: "Красавин Дмитрий Сергеевич"}
-    ],
-    [],
-    [
-        {pairNumber: 1, pairDay: 4, pairType: "LABORATORY-LESSON", pairTime: "8:45 - 10:20", pairName: "Математика для компьютерных наук ч.3", pairRoom: "Ауд. 216 (2)", teacherName: "Даммер Диана Дамировна"},
-    ],
-    [],
-    [
-        {pairNumber: 1, pairDay: 6, pairType: "EXAM", pairTime: "8:45 - 10:20", pairName: "Тестирование программного обеспечения", pairRoom: "Ауд. 216 (2)", teacherName: "Волков Максим Николаевич"},
-        {pairNumber: 2, pairDay: 6, pairType: "PRACTICAL-LESSON", pairTime: "12:25 - 14:00", pairName: "ООП", pairRoom: "Ауд. 101 (2)", teacherName: "Змеев Денис Олегович"},
-        {pairNumber: 3, pairDay: 6, pairType: 0, pairTime: "14:45 - 16:20"},
-        {pairNumber: 4, pairDay: 6, pairType: "LABORATORY-LESSON", pairTime: "16:35 - 18:10", pairName: "ООП", pairRoom: "Ауд. 202 (2)", teacherName: "Змеев Денис Олегович"},
-    ]
 ]
 
 createTimesList(response, timesList);

@@ -1,3 +1,35 @@
+$(document).ready(function() {
+    $(".timeslot").click(function() {
+        let cellId = "#" + $(this).attr('id');
+        let cell = $(cellId);
+        let pairTypeId = cell.find('.pair-cell').attr('type-id');
+        if (pairTypeId === undefined) {
+            $(".delete-button").addClass('d-none');
+            setText($("#editModalLabel"), "Создать пару");
+        }
+        else {
+            $(".delete-button").removeClass('d-none');
+            setText($("#editModalLabel"), "Изменить информацию о паре");
+            let pairNameId = cell.find('.pair-name').attr('pair-name-id');
+            let pairRoomId = cell.find('.pair-room').attr('pair-room-id');
+            let pairTeacherId = cell.find('.teacher-name').attr('pair-teacher-id');
+            $("#select-pair-type").find(`#${pairTypeId}`).attr("selected", true);
+            $("#select-pair-name").find(`#${pairNameId}`).attr("selected", true);
+            $("#select-pair-room").find(`#${pairRoomId}`).attr("selected", true);
+            $("#select-teacher").find(`#${pairTeacherId}`).attr("selected", true);
+        }
+    });
+})
+
+$("#repeat-check").click(function() {
+    if ($(this).is(":checked")) {
+        $(".repeat-block").removeClass('d-none');
+    }
+    else {
+        $(".repeat-block").addClass('d-none');
+    }
+})
+
 const createId = (day, pairNumber) => {
     return `${day}-${pairNumber}`;
 }
@@ -20,10 +52,11 @@ const createTimeslots = () => {
 
 createTimeslots();
 
-const createFreeCell = (pairNumber) => {
+const createFreeCell = (pairNumber, timeslotId) => {
     let addPairCell = $("#add-pair-template").clone();
     addPairCell.removeAttr('id');
     setText(addPairCell.find(".pair-time"), getPairTime(pairNumber));
+    addPairCell.attr("timeslot-id", timeslotId);
     addPairCell.removeClass("d-none");
 
     return addPairCell;
@@ -45,14 +78,15 @@ const clearTimetable = () => {
         }
 }
 
-const createTimetableToRedact = (currentPairs) => {
+const createTimetableToEdit = (currentPairs) => {
     for (let i = 0; i < currentPairs.length; i++) {
         for(let j = 0; j < currentPairs[i].length; j++) {
             let currentPair = currentPairs[i][j];
-            if (currentPair.pairType !== 0) {
+            if (!jQuery.isEmptyObject(currentPair)) {
                 let pairDay = currentPair.pairDay;
                 let pairNumber = currentPair.pairNumber;
-                let pairCell = createPair(currentPair.pairType, pairNumber, pairDay, currentPair.pairName, currentPair.pairRoom, currentPair.teacherName,"#pair-template-with-edit");
+                let pairCell = createPair(currentPair.pairType, pairNumber, pairDay, currentPair.pairName, currentPair.pairRoom, currentPair.teacherName,"#pair-template-with-edit", currentPair.timeslotId);
+                pairCell.attr('type-id', currentPair.pairType);
                 appendPair(pairCell, pairDay, pairNumber);
             }
         }
@@ -67,4 +101,4 @@ const createTimetableToRedact = (currentPairs) => {
     }
 }
 
-createTimetableToRedact(createTimetableMatrix(timeTable972101));
+createTimetableToEdit(createTimetableMatrix(timeTable972101));
