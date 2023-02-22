@@ -15,6 +15,7 @@ $('#go_to_login').click(function (e) {
 $('input').change(function (e) { 
     e.preventDefault();
     this.value = this.value.trim()
+    this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1)
 });
 
 $('.register-form').submit(function (e) { 
@@ -28,3 +29,9 @@ function handleFormSubmit(formData) {
         console.log("can fetch")
     }
 }
+
+
+// $(document).ready(function () {
+//     const CONTRACT_NUMBER = /^[A-Za-z0-9]+$/
+//     console.log(CONTRACT_NUMBER.test('skdjfk3j2kjnrk2^^^'))
+// });
