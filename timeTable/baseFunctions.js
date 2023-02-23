@@ -5,12 +5,16 @@ const createTimesList = (response, timesList) => {
     pairsOnDayAmount = response.length;
 
     for (let i = 0; i < pairsOnDayAmount; i++) {
-        timesList[i] = response[i].beginTime + " - " + response[i].endTime;
+        timesList[i] = {time: response[i].beginTime + " - " + response[i].endTime, timeslotId: response.id};
     }
 }
 
 const getPairTime = (pairNumber) => {
-    return timesList[pairNumber-1];
+    return timesList[pairNumber-1].time;
+}
+
+const getTimeslotId = (pairNumber) => {
+    return timesList[pairNumber-1].timeslotId;
 }
 
 function setText(elem, text) {
@@ -77,7 +81,7 @@ const createTimetableMatrix = (responseArray) => {
     return timetableMatrix;
 }
 
-const createPair = (pairType, pairNumber, pairDay, pairName, pairRoom, teacherName, templateCellId, timeslotId) => {
+const createPair = (pairType, pairNumber, pairDay, pairName, pairRoom, teacherName, templateCellId) => {
     let pair;
     let pairTypeInf = getPairTypeInf(pairType);
     let pairTypeString = pairTypeInf.typeString;
@@ -104,44 +108,43 @@ const createPair = (pairType, pairNumber, pairDay, pairName, pairRoom, teacherNa
         pair.find(".teacher-name").attr('pair-teacher-id', teacherName.id)
     }
 
-    pair.attr('timeslot-id', timeslotId);
     pair.removeClass("d-none");
     return pair;
 }
 
 let response = [
-    {sequenceNumber: 1, beginTime: "8:45", endTime: "10:20"},
-    {sequenceNumber: 2, beginTime: "10:35", endTime: "12:10"},
-    {sequenceNumber: 3, beginTime: "12:25", endTime: "14:00"},
-    {sequenceNumber: 4, beginTime: "14:45", endTime: "16:20"},
-    {sequenceNumber: 5, beginTime: "16:35", endTime: "18:10"},
-    {sequenceNumber: 6, beginTime: "18:25", endTime: "20:00"},
-    {sequenceNumber: 7, beginTime: "20:15", endTime: "21:50"},
+    {sequenceNumber: 1, beginTime: "8:45", endTime: "10:20", id: "9091"},
+    {sequenceNumber: 2, beginTime: "10:35", endTime: "12:10", id: "9092"},
+    {sequenceNumber: 3, beginTime: "12:25", endTime: "14:00", id: "9093"},
+    {sequenceNumber: 4, beginTime: "14:45", endTime: "16:20", id: "9094"},
+    {sequenceNumber: 5, beginTime: "16:35", endTime: "18:10", id: "9095"},
+    {sequenceNumber: 6, beginTime: "18:25", endTime: "20:00", id: "9096"},
+    {sequenceNumber: 7, beginTime: "20:15", endTime: "21:50", id: "9097"},
 ]
 
 let timeTable972101 = [
     [
-        {pairNumber: 1, pairDay: 1, pairType: "LECTURE", pairName: {name: "Основы машинного обучения", id: 5}, pairRoom: {number: "Ауд. 328 (2)", id: 2}, teacherName: {name: "Красавин Дмитрий Сергеевич", id: 4}, timeslotId: 11},
+        {pairNumber: 1, pairDay: 1, pairType: "LECTURE", pairName: {name: "Основы машинного обучения", id: 5}, pairRoom: {number: "Ауд. 328 (2)", id: 2}, teacherName: {name: "Красавин Дмитрий Сергеевич", id: 4}},
         {},
-        {pairNumber: 3, pairDay: 1, pairType: "PRACTICAL-LESSON", pairName: {name: "Основы машинного обучения", id: 5}, pairRoom: {number:"Ауд. 214 (2)", id: 3}, teacherName: {name: "Красавин Дмитрий Сергеевич", id: 4}, timeslotId: 13},
+        {pairNumber: 3, pairDay: 1, pairType: "PRACTICAL-LESSON", pairName: {name: "Основы машинного обучения", id: 5}, pairRoom: {number:"Ауд. 214 (2)", id: 3}, teacherName: {name: "Красавин Дмитрий Сергеевич", id: 4}},
         {},
-        {},
-        {},
-        {}
-    ],
-    [],
-    [
-        {pairNumber: 1, pairDay: 3, pairType: "EXAM", pairName: {name: "Тестирование программного обеспечения", id: 17}, pairRoom: {number: "Ауд. 216 (2)", id: 4}, teacherName: {name: "Волков Максим Николаевич", id: 45}, timeslotId: 31},
-        {pairNumber: 2, pairDay: 3, pairType: "PRACTICAL-LESSON", pairName: {name: "ООП", id: 90}, pairRoom: {number: "Ауд. 101 (2)", id: 67}, teacherName: {name: "Змеев Денис Олегович", id: 8}, timeslotId: 32},
-        {},
-        {pairNumber: 4, pairDay: 3, pairType: "LABORATORY-LESSON", pairName: {name: "ООП", id: 90}, pairRoom: {number: "Ауд. 202 (2)", id: 45}, teacherName: {name: "Змеев Денис Олегович", id: 8}, timeslotId: 34},
         {},
         {},
         {}
     ],
     [],
     [
-        {pairNumber: 1, pairDay: 5, pairType: "LABORATORY-LESSON", pairName: {name: "Математика для компьютерных наук ч.3", id: 12}, pairRoom: {number: "Ауд. 216 (2)", id: 4}, teacherName: {name: "Даммер Диана Дамировна", id: 18}, timeslotId: 51},
+        {pairNumber: 1, pairDay: 3, pairType: "EXAM", pairName: {name: "Тестирование программного обеспечения", id: 17}, pairRoom: {number: "Ауд. 216 (2)", id: 4}, teacherName: {name: "Волков Максим Николаевич", id: 45}},
+        {pairNumber: 2, pairDay: 3, pairType: "PRACTICAL-LESSON", pairName: {name: "ООП", id: 90}, pairRoom: {number: "Ауд. 101 (2)", id: 67}, teacherName: {name: "Змеев Денис Олегович", id: 8}},
+        {},
+        {pairNumber: 4, pairDay: 3, pairType: "LABORATORY-LESSON", pairName: {name: "ООП", id: 90}, pairRoom: {number: "Ауд. 202 (2)", id: 45}, teacherName: {name: "Змеев Денис Олегович", id: 8}},
+        {},
+        {},
+        {}
+    ],
+    [],
+    [
+        {pairNumber: 1, pairDay: 5, pairType: "LABORATORY-LESSON", pairName: {name: "Математика для компьютерных наук ч.3", id: 12}, pairRoom: {number: "Ауд. 216 (2)", id: 4}, teacherName: {name: "Даммер Диана Дамировна", id: 18}},
         {},
         {},
         {},

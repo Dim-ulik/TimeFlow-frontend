@@ -19,6 +19,10 @@ $(document).ready(function() {
             $("#select-teacher").find(`#${pairTeacherId}`).attr("selected", true);
         }
     });
+
+    $("#clear-timetable").click(function() {
+        console.log(1);
+    });
 })
 
 $("#repeat-check").click(function() {
@@ -44,6 +48,7 @@ const createTimeslots = () => {
         for(let pairNumber = 1; pairNumber <= pairsOnDayAmount; pairNumber++) {
             let timeslot = $("#timeslot-template").clone();
             timeslot.attr("id", createId(day, pairNumber));
+            timeslot.attr("timeslot-id", getTimeslotId(pairNumber));
             timeslot.removeClass('d-none');
             $(chooseDay(day)).append(timeslot);
         }
@@ -52,11 +57,10 @@ const createTimeslots = () => {
 
 createTimeslots();
 
-const createFreeCell = (pairNumber, timeslotId) => {
+const createFreeCell = (pairNumber) => {
     let addPairCell = $("#add-pair-template").clone();
     addPairCell.removeAttr('id');
     setText(addPairCell.find(".pair-time"), getPairTime(pairNumber));
-    addPairCell.attr("timeslot-id", timeslotId);
     addPairCell.removeClass("d-none");
 
     return addPairCell;
@@ -65,7 +69,7 @@ const createFreeCell = (pairNumber, timeslotId) => {
 const createFreeTable = () => {
     for (let day = 1; day <= 6; day++) {
         for (let pairNumber = 1; pairNumber <= pairsOnDayAmount; pairNumber++) {
-            createFreeCell(day, pairNumber);
+            createFreeCell(pairNumber);
         }
     }
 }
