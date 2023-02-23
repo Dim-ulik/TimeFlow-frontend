@@ -69,18 +69,12 @@ const createFreeCell = (pairNumber) => {
 const createFreeTable = () => {
     for (let day = 1; day <= 6; day++) {
         for (let pairNumber = 1; pairNumber <= pairsOnDayAmount; pairNumber++) {
-            createFreeCell(pairNumber);
+            appendPair(createFreeCell(pairNumber), day, pairNumber);
         }
     }
 }
 
-const clearTimetable = () => {
-    for (let day = 1; day <= 6; day++) {
-        for (let pairNumber = 1; pairNumber <= pairsOnDayAmount; pairNumber++) {
-                $(chooseDay(day)).children().last().remove();
-            }
-        }
-}
+
 
 const createTimetableToEdit = (currentPairs) => {
     for (let i = 0; i < currentPairs.length; i++) {
