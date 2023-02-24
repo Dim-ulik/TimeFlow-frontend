@@ -39,7 +39,7 @@
         <div class="mt-2">
             <button class="btn time-flow-button">Выйти из режима редактирования</button>
         </div>
-        <div class="row mt-4">
+        <div class="row mt-4" id="timetable-body">
             <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12 day-col" id="monday-col">
                 <div class="day-inf mb-xl-5 mb-lg-4 mb-md-4 mb-sm-3 mb-4">
                     <div class="day-name">
@@ -106,6 +106,9 @@
         </div>
     </div>
 </div>
+<div class="delete-view d-none">
+    <img src="delete.png" alt="delete" class="delete-img">
+</div>
 </body>
 
 <!-- Шаблон таймслота -->
@@ -120,7 +123,7 @@
 </div>
 
 <!-- Шаблон -->
-<div class="pair-cell pair-cell-hover d-none mb-4" id="pair-template-with-edit">
+<div class="pair-cell pair-cell-hover d-none mb-4" id="pair-template-with-edit" draggable="true">
     <div class="pair-inf">
         <div class="pair-time"></div>
         <div class="pair-type"></div>
@@ -200,4 +203,5 @@
 <script src="/bootstrap/bootstrap.min.js"></script>
 <script src="baseFunctions.js"></script>
 <script src="editorScript.js"></script>
+<script src="dragAndDropScript.js"></script>
 </html>
