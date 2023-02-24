@@ -41,7 +41,7 @@ body{
     width: 100%;
 }
 
-.form-control, .form-label, .form-check, .form-select{
+.form-control, .form-label, .form-check, .form-select, .invalid-feedback{
 	margin: 0 auto;
 	max-width: 400px;
 	width: 100%;
