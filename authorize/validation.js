@@ -6,54 +6,62 @@ const ONLY_LETTERS_AND_NUMBERS = /^[A-Za-z0-9]+$/
 
 function isValid( formData ) {
 
-    if (!isNameValid(formData.get('surname')) && formData.get('surname') == '') {
+    let isValidData = true
+
+    if (!isNameValid(formData.get('surname')) || formData.get('surname') == '') {
         $('#surname').toggleClass('is-invalid', true)
+        isValidData = false
     } else {
         $('#surname').removeClass('is-invalid')
     }
     
-    if (!isNameValid(formData.get('name')) && formData.get('name') == '') {
+    if (!isNameValid(formData.get('name')) || formData.get('name') == '') {
         $('#name').toggleClass('is-invalid', true)
+        isValidData = false
     } else {
         $('#name').removeClass('is-invalid')
     }
 
-    if (!isNameValid(formData.get('patronymic')) && formData.get('patronymic') == '') {
+    if (!isNameValid(formData.get('patronymic')) || formData.get('patronymic') == '') {
         $('#patronymic').toggleClass('is-invalid', true)
+        isValidData = false
     } else {
         $('#patronymic').removeClass('is-invalid')
     }
 
-    if (!isContractNumberValid(formData.get('contractNumber')) && formData.get('contractNumber') == '') {
-        $('#contract_number').toggleClass('is-invalid', true);
+    if (!isContractNumberValid(formData.get('contractNumber')) || formData.get('contractNumber') == '') {
+        $('#contract_number').toggleClass('is-invalid', true)
+        isValidData = false
     } else {
-        $('#contract_number').removeClass('is-invalid');
+        $('#contract_number').removeClass('is-invalid')
     }
 
-    if (!isEmailValid(formData.get('email')) && formData.get('email') == '') {
+    if (!isEmailValid(formData.get('email')) || formData.get('email') == '') {
         $('#email').toggleClass('is-invalid', true)
+        isValidData = false
     } else {
-        $('#email').removeClass('is-invalid');
+        $('#email').removeClass('is-invalid')
     }
 
     let max_password_len = 32
     let min_password_len = 8
-    if (!isNotContainsSpecialSumbols(formData.get('password')) &&
-    formData.get('password').length < min_password_len &&
+    if (!isNotContainsSpecialSumbols(formData.get('password')) ||
+    formData.get('password').length < min_password_len ||
     formData.get('password').length > max_password_len) {
         $('#password').toggleClass('is-invalid', true)
+        isValidData = false
     } else {
         $('#password').removeClass('is-invalid')
     }
 
     if (formData.get('password') !== formData.get('password_check')) {
         $('#password_check').toggleClass('is-invalid', true)
+        isValidData = false
     } else {
         $('#password_check').removeClass('is-invalid')
     }
 
-
-    return true;
+    return isValidData
 }
 
 function isNotContainsSpecialSumbols(value) {
