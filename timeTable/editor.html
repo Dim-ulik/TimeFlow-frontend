@@ -8,6 +8,7 @@
     <link type="Image/x-icon" href="images/favicon.ico" rel="icon">
     <title>TimeFlow - editor</title>
     <link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="select2/select2.min.css">
     <link rel="stylesheet" href="timeTableStyles.css">
     <link rel="stylesheet" href="editorStyles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -150,31 +151,42 @@
             <div class="modal-body">
                 <div class="mb-3">
                     <label for="select-pair-type" class="form-label">Тип пары</label>
-                    <select id="select-pair-type" class="form-select">
-                        <option id="LECTURE">Лекция</option>
-                        <option id="SEMINAR">Семинар</option>
-                        <option id="PRACTICAL-LESSON">Практика</option>
-                        <option id="LABORATORY-LESSON">Лабораторная</option>
-                        <option id="EXAM">Экзамен</option>
-                    </select>
+                    <div>
+                        <select id="select-pair-type" class="form-select">
+                            <option id="LECTURE">Лекция</option>
+                            <option id="SEMINAR">Семинар</option>
+                            <option id="PRACTICAL-LESSON">Практика</option>
+                            <option id="LABORATORY-LESSON">Лабораторная</option>
+                            <option id="EXAM">Экзамен</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="select-pair-name" class="form-label">Предмет</label>
-                    <select id="select-pair-name" class="form-select">
-                        <option>Пример 1</option>
-                    </select>
+                    <div>
+                        <select id="select-pair-name" class="form-select">
+                            <option>Пример 1</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="select-pair-room" class="form-label">Аудитория</label>
-                    <select id="select-pair-room" class="form-select">
-                        <option>Пример 1</option>
-                    </select>
+                    <div>
+                        <select id="select-pair-room" class="form-select">
+                            <option>2323</option>
+                            <option>233</option>
+                            <option>423</option>
+                            <option>523</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="mb-3">
-                    <label for="select-teacher" class="form-label">Учитель</label>
-                    <select id="select-teacher" class="form-select">
-                        <option>Пример 1</option>
-                    </select>
+                    <label for="select-teacher" class="form-label">Преподаватель</label>
+                    <div>
+                        <select id="select-teacher" class="form-select">
+                            <option>Пример 1</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="mb-3">
                     <div class="form-check">
@@ -201,6 +213,8 @@
 
 <script src="/jquery/jquery.js"></script>
 <script src="/bootstrap/bootstrap.min.js"></script>
+<script src="select2/select2.min.js"></script>
+<script src="select2/ru.js"></script>
 <script src="baseFunctions.js"></script>
 <script src="editorScript.js"></script>
 <script src="dragAndDropScript.js"></script>
