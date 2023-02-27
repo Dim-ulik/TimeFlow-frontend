@@ -56,26 +56,26 @@
                 <div class="message mb-2">
                     Фильтры
                 </div>
-                <div class="row">
+                <form class="row" id="filters">
                     <div class="mb-3 col-lg-5 col-md-4 col-sm-12">
-                        <select class="form-select">
-                            <option selected>По алфавиту</option>
-                            <option value="1">А-Я</option>
-                            <option value="2">Я-А</option>
+                        <select class="form-select" name="sorting">
+                            <option selected value="name-asc">По алфавиту</option>
+                            <option value="name-asc">А-Я</option>
+                            <option value="name-desc">Я-А</option>
                         </select>
                     </div>
                     <div class="mb-3 col-lg-5 col-md-4 col-sm-12">
-                        <select class="form-select" aria-label="Пример выбора по умолчанию">
-                            <option selected>По статусу</option>
-                            <option value="1">Студент</option>
-                            <option value="2">Сотрудник университета</option>
-                            <option value="3">Внешний пользователь</option>
+                        <select class="form-select" aria-label="Пример выбора по умолчанию" name="status">
+                            <option selected value="all">По статусу</option>
+                            <option value="student">Студент</option>
+                            <option value="employee">Сотрудник университета</option>
+                            <option value="user">Внешний пользователь</option>
                         </select>
                     </div>
                     <div class="mb-3 col-lg-2 col-md-4 col-sm-12">
-                        <button type="button" class="btn time-flow-button">Применить</button>
+                        <button id="apply_filters" type="button" class="btn time-flow-button">Применить</button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
         <div class="card filtration mt-3">
