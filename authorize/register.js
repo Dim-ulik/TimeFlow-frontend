@@ -11,20 +11,21 @@ $('.register-form').submit(function (e) {
 
 function handleFormSubmit(formData) {
     if (isValid(formData)) {
-        //sendData(formData)
+        sendData(JSON.stringify(Object.fromEntries(formData)))
     }
 }
 
 function sendData(data) {
-    fetch(`${URL}/api/account/register`, {
+    fetch(`http://94.103.87.164:8081/api/v1/employee/schedule-maker/sign-up`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept':'application/json'  
     },
-      body: JSON.stringify(data),
+      body: data,
     })
     .then ((response) => {
+        console.log(response)
         if (response.ok) {
             return response.json();
         } else {
@@ -32,8 +33,7 @@ function sendData(data) {
         }
     })
     .then ((json) => {
-        localStorage.setItem('token', `${json['token']}`);
-        //location.href = ''
+        console.log(json)
     })
   }
 

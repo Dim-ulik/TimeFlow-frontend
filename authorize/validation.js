@@ -1,6 +1,6 @@
 const EMAIL_REGEXP = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
 const WITHOUT_SPACES_REGEXP = /^\S+$/
-const ALL_LETTERS_WITH_HYPHEN = /^[A-Za-z- ]+$/
+const ALL_LETTERS_WITH_HYPHEN = /^[А-Яа-я- ]+$/
 const CONTRACT_NUMBER = /^\d{4}-\d{2}\/\d{2}$/
 const ONLY_LETTERS_AND_NUMBERS = /^[A-Za-z0-9]+$/
 
@@ -54,7 +54,7 @@ function isValid( formData ) {
         $('#password').removeClass('is-invalid')
     }
 
-    if (formData.get('password') !== formData.get('password_check')) {
+    if (formData.get('password') !== $('#password_check').val()) {
         $('#password_check').toggleClass('is-invalid', true)
         isValidData = false
     } else {
