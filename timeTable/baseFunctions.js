@@ -1,5 +1,6 @@
 let pairsOnDayAmount = 0;
 let timesList = [];
+let hostname = 'http://94.103.87.164:8081';
 
 const createTimesList = (response, timesList) => {
     pairsOnDayAmount = response.length;
