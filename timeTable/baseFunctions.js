@@ -42,24 +42,58 @@ const getRightDateFormat = (date) => {
 
 const getWeek = (date) => {
     let day = date.getDay();
-    let week = {
-        startDate: "",
-        endDate: ""
-    }
+    let week = [];
+    let startDate;
     let copy = new Date(date);
+
     if (day === 0) {
-        week.startDate =  getRightDateFormat(new Date(copy.setDate(date.getDate() - 6)));
-        week.endDate = getRightDateFormat(new Date(copy.setDate(date.getDate() - 1)));
+        startDate =  new Date(copy.setDate(date.getDate() - 6));
     }
     else {
-        week.startDate =  getRightDateFormat(new Date(copy.setDate(date.getDate() - (day-1))));
-        week.endDate = getRightDateFormat(new Date(copy.setDate(date.getDate() + (6-day))));
+        startDate = new Date(copy.setDate(date.getDate() - (day-1)));
+    }
+
+    for (let i = 0; i < 6; i++) {
+        copy = new Date(date);
+        week[i] = getRightDateFormat(new Date(copy.setDate(startDate.getDate() + i)));
+        console.log(copy);
     }
     return week;
 }
 
-let dateX = new Date ("2023-02-28");
-console.log(getWeek(dateX));
+const getMonth = (number) => {
+    switch (number) {
+        case "01":
+            return "января"
+        case "02":
+            return "февраля"
+        case "03":
+            return "марта"
+        case "04":
+            return "апреля"
+        case "05":
+            return "мая"
+        case "06":
+            return "июня"
+        case "07":
+            return "июля"
+        case "08":
+            return "августа"
+        case "09":
+            return "сентября"
+        case "10":
+            return "октября"
+        case "11":
+            return "ноября"
+        case "12":
+            return "декабря"
+    }
+}
+
+const getDayName = (dateString) => {
+    let monthNumber = `${dateString[5]}${dateString[6]}`
+    return `${dateString[8]}${dateString[9]} ${getMonth(monthNumber)}`;
+}
 
 const chooseDay = (day) => {
     switch (day) {
