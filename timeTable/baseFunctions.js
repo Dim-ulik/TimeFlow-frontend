@@ -1,5 +1,6 @@
 let pairsOnDayAmount = 0;
 let timesList = [];
+let hostname = 'http://94.103.87.164:8081';
 
 const createTimesList = (response, timesList) => {
     pairsOnDayAmount = response.length;
@@ -24,6 +25,74 @@ function setText(elem, text) {
     else {
         elem.text('Информация не найдена :(');
     }
+}
+
+const getRightDateFormat = (date) => {
+    let year = date.getFullYear();
+    let month = date.getMonth()+1;
+    let day = date.getDate();
+    if (month < 10) {
+        month = "0" + month;
+    }
+    if (day < 10) {
+        day = "0" + day;
+    }
+    return `${year}-${month}-${day}`;
+}
+
+const getWeek = (date) => {
+    let day = date.getDay();
+    let week = [];
+    let startDate;
+    let copy = new Date(date);
+
+    if (day === 0) {
+        startDate =  new Date(copy.setDate(date.getDate() - 6));
+    }
+    else {
+        startDate = new Date(copy.setDate(date.getDate() - (day-1)));
+    }
+
+    for (let i = 0; i < 6; i++) {
+        copy = new Date(date);
+        week[i] = getRightDateFormat(new Date(copy.setDate(startDate.getDate() + i)));
+        console.log(copy);
+    }
+    return week;
+}
+
+const getMonth = (number) => {
+    switch (number) {
+        case "01":
+            return "января"
+        case "02":
+            return "февраля"
+        case "03":
+            return "марта"
+        case "04":
+            return "апреля"
+        case "05":
+            return "мая"
+        case "06":
+            return "июня"
+        case "07":
+            return "июля"
+        case "08":
+            return "августа"
+        case "09":
+            return "сентября"
+        case "10":
+            return "октября"
+        case "11":
+            return "ноября"
+        case "12":
+            return "декабря"
+    }
+}
+
+const getDayName = (dateString) => {
+    let monthNumber = `${dateString[5]}${dateString[6]}`
+    return `${dateString[8]}${dateString[9]} ${getMonth(monthNumber)}`;
 }
 
 const chooseDay = (day) => {
