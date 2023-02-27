@@ -27,6 +27,40 @@ function setText(elem, text) {
     }
 }
 
+const getRightDateFormat = (date) => {
+    let year = date.getFullYear();
+    let month = date.getMonth()+1;
+    let day = date.getDate();
+    if (month < 10) {
+        month = "0" + month;
+    }
+    if (day < 10) {
+        day = "0" + day;
+    }
+    return `${year}-${month}-${day}`;
+}
+
+const getWeek = (date) => {
+    let day = date.getDay();
+    let week = {
+        startDate: "",
+        endDate: ""
+    }
+    let copy = new Date(date);
+    if (day === 0) {
+        week.startDate =  getRightDateFormat(new Date(copy.setDate(date.getDate() - 6)));
+        week.endDate = getRightDateFormat(new Date(copy.setDate(date.getDate() - 1)));
+    }
+    else {
+        week.startDate =  getRightDateFormat(new Date(copy.setDate(date.getDate() - (day-1))));
+        week.endDate = getRightDateFormat(new Date(copy.setDate(date.getDate() + (6-day))));
+    }
+    return week;
+}
+
+let dateX = new Date ("2023-02-28");
+console.log(getWeek(dateX));
+
 const chooseDay = (day) => {
     switch (day) {
         case 1:
