@@ -99,4 +99,20 @@ const createTimetableToEdit = (currentPairs) => {
     }
 }
 
+$("#select-pair-room").select2({
+    dropdownParent: '#editModal'
+});
+
+$("#select-teacher").select2({
+    dropdownParent: '#editModal'
+});
+
+$("#select-pair-type").select2({
+    dropdownParent: '#editModal'
+});
+
+$("#select-pair-name").select2({
+    dropdownParent: '#editModal'
+});
+
 createTimetableToEdit(createTimetableMatrix(timeTable972101));
