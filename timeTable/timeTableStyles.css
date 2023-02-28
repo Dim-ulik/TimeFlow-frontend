@@ -193,3 +193,28 @@ body {
 .form-select {
     border-radius: 20px;
 }
+
+.date-input {
+    border-radius: 20px;
+    height: 30px;
+    width: 195px;
+    height: 38px;
+    border: #d2d8de solid 1px;
+    color: #424147;
+    padding-right: 10px;
+    padding-left: 15px;
+}
+
+.arrow {
+    font-size: 15px;
+    color: rgb(58, 122, 217);
+}
+
+.week-slider {
+    font-size: 15px;
+    border-radius: 10px;
+}
+
+.week-slider:hover {
+    background: white;
+}
