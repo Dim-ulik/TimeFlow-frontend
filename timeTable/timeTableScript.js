@@ -38,4 +38,23 @@ const showTimetable = (matrix) => {
     }
 }
 
+const loadGroups = () => {
+    let url = hostname + "/api/v1/group";
+    fetch(url).then((response) => {
+        if (response.ok) {
+            return response.json();
+        }
+        else {
+            return 0;
+        }
+    }).then((json) => {
+        for(let i = 0; i < json.length; i++) {
+            let newOption = new Option(json[i].number, json[i].id);
+            $("#groups-list").append(newOption);
+        }
+    });
+}
+
+loadGroups();
+
 showTimetable(createTimetableMatrix(timeTable972101));

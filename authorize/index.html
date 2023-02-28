@@ -20,12 +20,13 @@
             </div>
         </div>
 
-        <form class="login-form">
+        <form class="login-form" id="login_form">
             <div class="mb-3">
-                <input class="form-control" type="email@example.com" placeholder="email" aria-label="default input example" >
+                <input class="form-control" type="email" placeholder="email@example.com" name="email">
             </div>
             <div class="mb-3">
-                <input class="form-control" type="password" placeholder="password" />
+                <input class="form-control" type="password" placeholder="password" name="password"/>
+                <div class="invalid-feedback">Проверьте email и пароль</div>
             </div>
             <div class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input btn-outline-secondary"/>
@@ -37,18 +38,21 @@
 
         </form>
 
-        <form class="register-form d-none">
+        <form class="register-form d-none" id="register_form">
             <div class="mb-3">
                 <label class="form-label">Фамилия</label>
-                <input class="form-control" placeholder="Иванов">
+                <input id="surname" class="form-control upperFirst" placeholder="Иванов" name="surname">
+                <div class="invalid-feedback">Используйте кириллицу</div>
             </div>
             <div class="mb-3">
                 <label class="form-label">Имя</label>
-                <input class="form-control" placeholder="Иван">
+                <input id="name" class="form-control upperFirst" placeholder="Иван" name="name">
+                <div class="invalid-feedback">Используйте кириллицу</div>
             </div>
             <div class="mb-3">
                 <label class="form-label">Отчество</label>
-                <input class="form-control" placeholder="Иванович">
+                <input id="patronymic" class="form-control upperFirst" placeholder="Иванович" name="patronymic">
+                <div class="invalid-feedback">Используйте кириллицу</div>
             </div>
             <div class="mb-3">
                 <label class="form-label">Номер трудового договора</label>
@@ -57,25 +61,29 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Пол</label>
-                <select class="form-select" aria-label="Default select example">
-                    <option value="0">Мужской</option>
-                    <option value="1">Женский</option>
+                <select id="sex" class="form-select" aria-label="Default select example" name="sex">
+                    <option value="MALE">Мужской</option>
+                    <option value="FEMALE">Женский</option>
                 </select>
             </div>
             <div class="mb-5">
               <label class="form-label">Email</label>
-              <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="email@example.com">
+              <input id="email" type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="email@example.com">
+              <div class="invalid-feedback">Некорректный email</div>
             </div>
             <div class="mb-1">
               <label class="form-label">Пароль</label>
-              <input type="password" class="form-control">
+              <input id="password" type="password" class="form-control" name="password">
+              <div class="invalid-feedback">Пароль должен содеражть от 8 до 32 симоволов и не может содержать специальных символов</div>
             </div>
             <div class="mb-5">
                 <label class="form-label">Пароль еще раз</label>
-                <input type="password" class="form-control">
+                <input id="password_check" type="password" class="form-control">
+                <div class="invalid-feedback">Пароли не совпадают</div>
             </div>
             
-            <button type="submit" class="btn btn-secondary btn-green mt-2">Зарегестрироваться</button>
+            <button id="register" type="submit" class="btn btn-secondary btn-green mt-2">Зарегестрироваться</button>
+            <div class="invalid-feedback">Ошибка регистрации</div>
             <span class="m-2" style="display: block;">
                 Уже есть аккаунт?
                 <a id="go_to_login" href="">Войти</a>
@@ -87,7 +95,7 @@
 
     <script src="../bootstrap/bootstrap.min.js"></script>
     <script src="../jquery/jquery.js"></script>
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 
 </html>

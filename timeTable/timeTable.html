@@ -25,24 +25,22 @@
     </div>
 </nav>
 <div class="container timetable mt-5">
-    <form class="row mb-5">
-        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
-            <select class="form-select" aria-label="Default select example">
-            <option selected>Номер группы</option>
-            <option class="d-none" value="972101">972101</option>
+    <form class="row mb-3">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-12">
+            <select class="form-select" id="groups-list">
+            <option value="0" selected>Номер группы</option>
             </select>
         </div>
-        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-sm-0 col-12 mt-2">
-            <select class="form-select" aria-label="Default select example">
-                <option value="1232" selected>Текущая неделя</option>
-                <option value="1232">20.02.2023 - 25.02.2023</option>
-            </select>
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-5 col-12 mt-2 mt-sm-0">
+            <input type="date" class="date-input">
         </div>
-        <div class="col-xl-1 col-lg-2 col-md-2 col-sm-2 col-3">
-            <button type="submit" class="btn time-flow-button ms-lg-4 ms-xl-0 mt-lg-0 mt-md-3 mt-sm-3 mt-3">Показать</button>
+        <div class="col-xl-3 col-lg-4 col-md-5 col-sm-12 mt-sm-3 mt-md-0 mt-2 mt-sm-0 col-12 text-xl-end text-xxl-start">
+            <button type="submit" class="btn time-flow-button">Показать</button>
+            <button type="submit" class="btn time-flow-button ms-md-2 ms-sm-2 ms-2">Редактировать</button>
         </div>
-        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6">
-            <button type="submit" class="btn time-flow-button ms-xl-2 mt-lg-0 mt-md-3 ms-md-0 ms-sm-4 mt-sm-3 mt-3 ms-3">Редактировать</button>
+        <div class="mt-sm-3 col-12 text-center mt-3">
+            <button type="submit" class="btn week-slider align-middle"><span class="arrow">< </span>Предыдущая <span class="d-none d-sm-inline">неделя</span></button>
+            <button type="submit" class="btn week-slider">Следующая <span class="d-none d-sm-inline">неделя</span> <span class="arrow">></span></button>
         </div>
     </form>
    <div class="row">

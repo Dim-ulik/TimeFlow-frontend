@@ -92,3 +92,7 @@
     outline:none;
     transform: scale(95%);
 }
+
+.form-select {
+    width: 300px;
+}
