@@ -53,22 +53,24 @@
     <div class="container mt-5">
         <div class="container" id="container">
             <div class="header">Заявки с WEB:</div>
-            <div class="card application mt-2 d-none" id="card-application">
+            <!-- template карточки пользователя - если пол мужской - ставим изображение man.png
+             а если пол женский - woman.png-->
+            <div class="card application mt-2" id="card-template">
                 <div class="card-body">
                     <div class="container">
                         <div class="row">
-                            <div class="col-xl-1 col-lg-1 col-md-2 col-sm-2 col-12 image g-0">
-                                <img class="img-fluid photo" src="./images/man.png">
+                            <div class="col-xl-1 col-lg-1 col-md-2 col-sm-2 col-12 text-center image g-0 g-sm-3 g-md-0">
+                                <img class="img-fluid photo" src="./images/woman.png">
                             </div>
-                            <div class="col-xl-8 col-lg-7 col-md-10 col-sm-10 person-inf">
+                            <div class="col-xl-7 col-lg-6 col-md-9 col-sm-10 mt-sm-0 mt-3 person-inf g-md-2 g-lg-0 ms-md-3">
                                 <h4 class="name"><span>ФИО: </span>Иванов Иван Иванович</h4>
                                 <h5 class="card-text contract-number"><span>Номер Договора: </span>90345678</h5>
                                 <h5 class="card-text email"><span>Email: </span>email12345@gmail.com</h5>
                             </div>
                             <div
-                                class="col-xl-3 col-lg-4 col-md-7 col-sm-8 m-lg-auto m-xl-auto mt-md-3 mt-sm-2 mt-3 ms-md-4 ms-sm-4">
-                                <button type="button" class="btn accept-button mx-3">Принять</button>
-                                <button type="button" class="btn reject-button">Отклонить</button>
+                                class="col-xl-3 col-lg-4 col-12 m-lg-auto m-xl-auto mt-md-3 mt-sm-2 mt-3 text-center text-lg-end">
+                                <button type="button" class="btn accept-button">Принять</button>
+                                <button type="button" class="btn reject-button ms-2">Отклонить</button>
                             </div>
                         </div>
                     </div>

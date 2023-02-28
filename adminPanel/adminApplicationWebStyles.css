@@ -28,26 +28,6 @@ body {
     color: #8b8a8e;
 }
 
-.time-flow-button {
-    background-color: #f0bd58;
-    color: #424147;
-    border-radius: 14px;
-    font-size: 15px;
-    -webkit-box-shadow: 5px 4px 20px -7px rgba(240, 189, 88, 1);
-    -moz-box-shadow: 5px 4px 20px -7px rgba(240, 189, 88, 1);
-    box-shadow: 5px 4px 20px -7px rgba(240, 189, 88, 1);
-}
-
-.time-flow-button:hover {
-    transform: scale(102%);
-    background-color: #fcae10;
-}
-
-.time-flow-button:active {
-    outline: none;
-    transform: scale(95%);
-}
-
 .accept-button {
     background-color: #8ed4ba;
     border-radius: 14px;
@@ -95,8 +75,6 @@ body {
 .card {
     border-radius: 20px;
 }
-
-
 
 #container {
     background-color: rgba(167, 167, 169, 0.13);
