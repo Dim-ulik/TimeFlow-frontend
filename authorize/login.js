@@ -7,7 +7,7 @@ $('.login-form').submit(function (e) {
     if (isValid(formData)) {
         console.log('can send')
     }
-    //sendData(formData)
+    sendData(JSON.stringify(Object.fromEntries(formData)))
 })
 
 function isValid(formData) {
@@ -19,13 +19,13 @@ function isValid(formData) {
 }
 
 function sendData(data) {
-    fetch(`${URL}/api/account/login`, {
+    fetch(`http://94.103.87.164:8081/api/v1/sign-in`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         },
-        body: JSON.stringify(data),
+        body: data,
     })
         .then((response) => {
             if (!response.ok) {
@@ -35,9 +35,8 @@ function sendData(data) {
             }
         })
         .then((json) => {
-            localStorage.setItem('token', `${json['token']}`)
-            console.log(localStorage.getItem('token'))
-            //location.href = ''
+            localStorage.setItem('accessToken', `${json['accessToken']}`)
+            location.href = '../timeTable/timeTable.html'
         })
 }
 

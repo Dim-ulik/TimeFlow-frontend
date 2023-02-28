@@ -5,18 +5,19 @@ $('.register-form').submit(function (e) {
     e.preventDefault()
     let formData = new FormData(register_form)
     $('.register-form .form-control').removeClass('is-invalid')
-    $('#register .invalid-feedback').removeClass('is-invalid')
+    $('.invalid-register').addClass('d-none')
     handleFormSubmit(formData)
 });
 
 function handleFormSubmit(formData) {
     if (isValid(formData)) {
+        console.log(JSON.stringify(Object.fromEntries(formData)))
         sendData(JSON.stringify(Object.fromEntries(formData)))
     }
 }
 
 function sendData(data) {
-    fetch(`http://94.103.87.164:8081/api/v1/employee/schedule-maker/sign-up`, {
+    fetch(`http://94.103.87.164:8081/api/v1/sign-up/schedule-maker`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -29,14 +30,16 @@ function sendData(data) {
         if (response.ok) {
             return response.json();
         } else {
-            errorRegister()
+            errorRegister('Ошибка регистрации')
         }
     })
     .then ((json) => {
-        console.log(json)
+        localStorage.setItem('accessToken', `${json['accessToken']}`)
+        location.href = '../timeTable/timeTable.html'
     })
   }
 
-function errorRegister() {
-    $('#register .invalid-feedback').addClass('is-invalid')
+function errorRegister(statusText) {
+    $('.invalid-register').removeClass('d-none')
+    $('.invalid-register').text(statusText)
 }
