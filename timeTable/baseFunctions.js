@@ -63,23 +63,23 @@ const getWeek = (date) => {
 
 const getMonth = (number) => {
     switch (number) {
-        case "01":
+        case "1":
             return "января"
-        case "02":
+        case "2":
             return "февраля"
-        case "03":
+        case "3":
             return "марта"
-        case "04":
+        case "4":
             return "апреля"
-        case "05":
+        case "5":
             return "мая"
-        case "06":
+        case "6":
             return "июня"
-        case "07":
+        case "7":
             return "июля"
-        case "08":
+        case "8":
             return "августа"
-        case "09":
+        case "9":
             return "сентября"
         case "10":
             return "октября"
@@ -91,7 +91,13 @@ const getMonth = (number) => {
 }
 
 const getDayName = (dateString) => {
-    let monthNumber = `${dateString[5]}${dateString[6]}`
+    let monthNumber = "";
+    if (dateString[5] === "0") {
+        monthNumber = dateString[6];
+    }
+    else {
+        monthNumber = `${dateString[5]}${dateString[6]}`;
+    }
     return `${dateString[8]}${dateString[9]} ${getMonth(monthNumber)}`;
 }
 
