@@ -53,10 +53,36 @@
 
     <div class="container mt-5">
         <div class="container" id="container">
-            <div class="header">Заявки с WEB:</div>
+            <div class="header">Заявки составителей:</div>
+            <div class="card filtration mt-3">
+                <div class="card-body text-center">
+                    <div class="message mb-2">
+                        Фильтры
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-lg-5 col-md-4 col-sm-12">
+                            <select class="form-select">
+                                <option selected disabled>По дате</option>
+                                <option value="1">Сначала новые</option>
+                                <option value="2">Сначала старые</option>
+                            </select>
+                        </div>
+                        <div class="mb-3 col-lg-5 col-md-4 col-sm-12">
+                            <select class="form-select" >
+                                <option selected disabled>Статус заявки</option>
+                                <option value="1">Окрыта</option>
+                                <option value="2">Закрыта</option>
+                            </select>
+                        </div>
+                        <div class="mb-3 col-lg-2 col-md-4 col-sm-12">
+                            <button type="button" class="btn time-flow-button">Применить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- template карточки пользователя - если пол мужской - ставим изображение man.png
              а если пол женский - woman.png-->
-            <div class="card application mt-2" id="card-template">
+            <div class="card application mt-4" id="card-template">
                 <div class="card-body">
                     <div class="container">
                         <div class="row">
