@@ -51,3 +51,8 @@ body{
 a {
 	text-decoration: none;
 }
+
+.invalid-register {
+    color: red;
+    display: block;
+}
