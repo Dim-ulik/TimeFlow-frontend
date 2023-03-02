@@ -108,3 +108,13 @@ body {
     font-size: 30px;
     text-align: center;
 }
+
+.message {
+    color: #424147;
+    /*цвет текста*/
+    font-size: 20px;
+}
+
+.pagination-block{
+    display: inline-block;
+}
