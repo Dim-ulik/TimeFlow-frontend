@@ -17,7 +17,7 @@ function handleFormSubmit(formData) {
 }
 
 function sendData(data) {
-    fetch(`http://94.103.87.164:8081/api/v1/sign-up/schedule-maker`, {
+    fetch(`http://94.103.87.164:8081/api/v1/sign-up/employee/schedule-maker`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
