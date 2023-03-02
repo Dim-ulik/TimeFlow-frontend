@@ -114,3 +114,7 @@ body {
     /*цвет текста*/
     font-size: 20px;
 }
+
+.pagination-block{
+    display: inline-block;
+}
