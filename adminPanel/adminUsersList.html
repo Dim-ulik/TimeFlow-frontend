@@ -31,14 +31,15 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Список пользователей</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Заявки с WEB</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Заявки с MOBILE</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"></a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Заявки
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="#">Заявки сотрудников</a></li>
+                            <li><a class="dropdown-item" href="#">Заявки составителей</a></li>
+                            <li><a class="dropdown-item" href="#">Заявки студентов</a></li>
+                        </ul>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -59,14 +60,14 @@
                 <div class="row">
                     <div class="mb-3 col-lg-5 col-md-4 col-sm-12">
                         <select class="form-select">
-                            <option selected>По алфавиту</option>
+                            <option selected disabled>По алфавиту</option>
                             <option value="1">А-Я</option>
                             <option value="2">Я-А</option>
                         </select>
                     </div>
                     <div class="mb-3 col-lg-5 col-md-4 col-sm-12">
                         <select class="form-select" aria-label="Пример выбора по умолчанию">
-                            <option selected>По статусу</option>
+                            <option selected disabled>По статусу</option>
                             <option value="1">Студент</option>
                             <option value="2">Сотрудник университета</option>
                             <option value="3">Внешний пользователь</option>
