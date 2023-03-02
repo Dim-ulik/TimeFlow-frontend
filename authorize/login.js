@@ -1,13 +1,20 @@
 import URL from '../url.js'
+import isAdmin from './isAdmin.js'
+var ISADMIN = false
 
 $('.login-form').submit(function (e) {
     e.preventDefault()
+    var ISADMIN = false
     $('.login-form .form-control').removeClass('is-invalid')
     let formData = new FormData(login_form)
+    if (isAdmin(formData.get('email'), formData.get('password'))) {
+        ISADMIN = true
+        sendData(JSON.stringify(Object.fromEntries(formData)))
+        return
+    } 
     if (isValid(formData)) {
-        console.log('can send')
+        sendData(JSON.stringify(Object.fromEntries(formData)))
     }
-    sendData(JSON.stringify(Object.fromEntries(formData)))
 })
 
 function isValid(formData) {
@@ -36,7 +43,9 @@ function sendData(data) {
         })
         .then((json) => {
             localStorage.setItem('accessToken', `${json['accessToken']}`)
-            location.href = '../timeTable/timeTable.html'
+            
+            location.href = '../adminPanel/adminApplicationWeb.html'
+        
         })
 }
 
