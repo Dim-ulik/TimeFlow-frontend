@@ -1,4 +1,4 @@
-import deleteApplication from "./deleteApplication";
+import deleteApplication from "./deleteApplication.js";
 
 function rejectApplication(id) {
     fetch(`http://94.103.87.164:8081/api/v1/request/employee/schedule-maker/${id}/reject`, {
