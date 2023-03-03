@@ -34,7 +34,7 @@ function loadApllications(typeOfUser, pageNumber, pageSize, sortDirection, isClo
         //     $('#applications-container').append(block)
         // }
 
-        //console.log(json)
+        console.log(json)
     })
 }
 
