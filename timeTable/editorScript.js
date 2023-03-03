@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    loadTimeslots(createTimetableToEdit,timeTable972101);
+
     $(".timeslot").click(function() {
         let cellId = "#" + $(this).attr('id');
         let cell = $(cellId);
@@ -19,10 +21,10 @@ $(document).ready(function() {
             $("#select-teacher").find(`#${pairTeacherId}`).attr("selected", true);
         }
     });
-
     $("#clear-timetable").click(function() {
         console.log(1);
     });
+    loadTimeslots();
 })
 
 $("#repeat-check").click(function() {
@@ -55,8 +57,6 @@ const createTimeslots = () => {
     }
 }
 
-createTimeslots();
-
 const createFreeCell = (pairNumber) => {
     let addPairCell = $("#add-pair-template").clone();
     addPairCell.removeAttr('id');
@@ -77,6 +77,7 @@ const createFreeTable = () => {
 
 
 const createTimetableToEdit = (currentPairs) => {
+    createTimeslots();
     for (let i = 0; i < currentPairs.length; i++) {
         for(let j = 0; j < currentPairs[i].length; j++) {
             let currentPair = currentPairs[i][j];
@@ -114,5 +115,3 @@ $("#select-pair-type").select2({
 $("#select-pair-name").select2({
     dropdownParent: '#editModal'
 });
-
-createTimetableToEdit(createTimetableMatrix(timeTable972101));
