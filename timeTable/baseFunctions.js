@@ -2,12 +2,24 @@ let pairsOnDayAmount = 0;
 let timesList = [];
 let hostname = 'http://94.103.87.164:8081';
 
-const createTimesList = (response, timesList) => {
-    pairsOnDayAmount = response.length;
+function loadTimeslots(func, arg) {
+    console.log(hostname);
+    let url = hostname + "/api/v1/timeslot";
+    fetch(url).then((response) => {
+        if (response.ok) {
+            return response.json();
+        }
+        else {
+            return 0;
+        }
+    }).then((response) => {
+        pairsOnDayAmount = response.length;
 
-    for (let i = 0; i < pairsOnDayAmount; i++) {
-        timesList[i] = {time: response[i].beginTime + " - " + response[i].endTime, timeslotId: response.id};
-    }
+        for (let i = 0; i < pairsOnDayAmount; i++) {
+            timesList[i] = {time: response[i].beginTime + " - " + response[i].endTime, timeslotId: response.id};
+        }
+        func(arg);
+    });
 }
 
 const getPairTime = (pairNumber) => {
@@ -187,16 +199,6 @@ const createPair = (pairType, pairNumber, pairDay, pairName, pairRoom, teacherNa
     return pair;
 }
 
-let response = [
-    {sequenceNumber: 1, beginTime: "8:45", endTime: "10:20", id: "9091"},
-    {sequenceNumber: 2, beginTime: "10:35", endTime: "12:10", id: "9092"},
-    {sequenceNumber: 3, beginTime: "12:25", endTime: "14:00", id: "9093"},
-    {sequenceNumber: 4, beginTime: "14:45", endTime: "16:20", id: "9094"},
-    {sequenceNumber: 5, beginTime: "16:35", endTime: "18:10", id: "9095"},
-    {sequenceNumber: 6, beginTime: "18:25", endTime: "20:00", id: "9096"},
-    {sequenceNumber: 7, beginTime: "20:15", endTime: "21:50", id: "9097"},
-]
-
 let timeTable972101 = [
     [
         {pairNumber: 1, pairDay: 1, pairType: "LECTURE", pairName: {name: "Основы машинного обучения", id: 5}, pairRoom: {number: "Ауд. 328 (2)", id: 2}, teacherName: {name: "Красавин Дмитрий Сергеевич", id: 4}},
@@ -230,4 +232,3 @@ let timeTable972101 = [
     []
 ]
 
-createTimesList(response, timesList);

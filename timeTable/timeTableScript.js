@@ -1,3 +1,8 @@
+$(document).ready(function () {
+    loadGroups();
+    loadTimeslots(showTimetable,timeTable972101);
+});
+
 const addPair = (pair, day) => {
     let dayId = chooseDay(day);
     $(dayId).append(pair);
@@ -55,6 +60,3 @@ const loadGroups = () => {
     });
 }
 
-loadGroups();
-
-showTimetable(createTimetableMatrix(timeTable972101));
