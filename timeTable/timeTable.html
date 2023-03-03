@@ -25,22 +25,22 @@
     </div>
 </nav>
 <div class="container timetable mt-5">
-    <form class="row mb-3">
-        <div class="col-lg-3 col-md-3 col-sm-3 col-12">
+    <form class="row mb-3" id="inf-form">
+        <div class="col-lg-3 col-md-3 col-sm-7 col-12">
             <select class="form-select" id="groups-list">
             <option value="0" selected>Номер группы</option>
             </select>
         </div>
         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-5 col-12 mt-2 mt-sm-0">
-            <input type="date" class="date-input">
+            <input type="date" class="date-input" id="week-date">
         </div>
         <div class="col-xl-3 col-lg-4 col-md-5 col-sm-12 mt-sm-3 mt-md-0 mt-2 mt-sm-0 col-12 text-xl-end text-xxl-start">
-            <button type="submit" class="btn time-flow-button" id="btn-show-timetable">Показать</button>
-            <button type="submit" class="btn time-flow-button ms-md-2 ms-sm-2 ms-2" id="btn-edit-timetable">Редактировать</button>
+            <button class="btn time-flow-button" id="btn-show-timetable">Показать</button>
+            <button class="btn time-flow-button ms-md-2 ms-sm-2 ms-2" id="btn-edit-timetable">Редактировать</button>
         </div>
         <div class="mt-sm-3 col-12 text-center mt-3">
-            <button type="submit" class="btn week-slider align-middle"><span class="arrow">< </span>Предыдущая <span class="d-none d-sm-inline">неделя</span></button>
-            <button type="submit" class="btn week-slider">Следующая <span class="d-none d-sm-inline">неделя</span> <span class="arrow">></span></button>
+            <button class="btn week-slider align-middle"><span class="arrow">< </span>Предыдущая <span class="d-none d-sm-inline">неделя</span></button>
+            <button class="btn week-slider">Следующая <span class="d-none d-sm-inline">неделя</span> <span class="arrow">></span></button>
         </div>
     </form>
    <div class="row">
@@ -49,9 +49,7 @@
                <div class="day-name">
                     Понедельник
                </div>
-               <div class="day-date" id="day-date-monday">
-                   13 янв.
-               </div>
+               <div class="day-date" id="day-date-monday"></div>
            </div>
        </div>
        <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12 day-col" id="tuesday-col">
@@ -59,9 +57,7 @@
                <div class="day-name">
                    Вторник
                </div>
-               <div class="day-date" id="day-date-tuesday">
-                   14 янв.
-               </div>
+               <div class="day-date" id="day-date-tuesday"></div>
            </div>
        </div>
        <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12 day-col" id="wednesday-col">
@@ -69,9 +65,7 @@
                <div class="day-name">
                    Среда
                </div>
-               <div class="day-date" id="day-date-wednesday">
-                   15 янв.
-               </div>
+               <div class="day-date" id="day-date-wednesday"></div>
            </div>
        </div>
        <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12 day-col" id="thursday-col">
@@ -79,9 +73,7 @@
                <div class="day-name">
                    Четверг
                </div>
-               <div class="day-date" id="day-date-thursday">
-                   16 янв.
-               </div>
+               <div class="day-date" id="day-date-thursday"></div>
            </div>
        </div>
        <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12 day-col" id="friday-col">
@@ -89,9 +81,7 @@
                <div class="day-name">
                    Пятница
                </div>
-               <div class="day-date" id="day-date-friday">
-                   17 янв.
-               </div>
+               <div class="day-date" id="day-date-friday"></div>
            </div>
        </div>
        <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12 day-col" id="saturday-col">
@@ -99,9 +89,7 @@
                <div class="day-name">
                    Суббота
                </div>
-               <div class="day-date" id="day-date-saturday">
-                   18 янв.
-               </div>
+               <div class="day-date" id="day-date-saturday"></div>
            </div>
        </div>
    </div>

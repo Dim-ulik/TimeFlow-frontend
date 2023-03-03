@@ -1,7 +1,55 @@
 $(document).ready(function () {
     loadGroups();
-    loadTimeslots(showTimetable,timeTable972101);
+    changeDate();
+    validation();
+    loadTimeslots();
+    $("#btn-show-timetable").click(function (e) {
+        e.preventDefault();
+        createTimetable();
+    });
+
+    $("#inf-form").change(function () {
+        validation();
+    });
 });
+
+const createTimetable = () => {
+    let date = $("#week-date").val();
+    let group = $("#groups-list").val();
+    let week = getWeek(date);
+    localStorage.setItem('date', date);
+    localStorage.setItem('group', group);
+    clearTimetable();
+    loadTimetable(group, week[0], week[week.length - 1], showTimetable);
+}
+
+const changeDate = () => {
+    let weekInput = $("#week-date");
+    let localWeek = localStorage.getItem('week');
+    let date = getRightDateFormat(new Date());
+    if (localWeek === null) {
+        weekInput.attr('value', date);
+        localStorage.setItem('week', date);
+    }
+    else {
+        weekInput.attr('value', localWeek);
+    }
+    let week = getWeek(weekInput.val());
+    changeDays(week);
+}
+
+const validation = () => {
+    let inputDate = $("#week-date");
+    let inputGroup = $("#groups-list");
+    if (inputGroup.val() === '0' || (inputDate.val() < '2010-01-01' || inputDate.val() > '3000-01-01')) {
+        $("#btn-show-timetable").attr('disabled', true);
+        $("#btn-edit-timetable").attr('disabled', true);
+    }
+    else {
+        $("#btn-show-timetable").attr('disabled', false);
+        $("#btn-edit-timetable").attr('disabled', false);
+    }
+}
 
 const addPair = (pair, day) => {
     let dayId = chooseDay(day);
@@ -22,9 +70,18 @@ const checkLastEmptyPair = (matrix, i, j) => {
     return (emptyCount + j) === (matrix[i].length - 1);
 }
 
+const checkEmptyDay = (day) => {
+    for (let i = 0; i < day.length; i++) {
+        if (!jQuery.isEmptyObject(day[i])) {
+            return false;
+        }
+    }
+    return true;
+}
+
 const showTimetable = (matrix) => {
     for (let i = 0; i < 6; i++) {
-        if (matrix[i].length !== 0) {
+        if (checkEmptyDay(matrix[i])) {
             for (let j = 0; j < matrix[i].length; j++) {
                 if (jQuery.isEmptyObject(matrix[i][j])) {
                     if (checkLastEmptyPair(matrix, i, j)) continue;
@@ -58,5 +115,9 @@ const loadGroups = () => {
             $("#groups-list").append(newOption);
         }
     });
+}
+
+const clearTimetable = () => {
+    $(".pair-cell").not("#pair-template").remove();
 }
 

@@ -1,5 +1,7 @@
 $(document).ready(function() {
-    loadTimeslots(createTimetableToEdit,timeTable972101);
+    let week = getWeek(localStorage.getItem('week'));
+    changeDays(week);
+    loadTimeslots();
 
     $(".timeslot").click(function() {
         let cellId = "#" + $(this).attr('id');
@@ -84,7 +86,7 @@ const createTimetableToEdit = (currentPairs) => {
             if (!jQuery.isEmptyObject(currentPair)) {
                 let pairDay = currentPair.pairDay;
                 let pairNumber = currentPair.pairNumber;
-                let pairCell = createPair(currentPair.pairType, pairNumber, pairDay, currentPair.pairName, currentPair.pairRoom, currentPair.teacherName,"#pair-template-with-edit", currentPair.timeslotId);
+                let pairCell = createPair(currentPair.pairType, pairNumber, pairDay, currentPair.pairName, currentPair.pairRoom, currentPair.teacherName,"#pair-template-with-edit", currentPair.id);
                 pairCell.attr('type-id', currentPair.pairType);
                 appendPair(pairCell, pairDay, pairNumber);
             }

@@ -2,7 +2,7 @@ let pairsOnDayAmount = 0;
 let timesList = [];
 let hostname = 'http://94.103.87.164:8081';
 
-function loadTimeslots(func, arg) {
+function loadTimeslots() {
     console.log(hostname);
     let url = hostname + "/api/v1/timeslot";
     fetch(url).then((response) => {
@@ -14,11 +14,9 @@ function loadTimeslots(func, arg) {
         }
     }).then((response) => {
         pairsOnDayAmount = response.length;
-
         for (let i = 0; i < pairsOnDayAmount; i++) {
             timesList[i] = {time: response[i].beginTime + " - " + response[i].endTime, timeslotId: response.id};
         }
-        func(arg);
     });
 }
 
@@ -52,11 +50,12 @@ const getRightDateFormat = (date) => {
     return `${year}-${month}-${day}`;
 }
 
-const getWeek = (date) => {
+const getWeek = (dataDate) => {
+    let date = new Date(dataDate);
     let day = date.getDay();
     let week = [];
     let startDate;
-    let copy = new Date(date);
+    let copy = new Date();
 
     if (day === 0) {
         startDate =  new Date(copy.setDate(date.getDate() - 6));
@@ -66,9 +65,8 @@ const getWeek = (date) => {
     }
 
     for (let i = 0; i < 6; i++) {
-        copy = new Date(date);
-        week[i] = getRightDateFormat(new Date(copy.setDate(startDate.getDate() + i)));
-        console.log(copy);
+        let temp = new Date(startDate);
+        week[i] = getRightDateFormat(new Date(temp.setDate(startDate.getDate() + i)));
     }
     return week;
 }
@@ -104,13 +102,20 @@ const getMonth = (number) => {
 
 const getDayName = (dateString) => {
     let monthNumber = "";
+    let dayNumber = "";
     if (dateString[5] === "0") {
         monthNumber = dateString[6];
     }
     else {
         monthNumber = `${dateString[5]}${dateString[6]}`;
     }
-    return `${dateString[8]}${dateString[9]} ${getMonth(monthNumber)}`;
+    if (dateString[8] === "0") {
+        dayNumber = dateString[9];
+    }
+    else {
+        dayNumber = dateString[8] + dateString[9];
+    }
+    return `${dayNumber} ${getMonth(monthNumber)}`;
 }
 
 const chooseDay = (day) => {
@@ -162,13 +167,7 @@ const getPairTypeInf = (pairType) => {
     return pairTypeInf;
 }
 
-const createTimetableMatrix = (responseArray) => {
-    //тут будет логика преобразования массива пар из запроса в удобный мне формат
-    let timetableMatrix = responseArray;
-    return timetableMatrix;
-}
-
-const createPair = (pairType, pairNumber, pairDay, pairName, pairRoom, teacherName, templateCellId) => {
+const createPair = (pairType, pairNumber, pairDay, pairName, pairRoom, teacherName, templateCellId, pairId) => {
     let pair;
     let pairTypeInf = getPairTypeInf(pairType);
     let pairTypeString = pairTypeInf.typeString;
@@ -183,7 +182,7 @@ const createPair = (pairType, pairNumber, pairDay, pairName, pairRoom, teacherNa
     }
 
     setText(pair.find(".pair-time"), getPairTime(pairNumber));
-    pair.removeAttr('id');
+    pair.attr('id', pairId);
 
     if (pairType !== 0) {
         setText(pair.find(".pair-type"), pairTypeString);
@@ -199,36 +198,70 @@ const createPair = (pairType, pairNumber, pairDay, pairName, pairRoom, teacherNa
     return pair;
 }
 
-let timeTable972101 = [
-    [
-        {pairNumber: 1, pairDay: 1, pairType: "LECTURE", pairName: {name: "Основы машинного обучения", id: 5}, pairRoom: {number: "Ауд. 328 (2)", id: 2}, teacherName: {name: "Красавин Дмитрий Сергеевич", id: 4}},
-        {},
-        {pairNumber: 3, pairDay: 1, pairType: "PRACTICAL-LESSON", pairName: {name: "Основы машинного обучения", id: 5}, pairRoom: {number:"Ауд. 214 (2)", id: 3}, teacherName: {name: "Красавин Дмитрий Сергеевич", id: 4}},
-        {},
-        {},
-        {},
-        {}
-    ],
-    [],
-    [
-        {pairNumber: 1, pairDay: 3, pairType: "EXAM", pairName: {name: "Тестирование программного обеспечения", id: 17}, pairRoom: {number: "Ауд. 216 (2)", id: 4}, teacherName: {name: "Волков Максим Николаевич", id: 45}},
-        {pairNumber: 2, pairDay: 3, pairType: "PRACTICAL-LESSON", pairName: {name: "ООП", id: 90}, pairRoom: {number: "Ауд. 101 (2)", id: 67}, teacherName: {name: "Змеев Денис Олегович", id: 8}},
-        {},
-        {pairNumber: 4, pairDay: 3, pairType: "LABORATORY-LESSON", pairName: {name: "ООП", id: 90}, pairRoom: {number: "Ауд. 202 (2)", id: 45}, teacherName: {name: "Змеев Денис Олегович", id: 8}},
-        {},
-        {},
-        {}
-    ],
-    [],
-    [
-        {pairNumber: 1, pairDay: 5, pairType: "LABORATORY-LESSON", pairName: {name: "Математика для компьютерных наук ч.3", id: 12}, pairRoom: {number: "Ауд. 216 (2)", id: 4}, teacherName: {name: "Даммер Диана Дамировна", id: 18}},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {}
-    ],
-    []
-]
+const loadTimetable = (groupId, startDate, endDate, func) => {
+    let url = hostname + "/api/v1/lesson/group/" + groupId + "?startDate=" + startDate + "&endDate=" + endDate;
+    fetch(url).then((response) => {
+        if (response.ok) {
+            return response.json();
+        }
+        else {
+            return 0;
+        }
+    }).then((json) => {
+        let rightFormatTimetable = createTimetableMatrix(json);
+        func(rightFormatTimetable);
+    });
+}
+
+
+const changeDays = (week) => {
+    for (let i = 0; i < 6; i++) {
+        let dayName = getDayName(week[i]);
+        let dayInf = $(chooseDay(i+1)).find('.day-date');
+        setText(dayInf, dayName);
+    }
+}
+
+const createTimetableMatrix = (response) => {
+    let pairsArray = response.lessons;
+    let timetableMatrix = [];
+    for(let i = 0; i < 6; i++) {
+        timetableMatrix[i] = [];
+    }
+    for (let i = 0; i < 6; i++) {
+        for (let j =  0; j < pairsOnDayAmount; j++) {
+            timetableMatrix[i][j] = {};
+        }
+    }
+    for (let i = 0; i < pairsArray.length; i++) {
+        let pairId = pairsArray[i].id;
+        let pairName = {
+            name: pairsArray[i].subject.name,
+            id: pairsArray[i].subject.id
+        };
+        let teacherName = {
+            name: pairsArray[i].teacher.surname + pairsArray[i].teacher.name + pairsArray[i].teacher.patronymic,
+            id: pairsArray[i].teacher.id
+        }
+        let pairRoom = {
+            number: pairsArray[i].classrom.number,
+            id: pairsArray[i].subject.id
+        }
+        let date = new Date(pairsArray[i].date);
+        let day = date.getDay();
+        let lessonType = pairsArray[i].lessonType;
+        let pairNumber = pairsArray[i].timeslot.sequenceNumber;
+        timetableMatrix[day][pairNumber] = {
+            pairNumber: pairNumber,
+            pairDay: day,
+            pairType: lessonType,
+            pairName: pairName,
+            pairRoom: pairRoom,
+            teacherName: teacherName,
+            id: pairId
+        }
+    }
+    return timetableMatrix;
+}
+
 
