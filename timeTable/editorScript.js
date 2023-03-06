@@ -1,7 +1,9 @@
 $(document).ready(function() {
     let week = getWeek(localStorage.getItem('week'));
-    changeDays(week);
+
     loadTimeslots();
+    changeHeader(week[0],week[5]);
+    changeDays(week);
 
     $(".timeslot").click(function() {
         let cellId = "#" + $(this).attr('id');
@@ -23,10 +25,13 @@ $(document).ready(function() {
             $("#select-teacher").find(`#${pairTeacherId}`).attr("selected", true);
         }
     });
+
     $("#clear-timetable").click(function() {
         console.log(1);
     });
-    loadTimeslots();
+
+    let group = localStorage.getItem('group');
+    loadTimetable(group, week[0], week[week.length - 1], createTimetableToEdit);
 })
 
 $("#repeat-check").click(function() {
@@ -37,6 +42,12 @@ $("#repeat-check").click(function() {
         $(".repeat-block").addClass('d-none');
     }
 })
+
+const changeHeader = (firstDay, lastDay) => {
+    let string = `${firstDay} - ${lastDay}`;
+    setText($('#group-dates'), string);
+    setText($('#group-number'), localStorage.getItem('group-number'))
+}
 
 const createId = (day, pairNumber) => {
     return `${day}-${pairNumber}`;
@@ -117,3 +128,4 @@ $("#select-pair-type").select2({
 $("#select-pair-name").select2({
     dropdownParent: '#editModal'
 });
+

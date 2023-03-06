@@ -207,6 +207,7 @@ const loadTimetable = (groupId, startDate, endDate, func) => {
             return 0;
         }
     }).then((json) => {
+        localStorage.setItem('group-number', json.studentGroup.number);
         let rightFormatTimetable = createTimetableMatrix(json);
         func(rightFormatTimetable);
     });
