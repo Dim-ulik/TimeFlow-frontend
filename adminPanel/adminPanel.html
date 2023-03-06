@@ -2,38 +2,243 @@
 <html lang="ru">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>TimeFlow</title>
-    <link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="./styles/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
-    <link rel="import" href="./navbar/navbar.html">
-    <link rel="import" href="filtrationApplications.html">
-    <link rel="import" href="filtrationUsersList.html">
-    <link rel="import" href="cardEmployee.html">
-    <link rel="import" href="cardStudent.html">
-    <link rel="import" href="./pagination/pagination.html">
+    <link rel="stylesheet" href="/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" />
+    <link rel="import" href="./navbar/navbar.html" />
+    <link rel="import" href="filtrationApplications.html" />
+    <link rel="import" href="filtrationUsersList.html" />
+    <link rel="import" href="cardEmployee.html" />
+    <link rel="import" href="cardStudent.html" />
+    <link rel="import" href="./pagination/pagination.html" />
 </head>
 
 <body>
-    <div id="navbar-admin-panel"></div>
-
+    <!-- <div id="navbar-admin-panel"></div> -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="./images/logo.png" alt="Logo" width="30" height="30"
+                    class="d-inline-block align-text-top logo" />
+                <span class="navbar-name">TimeFlow</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Переключатель навигации">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link navbar-active" id="users_list" value="users_list" href="#">Список
+                            пользователей</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="applications" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Заявки
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li>
+                                <a class="dropdown-item navbar-active" id="app_employee" value="applications"
+                                    href="#">Заявки сотрудников</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item navbar-active" id="app_schedule-maker" value="applications"
+                                    href="#">Заявки составителей</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item navbar-active" id="app_student" value="applications"
+                                    href="#">Заявки студентов</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <button type="button" class="btn time-flow-button log-out-btn">
+                            Выйти
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     <div class="container text-center mt-5">
         <div class="container" id="container">
-            <div class="header d-none"></div>
+            <div class="header"></div>
 
-            <div id="filtration"></div>
+            <!-- <div id="filtration"></div> -->
+            <div class="card filtration filtration-users_list d-none">
+                <div class="card-body">
+                    <div class="message mb-2">Фильтры</div>
+                    <form class="row" id="users_filters">
+                        <div class="mb-3 col-lg-5 col-md-4 col-sm-12">
+                            <select class="form-select" name="sorting">
+                                <option selected value="name-asc">По алфавиту</option>
+                                <option value="name-asc">А-Я</option>
+                                <option value="name-desc">Я-А</option>
+                            </select>
+                        </div>
+                        <div class="mb-3 col-lg-5 col-md-4 col-sm-12">
+                            <select class="form-select" aria-label="Пример выбора по умолчанию" name="status">
+                                <option selected value="all">По статусу</option>
+                                <option value="student">Студент</option>
+                                <option value="employee">Сотрудник университета</option>
+                                <option value="user">Внешний пользователь</option>
+                            </select>
+                        </div>
+                        <div class="mb-3 col-lg-2 col-md-4 col-sm-12">
+                            <button id="apply_filters" type="button"
+                                class="btn time-flow-button apply-users-list-filters">
+                                Применить
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ФИО</th>
+                                    <th scope="col">Номер документа</th>
+                                    <th scope="col">Статус</th>
+                                </tr>
+                            </thead>
+                            <tbody class="users-container"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
-            <div class="card-container"></div>
+            <div class="card filtration filtration-applications mt-3 d-none">
+                <div class="card-body text-center">
+                    <div class="message mb-2">Фильтры</div>
+                    <form class="row" id="app_filters">
+                        <div class="mb-3 col-lg-5 col-md-4 col-sm-12">
+                            <select class="form-select" name="sortDirection">
+                                <option selected value="ASC">По дате</option>
+                                <option value="ASC">Сначала старые</option>
+                                <option value="DESC">Сначала новые</option>
+                            </select>
+                        </div>
+                        <div class="mb-3 col-lg-5 col-md-4 col-sm-12">
+                            <select class="form-select" name="isClosed">
+                                <option selected value="">Статус заявки</option>
+                                <option value="false">Окрыта</option>
+                                <option value="true">Закрыта</option>
+                            </select>
+                        </div>
+                        <div class="mb-3 col-lg-2 col-md-4 col-sm-12">
+                            <button type="button" class="btn time-flow-button apply-applications-filters">
+                                Применить
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card-container" id="applications-container"></div>
         </div>
 
-        <div id="pagination"></div>
+        <div class="card application mt-4 d-none" id="card-template-student">
+            <div class="card-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-1 col-lg-1 col-md-2 col-sm-2 col-12 text-center image g-0 g-sm-3 g-md-0">
+                            <img class="img-fluid application-photo" src="./images/man.png" />
+                        </div>
+                        <div
+                            class="col-xl-7 col-lg-6 col-md-9 col-sm-10 mt-sm-0 mt-3 person-inf g-md-2 g-lg-0 ms-md-3 text-start">
+                            <div>
+                                <h4 class="d-inline">ФИО: </h4>
+                                <h4 class="application-name d-inline"></h4>
+                            </div>
+                            <div class="card-text">
+                                <span>Номер студенческого билета: </span>
+                                <h5 class="application-student-number d-inline"></h5>
+                            </div>
+                            <div class="card-text">
+                                <span>Номер группы: </span>
+                                <h5 class="application-group-number d-inline"></h5>
+                            </div>
+                            <div class="card-text">
+                                <span>Email: </span>
+                                <h5 class="application-email d-inline"></h5>
+                            </div>
+                        </div>
+                        <div
+                            class="col-xl-3 col-lg-4 col-12 m-lg-auto m-xl-auto mt-md-3 mt-sm-2 mt-3 text-center text-lg-end">
+                            <button type="button" class="btn accept-button">Принять</button>
+                            <button type="button" class="btn reject-button ms-2">Отклонить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card application mt-4 d-none" id="card-template-employee">
+            <div class="card-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-1 col-lg-1 col-md-2 col-sm-2 col-12 text-center image g-0 g-sm-3 g-md-0">
+                            <img class="img-fluid application-photo" src="./images/man.png" />
+                        </div>
+                        <div
+                            class="col-xl-7 col-lg-6 col-md-9 col-sm-10 mt-sm-0 mt-3 person-inf g-md-2 g-lg-0 ms-md-3 text-start">
+                            <div>
+                                <h4 class="d-inline">ФИО: </h4>
+                                <h4 class="application-name d-inline"></h4>
+                            </div>
+                            <div class="card-text">
+                                <span>Номер договора: </span>
+                                <h5 class="application-contract-number d-inline"></h5>
+                            </div>
+                            <div class="card-text">
+                                <span>Email: </span>
+                                <h5 class="application-email d-inline"></h5>
+                            </div>
+                        </div>
+                        <div
+                            class="col-xl-3 col-lg-4 col-12 m-lg-auto m-xl-auto mt-md-3 mt-sm-2 mt-3 text-center text-lg-end">
+                            <button type="button" class="btn accept-button">Принять</button>
+                            <button type="button" class="btn reject-button ms-2">Отклонить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div id="pagination"></div> -->
+        <div class="mt-3 align-content-center pagination-block">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item active">
+                        <a class="page-link" href="#">1</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
 </body>
 
