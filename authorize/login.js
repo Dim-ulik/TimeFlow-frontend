@@ -43,8 +43,9 @@ function sendData(data) {
         })
         .then((json) => {
             localStorage.setItem('accessToken', `${json['accessToken']}`)
-            
-            location.href = '../adminPanel/adminApplicationWeb.html'
+            localStorage.setItem('refreshToken', `${json['refreshToken']}`)
+
+            location.href = '../adminPanel/adminPanel.html'
         
         })
 }
