@@ -4,7 +4,7 @@ let hostname = 'http://94.103.87.164:8081';
 
 function loadTimeslots() {
     console.log(hostname);
-    let url = hostname + "/api/v1/timeslot";
+    let url = hostname + "/api/v1/timeslots";
     fetch(url).then((response) => {
         if (response.ok) {
             return response.json();
@@ -55,7 +55,7 @@ const getWeek = (dataDate) => {
     let day = date.getDay();
     let week = [];
     let startDate;
-    let copy = new Date();
+    let copy = new Date(date);
 
     if (day === 0) {
         startDate =  new Date(copy.setDate(date.getDate() - 6));
@@ -63,7 +63,6 @@ const getWeek = (dataDate) => {
     else {
         startDate = new Date(copy.setDate(date.getDate() - (day-1)));
     }
-
     for (let i = 0; i < 6; i++) {
         let temp = new Date(startDate);
         week[i] = getRightDateFormat(new Date(temp.setDate(startDate.getDate() + i)));
@@ -199,7 +198,7 @@ const createPair = (pairType, pairNumber, pairDay, pairName, pairRoom, teacherNa
 }
 
 const loadTimetable = (groupId, startDate, endDate, func) => {
-    let url = hostname + "/api/v1/lesson/group/" + groupId + "?startDate=" + startDate + "&endDate=" + endDate;
+    let url = hostname + "/api/v1/lessons/group/" + groupId + "?startDate=" + startDate + "&endDate=" + endDate;
     fetch(url).then((response) => {
         if (response.ok) {
             return response.json();

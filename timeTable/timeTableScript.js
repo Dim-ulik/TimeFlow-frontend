@@ -3,23 +3,58 @@ $(document).ready(function () {
     changeDate();
     validation();
     loadTimeslots();
+
     $("#btn-show-timetable").click(function (e) {
         e.preventDefault();
-        createTimetable();
+        createTimetable($("#week-date").val(), $("#groups-list").val());
+    });
+
+    $("#btn-edit-timetable").click(function (e) {
+        goToEditPage();
     });
 
     $("#inf-form").change(function () {
         validation();
     });
+
+    $('#next-week').click(function (e) {
+        e.preventDefault();
+        createTimetable(incrementWeek($("#week-date").val()), $("#groups-list").val());
+    });
+
+    $('#last-week').click(function (e) {
+        e.preventDefault();
+        createTimetable(decrementWeek($("#week-date").val()), $("#groups-list").val());
+    });
 });
 
-const createTimetable = () => {
+const decrementWeek = (date) => {
+    let tempDate = new Date(date);
+    let dateNew = new Date(date);
+    return getRightDateFormat(new Date(tempDate.setDate(dateNew.getDate() - 7)));
+}
+
+const incrementWeek = (date) => {
+    let tempDate = new Date(date);
+    let dateNew = new Date(date);
+    return getRightDateFormat(new Date(tempDate.setDate(dateNew.getDate() + 7)));
+}
+
+const goToEditPage = () => {
     let date = $("#week-date").val();
     let group = $("#groups-list").val();
-    let week = getWeek(date);
     localStorage.setItem('date', date);
     localStorage.setItem('group', group);
+}
+
+const createTimetable = (date, group) => {
+    let week = getWeek(date);
+
+    localStorage.setItem('group', group);
+    localStorage.setItem('week', date);
+
     clearTimetable();
+    changeDate();
     loadTimetable(group, week[0], week[week.length - 1], showTimetable);
 }
 
@@ -41,13 +76,18 @@ const changeDate = () => {
 const validation = () => {
     let inputDate = $("#week-date");
     let inputGroup = $("#groups-list");
+
+    let buttons = [$("#next-week"), $("#last-week"), $("#btn-show-timetable"), $("#btn-edit-timetable")];
+
     if (inputGroup.val() === '0' || (inputDate.val() < '2010-01-01' || inputDate.val() > '3000-01-01')) {
-        $("#btn-show-timetable").attr('disabled', true);
-        $("#btn-edit-timetable").attr('disabled', true);
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].attr('disabled', true);
+        }
     }
     else {
-        $("#btn-show-timetable").attr('disabled', false);
-        $("#btn-edit-timetable").attr('disabled', false);
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].attr('disabled', false);
+        }
     }
 }
 
@@ -101,7 +141,7 @@ const showTimetable = (matrix) => {
 }
 
 const loadGroups = () => {
-    let url = hostname + "/api/v1/group";
+    let url = hostname + "/api/v1/groups";
     fetch(url).then((response) => {
         if (response.ok) {
             return response.json();
