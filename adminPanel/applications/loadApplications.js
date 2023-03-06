@@ -1,4 +1,4 @@
-import acceptApplication from "./acceptApplication.js"
+import acceptApplication from "./acceptApplicationStudent.js"
 import rejectApplication from "./rejectApplication.js"
 
 function loadApllications(typeOfUser, pageNumber, pageSize, sortDirection = 'ASC', isClosed = '') {
@@ -32,9 +32,20 @@ function loadApllications(typeOfUser, pageNumber, pageSize, sortDirection = 'ASC
                 block.find('.application-group-number').text(application.student.group.number)
                 block.find('.application-email').text(application.student.userInfo.email)
     
-                $(`${this} .accept-button`).click(acceptApplication(application.id))
-                $(`${this} .reject-button`).click(rejectApplication(application.id))
+                if (application.closed) {
+                    block.find('.accept-button').addClass('d-none')
+                    block.find('.reject-button').addClass('d-none')
+                }
+
+                block.find('.accept-button').on('click', function() {
+                    acceptApplication(application.id);
+                })
+
+                block.find('.reject-button').on('click', function() {
+                    rejectApplication(application.id)
+                })
     
+               
                 $('#applications-container').append(block)
             }
 
@@ -54,9 +65,33 @@ function loadApllications(typeOfUser, pageNumber, pageSize, sortDirection = 'ASC
                 block.find('.application-contract-number').text(application.employee.contractNumber)
                 block.find('.application-email').text(application.employee.userInfo.email)
     
-                $(`${this} .accept-button`).click(acceptApplication(application.id))
-                $(`${this} .reject-button`).click(rejectApplication(application.id))
-    
+                block.find('.selectBox').on('click', function() {
+                    let checkboxes = block.find('.checkboxes');
+                    checkboxes.toggleClass('d-block');
+                })
+
+                block.find('.teacher-checkbox').on('change', function() {
+                    if (block.find(".teacher-checkbox").is(":checked")) {
+                        block.find(".teachers").removeClass("d-none");
+                      } else {
+                        block.find(".teachers").addClass("d-none");
+                      }
+                })
+
+                block.find('.accept-button').on('click', function() {
+                    let roles = []
+                    block.find('.checkboxes input').each(function (i, value) {  
+                        roles.push($(this).val())
+                    });
+                    let teacherId = block.find('.teachers-list').val();
+                    
+                    acceptApplication(application.id, roles, teacherId);
+                })
+
+                block.find('.reject-button').on('click', function() {
+                    rejectApplication(application.id)
+                })
+                
                 $('#applications-container').append(block)
             }
         }
