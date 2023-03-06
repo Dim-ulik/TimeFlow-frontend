@@ -1,23 +1,18 @@
 import deleteApplication from "./deleteApplication.js";
 
 function acceptApplication(id) {
-    fetch(`http://94.103.87.164:8081/api/v1/request/employee/schedule-maker/${id}/accept`, {
+    fetch(`http://94.103.87.164:8081/api/v1/student-requests/${id}/accept`, {
         method: 'POST',
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
         }
     })
     .then ((response) => {
-        console.log(response)
         if (response.ok) {
-            deleteApplication(id)
+            location.reload()
             return response.json()
-        } else {
-            
         }
     })
-    .then ((json) => {
-        console.log(json)
-    })
+
 }
 export default acceptApplication
