@@ -114,6 +114,55 @@ body {
     font-size: 20px;
 }
 
-.pagination-block{
+.pagination-block {
     display: inline-block;
+}
+
+.multiselect {
+    margin-bottom: 10px;
+}
+
+.teacher {
+    border-radius: 15px;
+}
+
+.selectBox {
+    position: relative;
+
+}
+
+.selectBox select {
+    width: 100%;
+    border-radius: 15px;
+}
+
+.overSelect {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+#checkboxes {
+    display: none;
+    border: 0.5px #7c7c7c solid;
+    background-color: #ffffff;
+    max-height: 150px;
+    border-radius: 15px;
+}
+
+#checkboxes label {
+    display: block;
+    font-weight: normal;
+    display: block;
+    white-space: nowrap;
+    min-height: 1.2em;
+    background-color: #ffffff00;
+    padding: 0 2.25rem 0 .75rem;
+}
+
+#checkboxes label:hover {
+    background-color: #1e90ff;
+    border-radius: 15px;
 }
