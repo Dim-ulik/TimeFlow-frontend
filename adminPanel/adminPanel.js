@@ -1,26 +1,70 @@
-import loadApllications from "./applications/loadApplications.js"
-import changeNavbar from "./navbar/changeNavbar.js";
-
-$('.apply-btn').click(function (e) { 
-    e.preventDefault();
-    console.log("aaa")
-    let formData = new FormData(filters)
-    let typeOfUser = 'employee'
-    let pageNumber = 0
-    let pageSize = 10
-    loadApllications(typeOfUser, pageNumber, pageSize, formData.get('sortDirection'), formData.get('isClosed'))
-})
+import loadApllications from "./applications/loadApplications.js";
+const pageSize = 10;
 
 $(document).ready(function () {
-    changeNavbar('users_list')
-    console.log($('.navbar-name').text())
-    $('#filtration').load('./filtrationUsersList.html')
-    $('#pagination').load('./pagination/pagination.html');
-    
+  let activePage = "users_list";
+  changeNavbar(activePage);
+  changeFiltration(activePage);
 });
 
-$('#apply_filters').click(function (e) { 
+$(".navbar-active").click(function (e) {
+  e.preventDefault()
+  changeNavbar($(this).attr("id"))
+  changeFiltration($(this).attr("value"))
+  changeContent($(this).attr("id"))
+});
+
+function changeContent(activePage) {
+    switch (activePage) {
+        case "users_list":
+            $('.header').text('Список пользователей');
+            $('.header').attr('value', 'users');
+          break;
+        case "app_employee":
+            $('.header').text('Заявки сотрудников');
+            $('.header').attr('value', 'employee');
+            loadApllications($('.header').attr('value'), 0, pageSize);
+
+          break;
+        case "app_schedule-maker":
+            $('.header').text('Заявки составителей');
+            $('.header').attr('value', 'schedule-maker');
+            loadApllications($('.header').attr('value'), 0, pageSize);
+
+          break;
+        case "app_student":
+            $('.header').text('Заявки студентов');
+            $('.header').attr('value', 'student');
+            loadApllications($('.header').attr('value'), 0, pageSize);
+
+          break;
+        default:
+          break;
+      }
+}
+
+function changeNavbar(activePage) {
+  $(".navbar-active").removeClass("active");
+  $(`#${activePage}`).addClass("active");
+}
+
+function changeFiltration(activePage) {
+  $(`.filtration`).addClass("d-none");
+  $(`.filtration-${activePage}`).removeClass("d-none");
+}
+
+$(".apply-applications-filters").click(function (e) {
+  e.preventDefault();
+  let formData = new FormData(app_filters);
+  let typeOfUser = $('.header').attr('value');
+  let pageNumber = 0;
+  loadApllications(typeOfUser, pageNumber, pageSize, formData.get('sortDirection'), formData.get('isClosed'))
+});
+
+$(".apply-users-list-filters").click(function (e) {
     e.preventDefault();
-    console.log('aaaaa')
-});
-
+    let formData = new FormData(app_filters);
+    let typeOfUser = $('.header').attr('value');
+    let pageNumber = 0;
+    loadApllications(typeOfUser, pageNumber, pageSize, formData.get('sortDirection'), formData.get('isClosed'))
+  });
