@@ -99,6 +99,8 @@ const addPair = (pair, day) => {
 const createFreeDay = (day) => {
     let cell = $("#free-day-template").clone();
     cell.removeClass("d-none");
+    cell.removeAttr('id');
+    cell.addClass('pair-cell');
     addPair(cell, day);
 }
 
@@ -121,7 +123,7 @@ const checkEmptyDay = (day) => {
 
 const showTimetable = (matrix) => {
     for (let i = 0; i < 6; i++) {
-        if (checkEmptyDay(matrix[i])) {
+        if (!checkEmptyDay(matrix[i])) {
             for (let j = 0; j < matrix[i].length; j++) {
                 if (jQuery.isEmptyObject(matrix[i][j])) {
                     if (checkLastEmptyPair(matrix, i, j)) continue;
@@ -158,6 +160,6 @@ const loadGroups = () => {
 }
 
 const clearTimetable = () => {
-    $(".pair-cell").not("#pair-template").remove();
+    $(".pair-cell").remove();
 }
 

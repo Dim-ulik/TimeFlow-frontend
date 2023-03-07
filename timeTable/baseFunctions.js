@@ -177,6 +177,7 @@ const createPair = (pairType, pairNumber, pairDay, pairName, pairRoom, teacherNa
         pair.addClass(pairTypeClass);
     }
     else {
+        console.log($("#free-day-template").attr('id'));
         pair = $("#no-pair-template").clone();
     }
 
@@ -193,6 +194,7 @@ const createPair = (pairType, pairNumber, pairDay, pairName, pairRoom, teacherNa
         pair.find(".teacher-name").attr('pair-teacher-id', teacherName.id)
     }
 
+    pair.addClass('pair-cell');
     pair.removeClass("d-none");
     return pair;
 }
@@ -240,18 +242,18 @@ const createTimetableMatrix = (response) => {
             id: pairsArray[i].subject.id
         };
         let teacherName = {
-            name: pairsArray[i].teacher.surname + pairsArray[i].teacher.name + pairsArray[i].teacher.patronymic,
+            name: pairsArray[i].teacher.surname + ' ' + pairsArray[i].teacher.name + ' ' + pairsArray[i].teacher.patronymic,
             id: pairsArray[i].teacher.id
         }
         let pairRoom = {
-            number: pairsArray[i].classrom.number,
-            id: pairsArray[i].subject.id
+            number: pairsArray[i].classroom.number,
+            id: pairsArray[i].classroom.id
         }
         let date = new Date(pairsArray[i].date);
         let day = date.getDay();
         let lessonType = pairsArray[i].lessonType;
         let pairNumber = pairsArray[i].timeslot.sequenceNumber;
-        timetableMatrix[day][pairNumber] = {
+        timetableMatrix[day-1][pairNumber-1] = {
             pairNumber: pairNumber,
             pairDay: day,
             pairType: lessonType,
