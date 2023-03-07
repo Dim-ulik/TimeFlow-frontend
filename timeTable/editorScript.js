@@ -5,33 +5,12 @@ $(document).ready(function() {
     changeHeader(week[0],week[5]);
     changeDays(week);
 
-    $(".timeslot").click(function() {
-        let cellId = "#" + $(this).attr('id');
-        let cell = $(cellId);
-        let pairTypeId = cell.find('.pair-cell').attr('type-id');
-        if (pairTypeId === undefined) {
-            $(".delete-button").addClass('d-none');
-            setText($("#editModalLabel"), "Создать пару");
-        }
-        else {
-            $(".delete-button").removeClass('d-none');
-            setText($("#editModalLabel"), "Изменить информацию о паре");
-            let pairNameId = cell.find('.pair-name').attr('pair-name-id');
-            let pairRoomId = cell.find('.pair-room').attr('pair-room-id');
-            let pairTeacherId = cell.find('.teacher-name').attr('pair-teacher-id');
-            $("#select-pair-type").find(`#${pairTypeId}`).attr("selected", true);
-            $("#select-pair-name").find(`#${pairNameId}`).attr("selected", true);
-            $("#select-pair-room").find(`#${pairRoomId}`).attr("selected", true);
-            $("#select-teacher").find(`#${pairTeacherId}`).attr("selected", true);
-        }
-    });
+    let group = localStorage.getItem('group');
+    loadTimetable(group, week[0], week[week.length - 1], createTimetableToEdit);
 
     $("#clear-timetable").click(function() {
         console.log(1);
     });
-
-    let group = localStorage.getItem('group');
-    loadTimetable(group, week[0], week[week.length - 1], createTimetableToEdit);
 })
 
 $("#repeat-check").click(function() {
@@ -91,6 +70,26 @@ const createFreeTable = () => {
 
 const createTimetableToEdit = (currentPairs) => {
     createTimeslots();
+    $(".timeslot").click(function() {
+        let cellId = "#" + $(this).attr('id');
+        let cell = $(cellId);
+        let pairTypeId = cell.find('.pair-cell').attr('type-id');
+        if (pairTypeId === undefined) {
+            $(".delete-button").addClass('d-none');
+            setText($("#editModalLabel"), "Создать пару");
+        }
+        else {
+            $(".delete-button").removeClass('d-none');
+            setText($("#editModalLabel"), "Изменить информацию о паре");
+            let pairNameId = cell.find('.pair-name').attr('pair-name-id');
+            let pairRoomId = cell.find('.pair-room').attr('pair-room-id');
+            let pairTeacherId = cell.find('.teacher-name').attr('pair-teacher-id');
+            $("#select-pair-type").find(`#${pairTypeId}`).attr("selected", true);
+            $("#select-pair-name").find(`#${pairNameId}`).attr("selected", true);
+            $("#select-pair-room").find(`#${pairRoomId}`).attr("selected", true);
+            $("#select-teacher").find(`#${pairTeacherId}`).attr("selected", true);
+        }
+    });
     for (let i = 0; i < currentPairs.length; i++) {
         for(let j = 0; j < currentPairs[i].length; j++) {
             let currentPair = currentPairs[i][j];
