@@ -1,7 +1,6 @@
 $(document).ready(function () {
     loadGroups();
     changeDate();
-    validation();
     loadTimeslots();
 
     $("#btn-show-timetable").click(function (e) {
@@ -142,6 +141,12 @@ const showTimetable = (matrix) => {
     }
 }
 
+const chooseLocalGroup = () => {
+    let localGroup = localStorage.getItem('group');
+    selectOption('groups-list', localGroup);
+    validation();
+}
+
 const loadGroups = () => {
     let url = hostname + "/api/v1/groups";
     fetch(url).then((response) => {
@@ -156,6 +161,8 @@ const loadGroups = () => {
             let newOption = new Option(json[i].number, json[i].id);
             $("#groups-list").append(newOption);
         }
+        chooseLocalGroup();
+        createTimetable($("#week-date").val(), $("#groups-list").val());
     });
 }
 

@@ -15,7 +15,7 @@ function loadTimeslots() {
     }).then((response) => {
         pairsOnDayAmount = response.length;
         for (let i = 0; i < pairsOnDayAmount; i++) {
-            timesList[i] = {time: response[i].beginTime + " - " + response[i].endTime, timeslotId: response.id};
+            timesList[i] = {time: response[i].beginTime + " - " + response[i].endTime, timeslotId: response[i].id};
         }
     });
 }
@@ -166,6 +166,11 @@ const getPairTypeInf = (pairType) => {
     return pairTypeInf;
 }
 
+const selectOption = (field, value) => {
+    let string = '#' + field + ' option[value=' + value + ']';
+    $(string).prop('selected', true);
+}
+
 const createPair = (pairType, pairNumber, pairDay, pairName, pairRoom, teacherName, templateCellId, pairId) => {
     let pair;
     let pairTypeInf = getPairTypeInf(pairType);
@@ -177,11 +182,10 @@ const createPair = (pairType, pairNumber, pairDay, pairName, pairRoom, teacherNa
         pair.addClass(pairTypeClass);
     }
     else {
-        console.log($("#free-day-template").attr('id'));
         pair = $("#no-pair-template").clone();
     }
-
     setText(pair.find(".pair-time"), getPairTime(pairNumber));
+    pair.find(".pair-time").attr('pair-time-id', getTimeslotId(pairNumber));
     pair.attr('id', pairId);
 
     if (pairType !== 0) {
