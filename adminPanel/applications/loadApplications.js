@@ -1,4 +1,5 @@
 import acceptApplication from "./acceptApplicationStudent.js"
+import acceptApplicationEmployee from "./acceptApplicatoinEmployee.js"
 import rejectApplication from "./rejectApplication.js"
 
 function loadApllications(typeOfUser, pageNumber, pageSize, sortDirection = 'ASC', isClosed = '') {
@@ -11,8 +12,8 @@ function loadApllications(typeOfUser, pageNumber, pageSize, sortDirection = 'ASC
         return response.json()
     })
     .then((json) => {
-        console.log(json)
         $('#applications-container').empty()
+        $('.users-container').empty()
 
         let template
         if (typeOfUser === 'student') {
@@ -33,16 +34,17 @@ function loadApllications(typeOfUser, pageNumber, pageSize, sortDirection = 'ASC
                 block.find('.application-email').text(application.student.userInfo.email)
     
                 if (application.closed) {
-                    block.find('.accept-button').addClass('d-none')
-                    block.find('.reject-button').addClass('d-none')
+                    block.find('.request-buttons').addClass('d-none')
+                    block.find('.account-status').removeClass('d-none')
+                    block.find('.account-status span').text(application.student.userInfo.accountStatus)
                 }
 
                 block.find('.accept-button').on('click', function() {
-                    acceptApplication(application.id);
+                    acceptApplicationStudent(application.id);
                 })
 
                 block.find('.reject-button').on('click', function() {
-                    rejectApplication(application.id)
+                    rejectApplication(typeOfUser, application.id)
                 })
     
                
@@ -78,18 +80,25 @@ function loadApllications(typeOfUser, pageNumber, pageSize, sortDirection = 'ASC
                       }
                 })
 
+                if (application.closed) {
+                    block.find('.request-buttons').addClass('d-none')
+                    block.find('.selectBox').addClass('d-none')
+                    block.find('.account-status').removeClass('d-none')
+                    block.find('.account-status span').text(application.employee.userInfo.accountStatus)
+                }
+
                 block.find('.accept-button').on('click', function() {
                     let roles = []
-                    block.find('.checkboxes input').each(function (i, value) {  
+                    block.find('.checkboxes input:checked').each(function (i, value) {  
                         roles.push($(this).val())
                     });
                     let teacherId = block.find('.teachers-list').val();
                     
-                    acceptApplication(application.id, roles, teacherId);
+                    acceptApplicationEmployee(application.id, roles, teacherId)
                 })
 
                 block.find('.reject-button').on('click', function() {
-                    rejectApplication(application.id)
+                    rejectApplication(typeOfUser, application.id)
                 })
                 
                 $('#applications-container').append(block)
