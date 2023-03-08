@@ -1,17 +1,10 @@
 import URL from '../url.js'
-import isAdmin from './isAdmin.js'
-var ISADMIN = false
 
 $('.login-form').submit(function (e) {
     e.preventDefault()
-    var ISADMIN = false
     $('.login-form .form-control').removeClass('is-invalid')
     let formData = new FormData(login_form)
-    if (isAdmin(formData.get('email'), formData.get('password'))) {
-        ISADMIN = true
-        sendData(JSON.stringify(Object.fromEntries(formData)))
-        return
-    } 
+    
     if (isValid(formData)) {
         sendData(JSON.stringify(Object.fromEntries(formData)))
     }
