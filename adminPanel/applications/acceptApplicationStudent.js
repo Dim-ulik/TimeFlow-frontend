@@ -1,6 +1,4 @@
-import deleteApplication from "./deleteApplication.js";
-
-function acceptApplication(id) {
+function acceptApplicationStudent(id) {
     fetch(`http://94.103.87.164:8081/api/v1/student-requests/${id}/accept`, {
         method: 'POST',
         headers: {
@@ -15,4 +13,4 @@ function acceptApplication(id) {
     })
 
 }
-export default acceptApplication
+export default acceptApplicationStudent
