@@ -79,22 +79,16 @@
                     <div class="message mb-2">Фильтры</div>
                     <form class="row" id="users_filters">
                         <div class="mb-3 col-lg-5 col-md-4 col-sm-12">
-                            <select class="form-select" name="sorting">
-                                <option selected value="name-asc">По алфавиту</option>
-                                <option value="name-asc">А-Я</option>
-                                <option value="name-desc">Я-А</option>
+                            <select class="form-select" aria-label="Пример выбора по умолчанию" name="status">
+                                <option selected value="students">Студент</option>
+                                <option value="employees">Сотрудник университета</option>
+                                <option value="users">Внешний пользователь</option>
                             </select>
                         </div>
                         <div class="mb-3 col-lg-5 col-md-4 col-sm-12">
-                            <select class="form-select" aria-label="Пример выбора по умолчанию" name="status">
-                                <option selected value="all">По статусу</option>
-                                <option value="student">Студент</option>
-                                <option value="employee">Сотрудник университета</option>
-                                <option value="user">Внешний пользователь</option>
-                            </select>
                         </div>
                         <div class="mb-3 col-lg-2 col-md-4 col-sm-12">
-                            <button id="apply_filters" type="button"
+                            <button type="button"
                                 class="btn time-flow-button apply-users-list-filters">
                                 Применить
                             </button>
@@ -111,7 +105,13 @@
                                     <th scope="col">Статус</th>
                                 </tr>
                             </thead>
-                            <tbody class="users-container"></tbody>
+                            <tr id="users-list-template" class="d-none">
+                                <td class="users-list-name">Иванов Иван Иванович</td>
+                                <td class="users-list-document-number">6917792018</td>
+                                <td class="users-list-role">Сотрудник университета</td>
+                            </tr>
+                            <tbody class="users-container" id="users-container">
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -174,10 +174,15 @@
                             </div>
                         </div>
                         <div
-                            class="col-xl-3 col-lg-4 col-12 m-lg-auto m-xl-auto mt-md-3 mt-sm-2 mt-3 text-center text-lg-end">
+                            class="request-buttons col-xl-3 col-lg-4 col-12 m-lg-auto m-xl-auto mt-md-3 mt-sm-2 mt-3 text-center text-lg-end">
                             <button type="button" class="btn accept-button">Принять</button>
                             <button type="button" class="btn reject-button ms-2">Отклонить</button>
                         </div>
+                        <div
+                            class="account-status d-none col-xl-3 col-lg-4 col-12 m-lg-auto m-xl-auto mt-md-3 mt-sm-2 mt-3 text-center text-lg-end">
+                            <span>DENIED</span>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
