@@ -1,10 +1,12 @@
 import loadApllications from "./applications/loadApplications.js";
+import loadUsersList from "./loadUsersList.js";
 const pageSize = 10;
 
 $(document).ready(function () {
   let activePage = "users_list";
   changeNavbar(activePage);
   changeFiltration(activePage);
+  changeContent(activePage);
   loadTeachers();
 });
 
@@ -40,6 +42,7 @@ function changeContent(activePage) {
     case "users_list":
       $(".header").text("Список пользователей");
       $(".header").attr("value", "users");
+      loadUsersList('students', 0, 10)
       break;
     case "app_employee":
       $(".header").text("Заявки сотрудников");
@@ -90,14 +93,13 @@ $(".apply-applications-filters").click(function (e) {
 
 $(".apply-users-list-filters").click(function (e) {
   e.preventDefault();
-  let formData = new FormData(app_filters);
-  let typeOfUser = $(".header").attr("value");
+  let formData = new FormData(users_filters);
   let pageNumber = 0;
-  loadApllications(
-    typeOfUser,
+  loadUsersList(
+    formData.get('status'),
     pageNumber,
     pageSize,
-    formData.get("sortDirection"),
-    formData.get("isClosed")
   );
 });
+
+
