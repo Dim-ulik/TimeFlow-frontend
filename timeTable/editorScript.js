@@ -38,7 +38,7 @@ $(document).ready(function() {
                 new Headers ({ "Authorization" : "Bearer " + token, 'Content-Type': 'application/json'}),
             body: inputData
         }).then((response) => {
-            // location.reload();
+            location.reload();
         });
     });
 })
@@ -245,3 +245,4 @@ const loadFreeRooms = (timeslotId, date) => {
         }
     });
 }
+

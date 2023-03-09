@@ -148,11 +148,11 @@ const getPairTypeInf = (pairType) => {
             pairTypeInf.pairClass = "seminar-pair";
             pairTypeInf.typeString = "Семинар";
             break;
-        case "PRACTICAL-LESSON":
+        case "PRACTICAL_LESSON":
             pairTypeInf.pairClass = "practice-pair";
             pairTypeInf.typeString = "Практика";
             break;
-        case "LABORATORY-LESSON":
+        case "LABORATORY_LESSON":
             pairTypeInf.pairClass = "laboratory-pair";
             pairTypeInf.typeString = "Лабораторная";
             break;
