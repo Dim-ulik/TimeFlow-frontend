@@ -38,11 +38,7 @@ $(document).ready(function() {
                 new Headers ({ "Authorization" : "Bearer " + token, 'Content-Type': 'application/json'}),
             body: inputData
         }).then((response) => {
-            if (response.ok) {
-                return 1;
-            } else {
-                console.log(response);
-            }
+            // location.reload();
         });
     });
 })
