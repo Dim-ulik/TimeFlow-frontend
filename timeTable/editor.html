@@ -91,7 +91,7 @@
             </div>
         </div>
         <div class="text-center mb-4">
-            <button class="btn delete-button" id="clear-timetable">Очистить раписание</button>
+            <button class="btn delete-button" id="clear-timetable">Очистить расписание</button>
         </div>
     </div>
 </div>
@@ -138,42 +138,39 @@
             </div>
             <div class="modal-body">
                 <div class="mb-3">
+                    <label for="select-pair-time" class="form-label">Время пары</label>
+                    <div>
+                        <select id="select-pair-time" class="form-select"></select>
+                    </div>
+                </div>
+                <div class="mb-3">
                     <label for="select-pair-type" class="form-label">Тип пары</label>
                     <div>
                         <select id="select-pair-type" class="form-select">
-                            <option id="LECTURE">Лекция</option>
-                            <option id="SEMINAR">Семинар</option>
-                            <option id="PRACTICAL-LESSON">Практика</option>
-                            <option id="LABORATORY-LESSON">Лабораторная</option>
-                            <option id="EXAM">Экзамен</option>
+                            <option value="LECTURE">Лекция</option>
+                            <option value="SEMINAR">Семинар</option>
+                            <option value="PRACTICAL-LESSON">Практика</option>
+                            <option value="LABORATORY-LESSON">Лабораторная</option>
+                            <option value="EXAM">Экзамен</option>
                         </select>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="select-pair-name" class="form-label">Предмет</label>
                     <div>
-                        <select id="select-pair-name" class="form-select">
-                            <option>Пример 1</option>
-                        </select>
+                        <select id="select-pair-name" class="form-select"></select>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="select-pair-room" class="form-label">Аудитория</label>
                     <div>
-                        <select id="select-pair-room" class="form-select">
-                            <option>2323</option>
-                            <option>233</option>
-                            <option>423</option>
-                            <option>523</option>
-                        </select>
+                        <select id="select-pair-room" class="form-select"></select>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="select-teacher" class="form-label">Преподаватель</label>
                     <div>
-                        <select id="select-teacher" class="form-select">
-                            <option>Пример 1</option>
-                        </select>
+                        <select id="select-teacher" class="form-select"></select>
                     </div>
                 </div>
                 <div class="mb-3">
@@ -193,7 +190,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn delete-button">Удалить пару</button>
-                <button type="button" class="btn time-flow-button">Применить изменения</button>
+                <button type="button" class="btn time-flow-button" id="edit-pair-btn">Создать</button>
             </div>
         </form>
     </div>

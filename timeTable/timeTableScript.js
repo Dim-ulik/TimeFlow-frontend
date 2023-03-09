@@ -1,7 +1,6 @@
 $(document).ready(function () {
     loadGroups();
     changeDate();
-    validation();
     loadTimeslots();
 
     $("#btn-show-timetable").click(function (e) {
@@ -99,6 +98,8 @@ const addPair = (pair, day) => {
 const createFreeDay = (day) => {
     let cell = $("#free-day-template").clone();
     cell.removeClass("d-none");
+    cell.removeAttr('id');
+    cell.addClass('pair-cell');
     addPair(cell, day);
 }
 
@@ -121,7 +122,7 @@ const checkEmptyDay = (day) => {
 
 const showTimetable = (matrix) => {
     for (let i = 0; i < 6; i++) {
-        if (checkEmptyDay(matrix[i])) {
+        if (!checkEmptyDay(matrix[i])) {
             for (let j = 0; j < matrix[i].length; j++) {
                 if (jQuery.isEmptyObject(matrix[i][j])) {
                     if (checkLastEmptyPair(matrix, i, j)) continue;
@@ -140,6 +141,12 @@ const showTimetable = (matrix) => {
     }
 }
 
+const chooseLocalGroup = () => {
+    let localGroup = localStorage.getItem('group');
+    selectOption('groups-list', localGroup);
+    validation();
+}
+
 const loadGroups = () => {
     let url = hostname + "/api/v1/groups";
     fetch(url).then((response) => {
@@ -154,10 +161,12 @@ const loadGroups = () => {
             let newOption = new Option(json[i].number, json[i].id);
             $("#groups-list").append(newOption);
         }
+        chooseLocalGroup();
+        createTimetable($("#week-date").val(), $("#groups-list").val());
     });
 }
 
 const clearTimetable = () => {
-    $(".pair-cell").not("#pair-template").remove();
+    $(".pair-cell").remove();
 }
 
