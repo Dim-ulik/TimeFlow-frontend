@@ -16,7 +16,7 @@ $(document).ready(function() {
         let groupId = localStorage.getItem('group');
         let subjectId = $("#select-pair-name").val();
         let teacherId = $("#select-teacher").val();
-        let classroomId = $("#classroomId").val();
+        let classroomId = $("#select-pair-room").val();
         let timeslotId = localStorage.getItem('timeslot-id');
         let date = localStorage.getItem('cell-date');
         let lessonType = $("#select-pair-type").val();
@@ -31,7 +31,7 @@ $(document).ready(function() {
             lessonType: lessonType
         });
         let url = hostname + "/api/v1/lessons";
-        let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ0aW1lLWZsb3ctYXBpIiwiaWQiOiI2YTRkZTllYi03MWIxLTQ1YjctYTVmYy04ZDQzNWJhYjMyY2YiLCJleHAiOjE2NzgzNjc4MzAsImlhdCI6MTY3ODM2NjkzMH0._mxo51eQ6nPOJGKHXysdDXSy08zcHRYgz8cdCmZ1pTE';
+        let token = localStorage.getItem('accessToken');
         fetch(url, {
             method: 'POST',
             headers:
