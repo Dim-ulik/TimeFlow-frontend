@@ -4,10 +4,69 @@ const ALL_LETTERS_WITH_HYPHEN = /^[А-Яа-я- ]+$/
 const CONTRACT_NUMBER = /^\d{4}-\d{2}\/\d{2}$/
 const ONLY_LETTERS_AND_NUMBERS = /^[A-Za-z0-9]+$/
 
+
+$('#surname, #name').change(function (e) { 
+    e.preventDefault();
+    if (!isNameValid($(this).val()) || $(this).val() == '') {
+        $(this).toggleClass('is-invalid', true)
+    } else {
+        $(this).removeClass('is-invalid')
+    }
+});
+
+$('#patronymic').change(function (e) { 
+    e.preventDefault();
+    if (!isNameValid($(this).val())) {
+        $(this).toggleClass('is-invalid', true)
+    } else {
+        $(this).removeClass('is-invalid')
+    }
+});
+
+$('#contractNumber').change(function (e) { 
+    e.preventDefault();
+    if (!isContractNumberValid($(this).val()) || $(this).val() == '') {
+        $(this).toggleClass('is-invalid', true)
+    } else {
+        $(this).removeClass('is-invalid')
+    }
+});
+
+$('#email').change(function (e) { 
+    e.preventDefault();
+    if (!isEmailValid($(this).val()) || $(this).val() == '') {
+        $(this).toggleClass('is-invalid', true)
+    } else {
+        $(this).removeClass('is-invalid')
+    }
+});
+
+
+$('#password').change(function (e) { 
+    e.preventDefault();
+    let max_password_len = 32
+    let min_password_len = 8
+    if (!isNotContainsSpecialSumbols($(this).val()) ||
+    $(this).val().length < min_password_len ||
+    $(this).val().length > max_password_len) {
+        $(this).toggleClass('is-invalid', true)
+    } else {
+        $(this).removeClass('is-invalid')
+    }
+});
+
+$('#password-check').change(function (e) { 
+    e.preventDefault();
+    if ($(this).val() !== $(this).val()) {
+        $(this).toggleClass('is-invalid', true)
+    } else {
+        $(this).removeClass('is-invalid')
+    }
+
+});
+
 function isValid( formData ) {
-
     let isValidData = true
-
     if (!isNameValid(formData.get('surname')) || formData.get('surname') == '') {
         $('#surname').toggleClass('is-invalid', true)
         isValidData = false
@@ -30,10 +89,10 @@ function isValid( formData ) {
     }
 
     if (!isContractNumberValid(formData.get('contractNumber')) || formData.get('contractNumber') == '') {
-        $('#contract_number').toggleClass('is-invalid', true)
+        $('#contractNumber').toggleClass('is-invalid', true)
         isValidData = false
     } else {
-        $('#contract_number').removeClass('is-invalid')
+        $('#contractNumber').removeClass('is-invalid')
     }
 
     if (!isEmailValid(formData.get('email')) || formData.get('email') == '') {
@@ -78,10 +137,6 @@ function isNameValid(value) {
 
 function isEmailValid(value) {
     return EMAIL_REGEXP.test(value)
-}
-
-function isWithoutSpaces(value) {
-    return WITHOUT_SPACES_REGEXP.test(value)
 }
 
 export default isValid

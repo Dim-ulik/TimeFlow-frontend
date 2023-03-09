@@ -11,7 +11,6 @@ $('.register-form').submit(function (e) {
 
 function handleFormSubmit(formData) {
     if (isValid(formData)) {
-        console.log(JSON.stringify(Object.fromEntries(formData)))
         sendData(JSON.stringify(Object.fromEntries(formData)))
     }
 }
@@ -26,17 +25,28 @@ function sendData(data) {
       body: data,
     })
     .then ((response) => {
-        console.log(response)
         if (response.ok) {
-            return response.json();
+            return response.json()
+            .then ((json) => {
+                console.log(json)
+                localStorage.setItem('accessToken', `${json['accessToken']}`)
+                localStorage.setItem('refreshToken', `${json['refreshToken']}`)
+                location.href = '../timeTable/timeTable.html'
+            })
         } else {
-            errorRegister('Ошибка регистрации')
+            if (response.status == 400) {
+                errorRegister('Ошибка регистрации')
+                return response.json()
+                .then((json) => {
+                    for (let error in json) {
+                        console.log(error + ' ' + json[error].join())
+                        $(`#${error}`).toggleClass('is-invalid', true)
+                        $(`#${error} + .invalid-feedback`).text(json[error].join())
+                    }
+                })
+            }
         }
-    })
-    .then ((json) => {
-        localStorage.setItem('accessToken', `${json['accessToken']}`)
-        location.href = '../timeTable/timeTable.html'
-    })
+    }) 
   }
 
 function errorRegister(statusText) {
