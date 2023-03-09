@@ -87,7 +87,7 @@ body {
     transform: scale(95%);
 }
 
-.photo {
+.application-photo {
     max-height: 135px;
     border-radius: 50%;
 }
@@ -114,7 +114,7 @@ body {
     font-size: 20px;
 }
 
-.pagination-block {
+.pagination-block{
     display: inline-block;
 }
 
@@ -144,7 +144,7 @@ body {
     bottom: 0;
 }
 
-#checkboxes {
+.checkboxes {
     display: none;
     border: 0.5px #7c7c7c solid;
     background-color: #ffffff;
@@ -152,7 +152,7 @@ body {
     border-radius: 15px;
 }
 
-#checkboxes label {
+.checkboxes label {
     display: block;
     font-weight: normal;
     display: block;
@@ -162,7 +162,7 @@ body {
     padding: 0 2.25rem 0 .75rem;
 }
 
-#checkboxes label:hover {
+.checkboxes label:hover {
     background-color: #1e90ff;
     border-radius: 15px;
 }
