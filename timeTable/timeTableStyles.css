@@ -48,6 +48,20 @@ body {
     transform: scale(95%);
 }
 
+.admin-btn {
+    color: white;
+    background-color: #4faf4d;
+    -webkit-box-shadow: 5px 4px 20px -7px rgb(78, 174, 77);
+    -moz-box-shadow: 5px 4px 20px -7px rgb(77, 173, 77);
+    box-shadow: 5px 4px 20px -7px rgb(76, 172, 77);
+}
+
+.admin-btn:hover {
+    transform: scale(102%);
+    color: white;
+    background-color: #439843;
+}
+
 .form-select {
     color: #424147;
 }
