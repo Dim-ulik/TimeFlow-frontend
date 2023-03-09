@@ -1,12 +1,10 @@
-$(".log-out-btn").click(function (e) {
-    console.log('logout')
+function logOut() {
+  console.log('logout')
   fetch(`http://94.103.87.164:8081/api/v1/sign-out`, {
     method: "POST",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("token"),
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
+    // headers: {
+    //   Authorization: "Bearer " + localStorage.getItem("refreshToken")
+    // },
     body: {
         "refreshToken": localStorage.getItem('refreshToken')
     }
@@ -16,4 +14,6 @@ $(".log-out-btn").click(function (e) {
 
     location.reload();
   })
-});
+}
+
+export default logOut
