@@ -1,3 +1,5 @@
+import loadPagination from "./pagination/loadPagination.js";
+
 function loadUsersList(typeOfUser, pageNumber, pageSize) {
     fetch(
         `http://94.103.87.164:8081/api/v1/${typeOfUser}?pageNumber=${pageNumber}&pageSize=${pageSize}`,
@@ -13,6 +15,7 @@ function loadUsersList(typeOfUser, pageNumber, pageSize) {
         .then((json) => {
             $(".users-container").empty();
             $("#applications-container").empty();
+            loadPagination(json)
 
             let template = $("#users-list-template");
 

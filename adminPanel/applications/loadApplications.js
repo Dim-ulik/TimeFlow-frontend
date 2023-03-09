@@ -1,3 +1,4 @@
+import loadPagination from "../pagination/loadPagination.js"
 import acceptApplication from "./acceptApplicationStudent.js"
 import acceptApplicationEmployee from "./acceptApplicatoinEmployee.js"
 import rejectApplication from "./rejectApplication.js"
@@ -14,6 +15,7 @@ function loadApllications(typeOfUser, pageNumber, pageSize, sortDirection = 'ASC
     .then((json) => {
         $('#applications-container').empty()
         $('.users-container').empty()
+        loadPagination(json)
 
         let template
         if (typeOfUser === 'student') {

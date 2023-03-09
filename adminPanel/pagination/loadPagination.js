@@ -1,31 +1,34 @@
-import updateApplications from "./updateApplications.js"
+//import updateApplications from "./updateApplications.js"
 
-function LoadPagination(json) {
-    $('#pagination').empty()
-    let paginationItem = $('#pagination-item')
+function loadPagination(json) {
+    $('.pagination-container').empty()
+    let paginationItem = $('.page-item-number')
 
-    for (let i = 0; i < json['pageInfo']['pageCount']; i++) {
+    console.log(json['totalPages'])
+    for (let i = 0; i < json['totalPages']; i++) {
 
         let newPaginationItem = paginationItem.clone()
         newPaginationItem.removeClass('d-none')
 
-        newPaginationItem.find('.pagination-item-link').text(i + 1)
+        newPaginationItem.find('.page-link').text(i + 1)
         newPaginationItem.attr('id', `paginationItem${i + 1}`)
 
         newPaginationItem.on('click', function () {
             updateApplications(newPaginationItem.text())
         })
 
-        $('#pagination').append(newPaginationItem)
+        $('.pagination-container').append(newPaginationItem)
     }
 
-    $(`#paginationItem${json['pageInfo']['currentPage']}`).addClass('active')
+    $(`#paginationItem${json['pageable']['pageNumber']+1}`).addClass('active')
 
     $('.pagination-previous').on('click', function () {
-        updateApplications(1)
+        updateApplications(0)
     })
 
     $('.pagination-next').on('click', function () {
-        updateApplications(json['pageInfo']['pageCount'])
+        updateApplications(json['totalPages']-1)
     })
 }
+
+export default loadPagination

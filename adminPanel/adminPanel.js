@@ -1,6 +1,8 @@
 import loadApllications from "./applications/loadApplications.js";
 import loadUsersList from "./loadUsersList.js";
-const pageSize = 10;
+import logOut from "./navbar/logOut.js";
+import LoadPagination from "./pagination/loadPagination.js";
+const pageSize = 5;
 
 $(document).ready(function () {
   let activePage = "users_list";
@@ -8,6 +10,7 @@ $(document).ready(function () {
   changeFiltration(activePage);
   changeContent(activePage);
   loadTeachers();
+  
 });
 
 function loadTeachers() {
@@ -42,7 +45,7 @@ function changeContent(activePage) {
     case "users_list":
       $(".header").text("Список пользователей");
       $(".header").attr("value", "users");
-      loadUsersList('students', 0, 10)
+      loadUsersList('students', 0, pageSize)
       break;
     case "app_employee":
       $(".header").text("Заявки сотрудников");
@@ -102,4 +105,8 @@ $(".apply-users-list-filters").click(function (e) {
   );
 });
 
+$('.log-out-btn').click(function (e) { 
+  e.preventDefault();
+  logOut();
+});
 
