@@ -3,7 +3,6 @@ let timesList = [];
 let hostname = 'http://94.103.87.164:8081';
 
 function loadTimeslots() {
-    console.log(hostname);
     let url = hostname + "/api/v1/timeslots";
     fetch(url).then((response) => {
         if (response.ok) {
@@ -225,6 +224,7 @@ const changeDays = (week) => {
         let dayName = getDayName(week[i]);
         let dayInf = $(chooseDay(i+1)).find('.day-date');
         setText(dayInf, dayName);
+        $(chooseDay(i+1)).attr('day-date', week[i]);
     }
 }
 

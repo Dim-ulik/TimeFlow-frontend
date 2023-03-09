@@ -66,13 +66,6 @@ const createFreeTable = () => {
     }
 }
 
-const createListOfTimes = () => {
-    for(let i = 0; i < pairsOnDayAmount; i++) {
-        let newOption = new Option(timesList[i].time, timesList[i].timeslotId);
-        $("#select-pair-time").append(newOption);
-    }
-}
-
 const createTimetableToEdit = (currentPairs) => {
     createTimeslots();
     for (let i = 0; i < currentPairs.length; i++) {
@@ -100,26 +93,29 @@ const createTimetableToEdit = (currentPairs) => {
         let cellId = "#" + $(this).attr('id');
         let cell = $(cellId);
         let pairTypeId = cell.find('.pair-cell').attr('type-id');
+        let pairTimeId = cell.attr('timeslot-id');
+        $('#select-pair-time').val(pairTimeId).trigger('change');
         if (pairTypeId === undefined) {
             $(".delete-button").addClass('d-none');
             setText($("#editModalLabel"), "Создать пару");
+            setText($("#edit-pair-btn"), "Создать");
         }
         else {
             $(".delete-button").removeClass('d-none');
             setText($("#editModalLabel"), "Изменить информацию о паре");
-            let pairTimeId = cell.find('.pair-time').attr('pair-time-id');
+            setText($("#edit-pair-btn"), "Изменить");
             let pairNameId = cell.find('.pair-name').attr('pair-name-id');
             let pairRoomId = cell.find('.pair-room').attr('pair-room-id');
             let pairTeacherId = cell.find('.teacher-name').attr('pair-teacher-id');
-            $('#select-pair-time').val(pairTimeId).trigger('change');
             $('#select-pair-type').val(pairTypeId).trigger('change');
             $('#select-pair-name').val(pairNameId).trigger('change');
             $('#select-pair-room').val(pairRoomId).trigger('change');
             $('#select-teacher').val(pairTeacherId).trigger('change');
         }
+        let date = cell.parent().attr('day-date');
+        loadFreeTimeslots(localStorage.getItem('group'), date);
+        loadFreeTeachers(cell.attr('timeslot-id'), date);
     });
-
-    createListOfTimes();
 }
 
 $("#select-pair-room").select2({
@@ -142,3 +138,37 @@ $("#select-pair-time").select2({
     dropdownParent: '#editModal'
 });
 
+const loadFreeTimeslots = (groupId, date) => {
+    let url = hostname + "/api/v1/available-timeslots/" + groupId + "?date=" + date;
+    fetch(url).then((response) => {
+        if (response.ok) {
+            return response.json();
+        }
+        else {
+            return 0;
+        }
+    }).then((response) => {
+        for (let i = 0; i < response.length; i++) {
+            let time = response[i].beginTime + " - " + response[i].endTime;
+            let newOption = new Option(time, response[i].id);
+            $("#select-pair-time").append(newOption);
+        }
+    });
+}
+const loadFreeTeachers = (timeslotId, date) => {
+    let url = hostname + "/api/v1/available-teachers/" + timeslotId + "?date=" + date;
+    fetch(url).then((response) => {
+        if (response.ok) {
+            return response.json();
+        }
+        else {
+            return 0;
+        }
+    }).then((response) => {
+        for (let i = 0; i < response.length; i++) {
+            let name = response[i].surname + " " + response[i].name[0] + ". " + response[i].patronymic[0] + ".";
+            let newOption = new Option(name, response[i].id);
+            $("#select-teacher").append(newOption);
+        }
+    });
+}
