@@ -11,6 +11,40 @@ $(document).ready(function() {
     $("#clear-timetable").click(function() {
         console.log(1);
     });
+
+    $("#edit-pair-btn").click(function () {
+        let groupId = localStorage.getItem('group');
+        let subjectId = $("#select-pair-name").val();
+        let teacherId = $("#select-teacher").val();
+        let classroomId = $("#classroomId").val();
+        let timeslotId = localStorage.getItem('timeslot-id');
+        let date = localStorage.getItem('cell-date');
+        let lessonType = $("#select-pair-type").val();
+
+        let inputData = JSON.stringify({
+            studentGroupId: groupId,
+            subjectId: subjectId,
+            teacherId: teacherId,
+            classroomId: classroomId,
+            timeslotId: timeslotId,
+            date: date,
+            lessonType: lessonType
+        });
+        let url = hostname + "/api/v1/lessons";
+        let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ0aW1lLWZsb3ctYXBpIiwiaWQiOiI2YTRkZTllYi03MWIxLTQ1YjctYTVmYy04ZDQzNWJhYjMyY2YiLCJleHAiOjE2NzgzNjc4MzAsImlhdCI6MTY3ODM2NjkzMH0._mxo51eQ6nPOJGKHXysdDXSy08zcHRYgz8cdCmZ1pTE';
+        fetch(url, {
+            method: 'POST',
+            headers:
+                new Headers ({ "Authorization" : "Bearer " + token, 'Content-Type': 'application/json'}),
+            body: inputData
+        }).then((response) => {
+            if (response.ok) {
+                return 1;
+            } else {
+                console.log(response);
+            }
+        });
+    });
 })
 
 $("#repeat-check").click(function() {
@@ -94,6 +128,7 @@ const createTimetableToEdit = (currentPairs) => {
         let cell = $(cellId);
         let pairTypeId = cell.find('.pair-cell').attr('type-id');
         let pairTimeId = cell.attr('timeslot-id');
+        localStorage.setItem('timeslot-id', pairTimeId);
         $('#select-pair-time').val(pairTimeId).trigger('change');
         if (pairTypeId === undefined) {
             $(".delete-button").addClass('d-none');
@@ -113,8 +148,11 @@ const createTimetableToEdit = (currentPairs) => {
             $('#select-teacher').val(pairTeacherId).trigger('change');
         }
         let date = cell.parent().attr('day-date');
+        localStorage.setItem('cell-date', date);
         loadFreeTimeslots(localStorage.getItem('group'), date);
-        loadFreeTeachers(cell.attr('timeslot-id'), date);
+        loadFreeTeachers(pairTimeId, date);
+        loadSubjects();
+        loadFreeRooms(pairTimeId, date);
     });
 }
 
@@ -155,6 +193,11 @@ const loadFreeTimeslots = (groupId, date) => {
         }
     });
 }
+
+const createTeacherShortName = (surname, name, patronymic) => {
+    return surname + " " + name[0] + ". " + patronymic[0] + ".";
+}
+
 const loadFreeTeachers = (timeslotId, date) => {
     let url = hostname + "/api/v1/available-teachers/" + timeslotId + "?date=" + date;
     fetch(url).then((response) => {
@@ -166,9 +209,43 @@ const loadFreeTeachers = (timeslotId, date) => {
         }
     }).then((response) => {
         for (let i = 0; i < response.length; i++) {
-            let name = response[i].surname + " " + response[i].name[0] + ". " + response[i].patronymic[0] + ".";
+            let name = createTeacherShortName(response[i].surname, response[i].name, response[i].patronymic);
             let newOption = new Option(name, response[i].id);
             $("#select-teacher").append(newOption);
+        }
+    });
+}
+
+const loadSubjects = () => {
+    let url = hostname + "/api/v1/subjects";
+    fetch(url).then((response) => {
+        if (response.ok) {
+            return response.json();
+        }
+        else {
+            return 0;
+        }
+    }).then((response) => {
+        for (let i = 0; i < response.length; i++) {
+            let newOption = new Option(response[i].name, response[i].id);
+            $("#select-pair-name").append(newOption);
+        }
+    });
+}
+
+const loadFreeRooms = (timeslotId, date) => {
+    let url = hostname + "/api/v1/available-classrooms/" + timeslotId + "?date=" + date;
+    fetch(url).then((response) => {
+        if (response.ok) {
+            return response.json();
+        }
+        else {
+            return 0;
+        }
+    }).then((response) => {
+        for (let i = 0; i < response.length; i++) {
+            let newOption = new Option(response[i].number, response[i].id);
+            $("#select-pair-room").append(newOption);
         }
     });
 }
