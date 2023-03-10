@@ -9,7 +9,7 @@ function logOut() {
     localStorage.removeItem("refreshToken")
     localStorage.removeItem("accessToken")
 
-    location.reload();
+    location.href = "../authorize/index.html"
   })
 }
 

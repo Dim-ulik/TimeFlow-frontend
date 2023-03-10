@@ -51,6 +51,9 @@ $(document).ready(function() {
     if (localStorage.getItem('ROLE') === 'ROLE_ADMIN') {
         $('.nav-admin').removeClass('d-none');
     }
+
+    $('#schedule').addClass('active')
+
 })
 
 $("#repeat-check").click(function() {
@@ -261,3 +264,14 @@ $('.log-out-btn').click(function (e) {
     logOut();
   });
   
+$('#users_list').click(function (e) { 
+    e.preventDefault();
+    localStorage.setItem('location', 'users_list')
+    location.href = '../adminPanel/adminPanel.html'
+});
+
+$('#app_employee, #app_schedule-maker, #app_student').click(function (e) { 
+    e.preventDefault();
+    localStorage.setItem('location', $(this).attr('id'))
+    location.href = '../adminPanel/adminPanel.html'
+});

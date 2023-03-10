@@ -1,5 +1,3 @@
-import checkRole from "./checkRole.js";
-
 function checkStatus() {
     fetch('http://94.103.87.164:8081/api/v1/account/employee', {
         headers: {
@@ -18,7 +16,21 @@ function checkStatus() {
                         location.href = '../bannedPage/bannedPage.html'
                         break;
                     case 'ACTIVATE':
-                        checkRole()
+                        
+                        for (let post of json.posts) {
+                            if (post.postRole === 'ROLE_SCHEDULE_MAKER') {
+                                localStorage.setItem('ROLE', post.postRole)
+                            }
+                            if (post.postRole === 'ROLE_ADMIN') {
+                                localStorage.setItem('ROLE', post.postRole)
+                            }
+                        }
+                        if (localStorage.getItem('ROLE') === 'ROLE_ADMIN') {
+                            location.href = '../adminPanel/adminPanel.html'
+                        } else if (localStorage.getItem('ROLE') === 'ROLE_SCHEDULE_MAKER') {
+                            location.href = '../timeTable/timeTable.html'
+                        }
+
                         break;
                 }
             })

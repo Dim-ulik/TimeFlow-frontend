@@ -6,6 +6,9 @@ const pageSize = 5;
 
 $(document).ready(function () {
   let activePage = "users_list";
+  if (localStorage.getItem('location') != '') {
+    activePage = localStorage.getItem('location');
+  }
   changeNavbar(activePage);
   changeFiltration(activePage);
   changeContent(activePage);
@@ -34,8 +37,9 @@ function loadTeachers() {
 
 $(".navbar-active").click(function (e) {
   e.preventDefault();
+  localStorage.setItem('location', $(this).attr("id"))
   changeNavbar($(this).attr("id"));
-  changeFiltration($(this).attr("value"));
+  changeFiltration($(this).attr("id"));
   changeContent($(this).attr("id"));
 });
 
