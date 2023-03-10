@@ -190,7 +190,7 @@ const loadFreeTimeslots = (groupId, date, alreadyChosen, pairTime) => {
             let newOption = new Option(time, response[i].id);
             field.append(newOption);
         }
-        if (alreadyChosen !== null) {
+        if (alreadyChosen !== undefined) {
             let newOption = new Option(pairTime, alreadyChosen);
             field.append(newOption);
             field.val(alreadyChosen).trigger('change');
@@ -224,7 +224,7 @@ const loadFreeTeachers = (timeslotId, date, alreadyChosen, teacherName) => {
             let newOption = new Option(name, response[i].id);
             field.append(newOption);
         }
-        if (alreadyChosen !== null) {
+        if (alreadyChosen !== undefined) {
             let newOption = new Option(rewriteTeacherName(teacherName), alreadyChosen);
             field.append(newOption);
             field.val(alreadyChosen).trigger('change');
@@ -248,7 +248,7 @@ const loadSubjects = (alreadyChosen, pairName) => {
             let newOption = new Option(response[i].name, response[i].id);
             field.append(newOption);
         }
-        if (alreadyChosen !== null) {
+        if (alreadyChosen !== undefined) {
             let newOption = new Option(pairName, alreadyChosen);
             field.append(newOption);
             field.val(alreadyChosen).trigger('change');
@@ -272,7 +272,7 @@ const loadFreeRooms = (timeslotId, date, alreadyChosen, pairRoom) => {
             let newOption = new Option(response[i].number, response[i].id);
             field.append(newOption);
         }
-        if (alreadyChosen !== null) {
+        if (alreadyChosen !== undefined) {
             let newOption = new Option(pairRoom, alreadyChosen);
             field.append(newOption);
             field.val(alreadyChosen).trigger('change');
