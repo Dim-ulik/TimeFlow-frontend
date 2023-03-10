@@ -1,3 +1,4 @@
+import needToRefreshToken from "../authorize/needToRefreshToken.js";
 import loadPagination from "./pagination/loadPagination.js";
 
 function loadUsersList(typeOfUser, pageNumber, pageSize) {
@@ -10,6 +11,7 @@ function loadUsersList(typeOfUser, pageNumber, pageSize) {
         }
     )
         .then((response) => {
+            needToRefreshToken(response)
             return response.json();
         })
         .then((json) => {
