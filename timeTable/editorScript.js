@@ -124,6 +124,7 @@ const createTimetableToEdit = (currentPairs) => {
         let cell = $(cellId);
         let pairTypeId = cell.find('.pair-cell').attr('type-id');
         let pairTimeId = cell.attr('timeslot-id');
+        let pairTime = cell.find('.pair-time').text();
         localStorage.setItem('timeslot-id', pairTimeId);
         $('#select-pair-time').val(pairTimeId).trigger('change');
         if (pairTypeId === undefined) {
@@ -136,16 +137,19 @@ const createTimetableToEdit = (currentPairs) => {
             setText($("#editModalLabel"), "Изменить информацию о паре");
             setText($("#edit-pair-btn"), "Изменить");
             var pairNameId = cell.find('.pair-name').attr('pair-name-id');
+            var pairName = cell.find('.pair-name').text();
             var pairRoomId = cell.find('.pair-room').attr('pair-room-id');
+            var pairRoom = cell.find('.pair-room').text();
             var pairTeacherId = cell.find('.teacher-name').attr('pair-teacher-id');
+            var teacherName = cell.find('.teacher-name').text();
             $("#select-pair-type").val(pairTypeId).trigger('change');
         }
         let date = cell.parent().attr('day-date');
         localStorage.setItem('cell-date', date);
-        loadFreeTimeslots(localStorage.getItem('group'), date, pairTimeId);
-        loadFreeTeachers(pairTimeId, date, pairTeacherId);
-        loadSubjects(pairNameId);
-        loadFreeRooms(pairTimeId, date, pairRoomId);
+        loadFreeTimeslots(localStorage.getItem('group'), date, pairTimeId, pairTime);
+        loadFreeTeachers(pairTimeId, date, pairTeacherId, teacherName);
+        loadSubjects(pairNameId, pairName);
+        loadFreeRooms(pairTimeId, date, pairRoomId, pairRoom);
     });
 }
 
@@ -169,7 +173,7 @@ $("#select-pair-time").select2({
     dropdownParent: '#editModal'
 });
 
-const loadFreeTimeslots = (groupId, date, alreadyChosen) => {
+const loadFreeTimeslots = (groupId, date, alreadyChosen, pairTime) => {
     let url = hostname + "/api/v1/available-timeslots/" + groupId + "?date=" + date;
     fetch(url).then((response) => {
         if (response.ok) {
@@ -186,7 +190,11 @@ const loadFreeTimeslots = (groupId, date, alreadyChosen) => {
             let newOption = new Option(time, response[i].id);
             field.append(newOption);
         }
-        if (alreadyChosen !== null) field.val(alreadyChosen).trigger('change');
+        if (alreadyChosen !== null) {
+            let newOption = new Option(pairTime, alreadyChosen);
+            field.append(newOption);
+            field.val(alreadyChosen).trigger('change');
+        }
     });
 }
 
@@ -194,7 +202,12 @@ const createTeacherShortName = (surname, name, patronymic) => {
     return surname + " " + name[0] + ". " + patronymic[0] + ".";
 }
 
-const loadFreeTeachers = (timeslotId, date, alreadyChosen) => {
+const rewriteTeacherName = (name) => {
+    let arrayStrings = name.split(' ');
+    return createTeacherShortName(arrayStrings[0], arrayStrings[1], arrayStrings[2]);
+}
+
+const loadFreeTeachers = (timeslotId, date, alreadyChosen, teacherName) => {
     let url = hostname + "/api/v1/available-teachers/" + timeslotId + "?date=" + date;
     fetch(url).then((response) => {
         if (response.ok) {
@@ -211,11 +224,15 @@ const loadFreeTeachers = (timeslotId, date, alreadyChosen) => {
             let newOption = new Option(name, response[i].id);
             field.append(newOption);
         }
-        if (alreadyChosen !== null) field.val(alreadyChosen).trigger('change');
+        if (alreadyChosen !== null) {
+            let newOption = new Option(rewriteTeacherName(teacherName), alreadyChosen);
+            field.append(newOption);
+            field.val(alreadyChosen).trigger('change');
+        }
     });
 }
 
-const loadSubjects = (alreadyChosen) => {
+const loadSubjects = (alreadyChosen, pairName) => {
     let url = hostname + "/api/v1/subjects";
     fetch(url).then((response) => {
         if (response.ok) {
@@ -231,11 +248,15 @@ const loadSubjects = (alreadyChosen) => {
             let newOption = new Option(response[i].name, response[i].id);
             field.append(newOption);
         }
-        if (alreadyChosen !== null) field.val(alreadyChosen).trigger('change');
+        if (alreadyChosen !== null) {
+            let newOption = new Option(pairName, alreadyChosen);
+            field.append(newOption);
+            field.val(alreadyChosen).trigger('change');
+        }
     });
 }
 
-const loadFreeRooms = (timeslotId, date, alreadyChosen) => {
+const loadFreeRooms = (timeslotId, date, alreadyChosen, pairRoom) => {
     let url = hostname + "/api/v1/available-classrooms/" + timeslotId + "?date=" + date;
     fetch(url).then((response) => {
         if (response.ok) {
@@ -251,8 +272,11 @@ const loadFreeRooms = (timeslotId, date, alreadyChosen) => {
             let newOption = new Option(response[i].number, response[i].id);
             field.append(newOption);
         }
-        console.log(alreadyChosen);
-        if (alreadyChosen !== null) field.val(alreadyChosen).trigger('change');
+        if (alreadyChosen !== null) {
+            let newOption = new Option(pairRoom, alreadyChosen);
+            field.append(newOption);
+            field.val(alreadyChosen).trigger('change');
+        }
     });
 }
 
