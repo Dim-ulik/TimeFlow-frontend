@@ -41,6 +41,19 @@ $(document).ready(function() {
             location.reload();
         });
     });
+
+    $("#delete-pair-btn").click(function () {
+        let pairId = localStorage.getItem('pair-id');
+        let url = hostname + "/api/v1/lessons/" + pairId;
+        let token = localStorage.getItem('accessToken');
+        fetch(url, {
+            method: 'DELETE',
+            headers:
+                new Headers ({ "Authorization" : "Bearer " + token, 'Content-Type': 'application/json'}),
+        }).then((response) => {
+            location.reload();
+        });
+    });
 })
 
 $("#repeat-check").click(function() {
@@ -121,6 +134,7 @@ const createTimetableToEdit = (currentPairs) => {
 
     $(".timeslot").click(function() {
         let cellId = "#" + $(this).attr('id');
+        localStorage.setItem('pair-id', $(this).find('.pair-cell').attr('id'));
         let cell = $(cellId);
         let pairTypeId = cell.find('.pair-cell').attr('type-id');
         let pairTimeId = cell.attr('timeslot-id');
