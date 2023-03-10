@@ -8,12 +8,23 @@ $(document).ready(function() {
     let group = localStorage.getItem('group');
     if (week.length > 0 && group.length > 0) loadTimetable(group, week[0], week[week.length - 1], createTimetableToEdit);
 
-    $("#clear-timetable").click(function() {
-        console.log(1);
-    });
-
     $("#go-back-btn").click(function () {
         window.location.href = './timeTable.html';
+    });
+
+    $("#clear-timetable").click(function () {
+        let groupId = localStorage.getItem('group');
+        let startDate = week[0];
+        let endDate = week[5];
+        let url = hostname + "/api/v1/lessons/group/" + groupId + "?startDate=" + startDate + "&endDate=" + endDate;
+        let token = localStorage.getItem('accessToken');
+        fetch(url, {
+            method: 'DELETE',
+            headers:
+                new Headers ({ "Authorization" : "Bearer " + token, 'Content-Type': 'application/json'}),
+        }).then((response) => {
+            location.reload();
+        });
     });
 
     const getInputData = () => {
