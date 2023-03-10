@@ -130,7 +130,7 @@ const showTimetable = (matrix) => {
                     addPair(currentPair, i+1);
                 }
                 else {
-                    let currentPair = createPair(matrix[i][j].pairType, matrix[i][j].pairNumber, matrix[i][j].pairDay, matrix[i][j].pairName, matrix[i][j].pairRoom, matrix[i][j].teacherName, "#pair-template");
+                    let currentPair = createPair(matrix[i][j].pairType, matrix[i][j].pairNumber, matrix[i][j].pairDay, matrix[i][j].pairName, matrix[i][j].pairRoom, matrix[i][j].teacherName, "#pair-template", matrix[i][j].id);
                     addPair(currentPair, matrix[i][j].pairDay);
                 }
             }

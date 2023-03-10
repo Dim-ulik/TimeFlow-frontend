@@ -17,7 +17,7 @@ $(document).ready(function() {
         let subjectId = $("#select-pair-name").val();
         let teacherId = $("#select-teacher").val();
         let classroomId = $("#select-pair-room").val();
-        let timeslotId = localStorage.getItem('timeslot-id');
+        let timeslotId = $("#select-pair-time").val();
         let date = localStorage.getItem('cell-date');
         let lessonType = $("#select-pair-type").val();
 
@@ -135,20 +135,17 @@ const createTimetableToEdit = (currentPairs) => {
             $(".delete-button").removeClass('d-none');
             setText($("#editModalLabel"), "Изменить информацию о паре");
             setText($("#edit-pair-btn"), "Изменить");
-            let pairNameId = cell.find('.pair-name').attr('pair-name-id');
-            let pairRoomId = cell.find('.pair-room').attr('pair-room-id');
-            let pairTeacherId = cell.find('.teacher-name').attr('pair-teacher-id');
-            $('#select-pair-type').val(pairTypeId).trigger('change');
-            $('#select-pair-name').val(pairNameId).trigger('change');
-            $('#select-pair-room').val(pairRoomId).trigger('change');
-            $('#select-teacher').val(pairTeacherId).trigger('change');
+            var pairNameId = cell.find('.pair-name').attr('pair-name-id');
+            var pairRoomId = cell.find('.pair-room').attr('pair-room-id');
+            var pairTeacherId = cell.find('.teacher-name').attr('pair-teacher-id');
+            $("#select-pair-type").val(pairTypeId).trigger('change');
         }
         let date = cell.parent().attr('day-date');
         localStorage.setItem('cell-date', date);
-        loadFreeTimeslots(localStorage.getItem('group'), date);
-        loadFreeTeachers(pairTimeId, date);
-        loadSubjects();
-        loadFreeRooms(pairTimeId, date);
+        loadFreeTimeslots(localStorage.getItem('group'), date, pairTimeId);
+        loadFreeTeachers(pairTimeId, date, pairTeacherId);
+        loadSubjects(pairNameId);
+        loadFreeRooms(pairTimeId, date, pairRoomId);
     });
 }
 
@@ -172,7 +169,7 @@ $("#select-pair-time").select2({
     dropdownParent: '#editModal'
 });
 
-const loadFreeTimeslots = (groupId, date) => {
+const loadFreeTimeslots = (groupId, date, alreadyChosen) => {
     let url = hostname + "/api/v1/available-timeslots/" + groupId + "?date=" + date;
     fetch(url).then((response) => {
         if (response.ok) {
@@ -182,11 +179,14 @@ const loadFreeTimeslots = (groupId, date) => {
             return 0;
         }
     }).then((response) => {
+        let field = $("#select-pair-time");
+        field.empty();
         for (let i = 0; i < response.length; i++) {
             let time = response[i].beginTime + " - " + response[i].endTime;
             let newOption = new Option(time, response[i].id);
-            $("#select-pair-time").append(newOption);
+            field.append(newOption);
         }
+        if (alreadyChosen !== null) field.val(alreadyChosen).trigger('change');
     });
 }
 
@@ -194,7 +194,7 @@ const createTeacherShortName = (surname, name, patronymic) => {
     return surname + " " + name[0] + ". " + patronymic[0] + ".";
 }
 
-const loadFreeTeachers = (timeslotId, date) => {
+const loadFreeTeachers = (timeslotId, date, alreadyChosen) => {
     let url = hostname + "/api/v1/available-teachers/" + timeslotId + "?date=" + date;
     fetch(url).then((response) => {
         if (response.ok) {
@@ -204,15 +204,18 @@ const loadFreeTeachers = (timeslotId, date) => {
             return 0;
         }
     }).then((response) => {
+        let field = $("#select-teacher");
+        field.empty();
         for (let i = 0; i < response.length; i++) {
             let name = createTeacherShortName(response[i].surname, response[i].name, response[i].patronymic);
             let newOption = new Option(name, response[i].id);
-            $("#select-teacher").append(newOption);
+            field.append(newOption);
         }
+        if (alreadyChosen !== null) field.val(alreadyChosen).trigger('change');
     });
 }
 
-const loadSubjects = () => {
+const loadSubjects = (alreadyChosen) => {
     let url = hostname + "/api/v1/subjects";
     fetch(url).then((response) => {
         if (response.ok) {
@@ -222,14 +225,17 @@ const loadSubjects = () => {
             return 0;
         }
     }).then((response) => {
+        let field = $("#select-pair-name");
+        field.empty();
         for (let i = 0; i < response.length; i++) {
             let newOption = new Option(response[i].name, response[i].id);
-            $("#select-pair-name").append(newOption);
+            field.append(newOption);
         }
+        if (alreadyChosen !== null) field.val(alreadyChosen).trigger('change');
     });
 }
 
-const loadFreeRooms = (timeslotId, date) => {
+const loadFreeRooms = (timeslotId, date, alreadyChosen) => {
     let url = hostname + "/api/v1/available-classrooms/" + timeslotId + "?date=" + date;
     fetch(url).then((response) => {
         if (response.ok) {
@@ -239,10 +245,14 @@ const loadFreeRooms = (timeslotId, date) => {
             return 0;
         }
     }).then((response) => {
+        let field = $("#select-pair-room");
+        field.empty();
         for (let i = 0; i < response.length; i++) {
             let newOption = new Option(response[i].number, response[i].id);
-            $("#select-pair-room").append(newOption);
+            field.append(newOption);
         }
+        console.log(alreadyChosen);
+        if (alreadyChosen !== null) field.val(alreadyChosen).trigger('change');
     });
 }
 
