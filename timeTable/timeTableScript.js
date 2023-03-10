@@ -9,6 +9,7 @@ $(document).ready(function () {
     });
 
     $("#btn-edit-timetable").click(function (e) {
+        e.preventDefault();
         goToEditPage();
     });
 
@@ -44,6 +45,7 @@ const goToEditPage = () => {
     let group = $("#groups-list").val();
     localStorage.setItem('date', date);
     localStorage.setItem('group', group);
+    window.location.href = './editor.html';
 }
 
 const createTimetable = (date, group) => {

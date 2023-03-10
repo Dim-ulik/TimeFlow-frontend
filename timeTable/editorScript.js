@@ -6,13 +6,17 @@ $(document).ready(function() {
     changeDays(week);
 
     let group = localStorage.getItem('group');
-    loadTimetable(group, week[0], week[week.length - 1], createTimetableToEdit);
+    if (week.length > 0 && group.length > 0) loadTimetable(group, week[0], week[week.length - 1], createTimetableToEdit);
 
     $("#clear-timetable").click(function() {
         console.log(1);
     });
 
-    $("#edit-pair-btn").click(function () {
+    $("#go-back-btn").click(function () {
+        window.location.href = './timeTable.html';
+    });
+
+    const getInputData = () => {
         let groupId = localStorage.getItem('group');
         let subjectId = $("#select-pair-name").val();
         let teacherId = $("#select-teacher").val();
@@ -21,7 +25,7 @@ $(document).ready(function() {
         let date = localStorage.getItem('cell-date');
         let lessonType = $("#select-pair-type").val();
 
-        let inputData = JSON.stringify({
+        return JSON.stringify({
             studentGroupId: groupId,
             subjectId: subjectId,
             teacherId: teacherId,
@@ -30,31 +34,56 @@ $(document).ready(function() {
             date: date,
             lessonType: lessonType
         });
+    }
+
+    $("#create-pair-btn").click(function () {
         let url = hostname + "/api/v1/lessons";
         let token = localStorage.getItem('accessToken');
         fetch(url, {
             method: 'POST',
             headers:
                 new Headers ({ "Authorization" : "Bearer " + token, 'Content-Type': 'application/json'}),
-            body: inputData
+            body: getInputData()
         }).then((response) => {
             location.reload();
         });
     });
 
     $("#delete-pair-btn").click(function () {
+        deletePair();
+    });
+
+    $("#edit-pair-btn").click(function () {
         let pairId = localStorage.getItem('pair-id');
         let url = hostname + "/api/v1/lessons/" + pairId;
         let token = localStorage.getItem('accessToken');
         fetch(url, {
-            method: 'DELETE',
+            method: 'PUT',
             headers:
                 new Headers ({ "Authorization" : "Bearer " + token, 'Content-Type': 'application/json'}),
+            body: getInputData()
         }).then((response) => {
             location.reload();
         });
     });
 })
+
+const deletePair = (cellId) => {
+    let pairId = localStorage.getItem('pair-id');
+    if (cellId !== undefined) {
+        pairId = cellId;
+    }
+
+    let url = hostname + "/api/v1/lessons/" + pairId;
+    let token = localStorage.getItem('accessToken');
+    fetch(url, {
+        method: 'DELETE',
+        headers:
+            new Headers ({ "Authorization" : "Bearer " + token, 'Content-Type': 'application/json'}),
+    }).then((response) => {
+        location.reload();
+    });
+}
 
 $("#repeat-check").click(function() {
     if ($(this).is(":checked")) {
@@ -143,13 +172,15 @@ const createTimetableToEdit = (currentPairs) => {
         $('#select-pair-time').val(pairTimeId).trigger('change');
         if (pairTypeId === undefined) {
             $(".delete-button").addClass('d-none');
+            $("#edit-pair-btn").addClass('d-none');
+            $("#create-pair-btn").removeClass('d-none');
             setText($("#editModalLabel"), "Создать пару");
-            setText($("#edit-pair-btn"), "Создать");
         }
         else {
             $(".delete-button").removeClass('d-none');
+            $("#edit-pair-btn").removeClass('d-none');
+            $("#create-pair-btn").addClass('d-none');
             setText($("#editModalLabel"), "Изменить информацию о паре");
-            setText($("#edit-pair-btn"), "Изменить");
             var pairNameId = cell.find('.pair-name').attr('pair-name-id');
             var pairName = cell.find('.pair-name').text();
             var pairRoomId = cell.find('.pair-room').attr('pair-room-id');
