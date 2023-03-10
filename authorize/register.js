@@ -31,7 +31,7 @@ function sendData(data) {
                 console.log(json)
                 localStorage.setItem('accessToken', `${json['accessToken']}`)
                 localStorage.setItem('refreshToken', `${json['refreshToken']}`)
-                location.href = '../timeTable/timeTable.html'
+                location.href = '../downloadPage/downloadPage.html'
             })
         } else {
             if (response.status == 400) {
