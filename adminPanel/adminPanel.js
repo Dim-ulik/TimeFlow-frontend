@@ -1,7 +1,7 @@
 import loadApllications from "./applications/loadApplications.js";
 import loadUsersList from "./loadUsersList.js";
-import logOut from "./navbar/logOut.js";
-import LoadPagination from "./pagination/loadPagination.js";
+import logOut from "../navbar/logOut.js";
+import loadPagination from "./pagination/loadPagination.js";
 const pageSize = 5;
 
 $(document).ready(function () {
@@ -10,7 +10,6 @@ $(document).ready(function () {
   changeFiltration(activePage);
   changeContent(activePage);
   loadTeachers();
-  
 });
 
 function loadTeachers() {
@@ -109,4 +108,9 @@ $('.log-out-btn').click(function (e) {
   e.preventDefault();
   logOut();
 });
+
+$('#schedule').click(function(e) {
+  e.preventDefault()
+  location.href = '../timeTable/timeTable.html'
+})
 
