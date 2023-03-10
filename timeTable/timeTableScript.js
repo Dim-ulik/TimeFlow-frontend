@@ -1,7 +1,12 @@
+import logOut from "../navbar/logOut.js";
+
 $(document).ready(function () {
     loadGroups();
     changeDate();
     loadTimeslots();
+
+    localStorage.setItem('nav-location', 'schedule')
+    
 
     $("#btn-show-timetable").click(function (e) {
         e.preventDefault();
@@ -25,6 +30,10 @@ $(document).ready(function () {
         e.preventDefault();
         createTimetable(decrementWeek($("#week-date").val()), $("#groups-list").val());
     });
+
+    if (localStorage.getItem('ROLE') === 'ROLE_EMPLOYEE') {
+        $('.nav-admin').removeClass('d-none');
+    }
 });
 
 const decrementWeek = (date) => {
@@ -170,3 +179,8 @@ const clearTimetable = () => {
     $(".pair-cell").remove();
 }
 
+$('.log-out-btn').click(function (e) { 
+    e.preventDefault();
+    logOut();
+  });
+  

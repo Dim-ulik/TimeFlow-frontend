@@ -16,16 +16,57 @@
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
-<nav class="navbar navbar-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <img src="./images/logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top logo">
-            <span class="navbar-name">TimeFlow</span>
-        </a>
-        <button type="button" class="btn time-flow-button admin-btn">Перейти в панель администратора</button>
-        <button type="button" class="btn time-flow-button">Выйти</button>
-    </div>
-</nav>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="./images/logo.png" alt="Logo" width="30" height="30"
+                    class="d-inline-block align-text-top logo" />
+                <span class="navbar-name">TimeFlow</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Переключатель навигации">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link navbar-active" id="users_list" value="users_list" href="#">Расписание</a>
+                    </li>
+                    <li class="nav-item nav-admin d-none">
+                        <a class="nav-link navbar-active" id="users_list" value="users_list" href="#">Список
+                            пользователей</a>
+                    </li>
+                    <li class="nav-item dropdown nav-admin d-none">
+                        <a class="nav-link dropdown-toggle" href="#" id="applications" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Заявки
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li>
+                                <a class="dropdown-item navbar-active" id="app_employee" value="applications"
+                                    href="#">Заявки сотрудников</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item navbar-active" id="app_schedule-maker" value="applications"
+                                    href="#">Заявки составителей</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item navbar-active" id="app_student" value="applications"
+                                    href="#">Заявки студентов</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <button type="button" class="btn time-flow-button log-out-btn">
+                            Выйти
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 <div>
     <div class="container">
         <div class="row group-information mt-4">
@@ -202,6 +243,6 @@
 <script src="select2/select2.min.js"></script>
 <script src="select2/ru.js"></script>
 <script src="baseFunctions.js"></script>
-<script src="editorScript.js"></script>
+<script type="module" src="editorScript.js"></script>
 <script src="dragAndDropScript.js"></script>
 </html>

@@ -1,3 +1,5 @@
+import logOut from "../navbar/logOut.js";
+
 $(document).ready(function() {
     let week = getWeek(localStorage.getItem('week'));
 
@@ -45,6 +47,10 @@ $(document).ready(function() {
             }
         });
     });
+
+    if (localStorage.getItem('ROLE') === 'ROLE_ADMIN') {
+        $('.nav-admin').removeClass('d-none');
+    }
 })
 
 $("#repeat-check").click(function() {
@@ -249,3 +255,9 @@ const loadFreeRooms = (timeslotId, date) => {
         }
     });
 }
+
+$('.log-out-btn').click(function (e) { 
+    e.preventDefault();
+    logOut();
+  });
+  
