@@ -23,7 +23,9 @@ $(document).ready(function() {
             headers:
                 new Headers ({ "Authorization" : "Bearer " + token, 'Content-Type': 'application/json'}),
         }).then((response) => {
-            location.reload();
+            clearAllTimeslots();
+            loadTimetable(group, week[0], week[week.length - 1], createTimetableToEdit);
+            $(".btn-close").trigger("click");
         });
     });
 
@@ -67,7 +69,9 @@ $(document).ready(function() {
             body: JSON.stringify(inputData)
         }).then((response) => {
             if (response.ok) {
-                location.reload();
+                clearAllTimeslots();
+                loadTimetable(group, week[0], week[week.length - 1], createTimetableToEdit);
+                $(".btn-close").trigger("click");
             }
             else {
                 alert("Невозможно добавить пару - произошло наложение");
@@ -89,7 +93,9 @@ $(document).ready(function() {
                 new Headers ({ "Authorization" : "Bearer " + token, 'Content-Type': 'application/json'}),
             body: JSON.stringify(getInputData())
         }).then((response) => {
-            location.reload();
+            clearAllTimeslots();
+            loadTimetable(group, week[0], week[week.length - 1], createTimetableToEdit);
+            $(".btn-close").trigger("click");
         });
     });
 })
@@ -100,6 +106,9 @@ const deletePair = (cellId) => {
         pairId = cellId;
     }
 
+    let week = getWeek(localStorage.getItem('week'));
+    let group = localStorage.getItem('group');
+
     let url = hostname + "/api/v1/lessons/" + pairId;
     let token = localStorage.getItem('accessToken');
     fetch(url, {
@@ -107,8 +116,19 @@ const deletePair = (cellId) => {
         headers:
             new Headers ({ "Authorization" : "Bearer " + token, 'Content-Type': 'application/json'}),
     }).then((response) => {
-        location.reload();
+        clearAllTimeslots();
+        loadTimetable(group, week[0], week[week.length - 1], createTimetableToEdit);
+        $(".btn-close").trigger("click");
     });
+}
+
+const clearAllTimeslots = () => {
+    for (let i = 0; i < 6; i++) {
+        for (let j = 0; j < pairsOnDayAmount; j++) {
+            let id = "#" + createId(i+1, j+1);
+            $(id).empty();
+        }
+    }
 }
 
 $("#repeat-check").click(function() {
