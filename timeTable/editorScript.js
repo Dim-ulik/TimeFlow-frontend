@@ -36,7 +36,7 @@ $(document).ready(function() {
         let date = localStorage.getItem('cell-date');
         let lessonType = $("#select-pair-type").val();
 
-        return JSON.stringify({
+        return {
             studentGroupId: groupId,
             subjectId: subjectId,
             teacherId: teacherId,
@@ -44,19 +44,34 @@ $(document).ready(function() {
             timeslotId: timeslotId,
             date: date,
             lessonType: lessonType
-        });
+        };
     }
 
     $("#create-pair-btn").click(function () {
+        let repeatCount = 1;
+        let inputData = getInputData();
         let url = hostname + "/api/v1/lessons";
+        if ($("#repeat-check").is(":checked")) {
+            repeatCount = Number($("#select-repeat").val());
+            inputData = {
+                ...inputData,
+                numberOfWeeks: repeatCount
+            }
+            url = hostname + "/api/v1/lessons/for-a-few-weeks";
+        }
         let token = localStorage.getItem('accessToken');
         fetch(url, {
             method: 'POST',
             headers:
                 new Headers ({ "Authorization" : "Bearer " + token, 'Content-Type': 'application/json'}),
-            body: getInputData()
+            body: JSON.stringify(inputData)
         }).then((response) => {
-            location.reload();
+            if (response.ok) {
+                location.reload();
+            }
+            else {
+                alert("Невозможно добавить пару - произошло наложение");
+            }
         });
     });
 
@@ -72,7 +87,7 @@ $(document).ready(function() {
             method: 'PUT',
             headers:
                 new Headers ({ "Authorization" : "Bearer " + token, 'Content-Type': 'application/json'}),
-            body: getInputData()
+            body: JSON.stringify(getInputData())
         }).then((response) => {
             location.reload();
         });
@@ -186,8 +201,10 @@ const createTimetableToEdit = (currentPairs) => {
             $("#edit-pair-btn").addClass('d-none');
             $("#create-pair-btn").removeClass('d-none');
             setText($("#editModalLabel"), "Создать пару");
+            $("#repeat").removeClass("d-none");
         }
         else {
+            $("#repeat").addClass("d-none");
             $(".delete-button").removeClass('d-none');
             $("#edit-pair-btn").removeClass('d-none');
             $("#create-pair-btn").addClass('d-none');
