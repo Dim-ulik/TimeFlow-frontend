@@ -270,4 +270,8 @@ const createTimetableMatrix = (response) => {
     return timetableMatrix;
 }
 
+const checkToken = () => {
+
+}
+
 

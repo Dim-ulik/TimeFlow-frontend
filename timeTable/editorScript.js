@@ -23,9 +23,14 @@ $(document).ready(function() {
             headers:
                 new Headers ({ "Authorization" : "Bearer " + token, 'Content-Type': 'application/json'}),
         }).then((response) => {
-            clearAllTimeslots();
-            loadTimetable(group, week[0], week[week.length - 1], createTimetableToEdit);
-            $(".btn-close").trigger("click");
+            if (response.ok) {
+                clearAllTimeslots();
+                loadTimetable(group, week[0], week[week.length - 1], createTimetableToEdit);
+                $(".btn-close").trigger("click");
+            }
+            if (response.status === 450) {
+                window.location.href = '../authorize/index.html';
+            }
         });
     });
 
@@ -74,7 +79,12 @@ $(document).ready(function() {
                 $(".btn-close").trigger("click");
             }
             else {
-                alert("Невозможно добавить пару - произошло наложение");
+                if (response.status === 450) {
+                    window.location.href = '../authorize/index.html';
+                }
+                else {
+                    alert("Невозможно добавить пару - произошло наложение");
+                }
             }
         });
     });
@@ -93,9 +103,19 @@ $(document).ready(function() {
                 new Headers ({ "Authorization" : "Bearer " + token, 'Content-Type': 'application/json'}),
             body: JSON.stringify(getInputData())
         }).then((response) => {
-            clearAllTimeslots();
-            loadTimetable(group, week[0], week[week.length - 1], createTimetableToEdit);
-            $(".btn-close").trigger("click");
+            if (response.ok) {
+                clearAllTimeslots();
+                loadTimetable(group, week[0], week[week.length - 1], createTimetableToEdit);
+                $(".btn-close").trigger("click");
+            }
+            else {
+                if (response.status === 450) {
+                    window.location.href = '../authorize/index.html';
+                }
+                else {
+                    alert("Невозможно добавить пару - произошло наложение");
+                }
+            }
         });
     });
 })
@@ -116,9 +136,14 @@ const deletePair = (cellId) => {
         headers:
             new Headers ({ "Authorization" : "Bearer " + token, 'Content-Type': 'application/json'}),
     }).then((response) => {
-        clearAllTimeslots();
-        loadTimetable(group, week[0], week[week.length - 1], createTimetableToEdit);
-        $(".btn-close").trigger("click");
+        if (response.ok) {
+            clearAllTimeslots();
+            loadTimetable(group, week[0], week[week.length - 1], createTimetableToEdit);
+            $(".btn-close").trigger("click");
+        }
+        else {
+            window.location.href = '../authorize/index.html';
+        }
     });
 }
 
@@ -176,14 +201,6 @@ const createFreeCell = (pairNumber) => {
     return addPairCell;
 }
 
-const createFreeTable = () => {
-    for (let day = 1; day <= 6; day++) {
-        for (let pairNumber = 1; pairNumber <= pairsOnDayAmount; pairNumber++) {
-            appendPair(createFreeCell(pairNumber), day, pairNumber);
-        }
-    }
-}
-
 const createTimetableToEdit = (currentPairs) => {
     createTimeslots();
     for (let i = 0; i < currentPairs.length; i++) {
@@ -217,7 +234,7 @@ const createTimetableToEdit = (currentPairs) => {
         localStorage.setItem('timeslot-id', pairTimeId);
         $('#select-pair-time').val(pairTimeId).trigger('change');
         if (pairTypeId === undefined) {
-            $(".delete-button").addClass('d-none');
+            $("#delete-pair-btn").addClass('d-none');
             $("#edit-pair-btn").addClass('d-none');
             $("#create-pair-btn").removeClass('d-none');
             setText($("#editModalLabel"), "Создать пару");
@@ -225,7 +242,7 @@ const createTimetableToEdit = (currentPairs) => {
         }
         else {
             $("#repeat").addClass("d-none");
-            $(".delete-button").removeClass('d-none');
+            $("#delete-pair-btn").removeClass('d-none');
             $("#edit-pair-btn").removeClass('d-none');
             $("#create-pair-btn").addClass('d-none');
             setText($("#editModalLabel"), "Изменить информацию о паре");
@@ -372,4 +389,6 @@ const loadFreeRooms = (timeslotId, date, alreadyChosen, pairRoom) => {
         }
     });
 }
+
+
 
