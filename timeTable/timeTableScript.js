@@ -1,6 +1,11 @@
 import logOut from "../navbar/logOut.js";
 
 $(document).ready(function () {
+    if (localStorage.getItem('accessToken') === null) {
+        window.location.href = '../authorize/index.html';
+        return;
+    }
+
     loadGroups();
     changeDate();
     loadTimeslots();

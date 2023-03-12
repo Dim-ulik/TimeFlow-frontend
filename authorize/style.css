@@ -7,10 +7,11 @@
     --color-custom-blue: #A3B6EE;
     --color-custom-green: #89A6A2;
     --color-text: #424147;
+    --color-background-base: #eeeef5
 }
 
 body{
-    background-color: var(--color-background-light);
+    background-color: var(--color-background-base);
 }
 
 .logo span {

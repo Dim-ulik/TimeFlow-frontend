@@ -2,6 +2,11 @@ import needToRefreshToken from "../authorize/needToRefreshToken.js";
 import logOut from "../navbar/logOut.js";
 
 $(document).ready(function() {
+    if (localStorage.getItem('accessToken') === null) {
+        window.location.href = '../authorize/index.html';
+        return;
+    }
+
     let week = getWeek(localStorage.getItem('week'));
 
     loadTimeslots();
