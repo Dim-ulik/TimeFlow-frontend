@@ -1,3 +1,6 @@
+import needToRefreshToken from "../authorize/needToRefreshToken.js";
+import logOut from "../navbar/logOut.js";
+
 $(document).ready(function() {
     let week = getWeek(localStorage.getItem('week'));
 
@@ -70,6 +73,7 @@ $(document).ready(function() {
                 new Headers ({ "Authorization" : "Bearer " + token, 'Content-Type': 'application/json'}),
             body: JSON.stringify(inputData)
         }).then((response) => {
+            needToRefreshToken(response)
             if (response.ok) {
                 clearAllTimeslots();
                 loadTimetable(group, week[0], week[week.length - 1], createTimetableToEdit);
@@ -95,6 +99,7 @@ $(document).ready(function() {
                 new Headers ({ "Authorization" : "Bearer " + token, 'Content-Type': 'application/json'}),
             body: JSON.stringify(getInputData())
         }).then((response) => {
+            needToRefreshToken(response)
             if (response.ok) {
                 clearAllTimeslots();
                 loadTimetable(group, week[0], week[week.length - 1], createTimetableToEdit);
@@ -105,6 +110,13 @@ $(document).ready(function() {
             }
         });
     });
+
+    if (localStorage.getItem('ROLE') === 'ROLE_ADMIN') {
+        $('.nav-admin').removeClass('d-none');
+    }
+
+    $('#schedule').addClass('active')
+
 })
 
 const deletePair = (cellId) => {
@@ -375,4 +387,19 @@ const loadFreeRooms = (timeslotId, date, alreadyChosen, pairRoom) => {
 }
 
 
+$('.log-out-btn').click(function (e) { 
+    e.preventDefault();
+    logOut();
+  });
+  
+$('#users_list').click(function (e) { 
+    e.preventDefault();
+    localStorage.setItem('location', 'users_list')
+    location.href = '../adminPanel/adminPanel.html'
+});
 
+$('#app_employee, #app_schedule-maker, #app_student').click(function (e) { 
+    e.preventDefault();
+    localStorage.setItem('location', $(this).attr('id'))
+    location.href = '../adminPanel/adminPanel.html'
+});

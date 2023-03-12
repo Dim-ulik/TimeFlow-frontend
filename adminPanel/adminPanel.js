@@ -1,16 +1,18 @@
 import loadApllications from "./applications/loadApplications.js";
 import loadUsersList from "./loadUsersList.js";
-import logOut from "./navbar/logOut.js";
-import LoadPagination from "./pagination/loadPagination.js";
+import logOut from "../navbar/logOut.js";
+import loadPagination from "./pagination/loadPagination.js";
 const pageSize = 5;
 
 $(document).ready(function () {
-  let activePage = "users_list";
+  if (localStorage.getItem('location') == null) {
+    localStorage.setItem('location', 'users_list')
+  }
+  let activePage = localStorage.getItem('location');
   changeNavbar(activePage);
   changeFiltration(activePage);
   changeContent(activePage);
   loadTeachers();
-  
 });
 
 function loadTeachers() {
@@ -35,8 +37,9 @@ function loadTeachers() {
 
 $(".navbar-active").click(function (e) {
   e.preventDefault();
+  localStorage.setItem('location', $(this).attr("id"))
   changeNavbar($(this).attr("id"));
-  changeFiltration($(this).attr("value"));
+  changeFiltration($(this).attr("id"));
   changeContent($(this).attr("id"));
 });
 
@@ -105,8 +108,13 @@ $(".apply-users-list-filters").click(function (e) {
   );
 });
 
-$('.log-out-btn').click(function (e) { 
+$('.log-out-btn').click(function (e) {
   e.preventDefault();
   logOut();
 });
+
+$('#schedule').click(function (e) {
+  e.preventDefault()
+  location.href = '../timeTable/timeTable.html'
+})
 

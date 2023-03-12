@@ -1,7 +1,7 @@
 import needToRefreshToken from "../../authorize/needToRefreshToken.js"
 
-function acceptApplicationStudent(id) {
-    fetch(`http://94.103.87.164:8081/api/v1/student-requests/${id}/accept`, {
+function acceptApplicationScheduleMaker(id) {
+    fetch(`http://94.103.87.164:8081/api/v1/schedule-maker-requests/${id}/accept`, {
         method: 'POST',
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
@@ -16,4 +16,4 @@ function acceptApplicationStudent(id) {
     })
 
 }
-export default acceptApplicationStudent
+export default acceptApplicationScheduleMaker

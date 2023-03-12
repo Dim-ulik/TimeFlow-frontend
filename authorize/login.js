@@ -1,10 +1,12 @@
 import URL from '../url.js'
+import checkStatus from './checkStatus.js'
+
 
 $('.login-form').submit(function (e) {
     e.preventDefault()
     $('.login-form .form-control').removeClass('is-invalid')
     let formData = new FormData(login_form)
-    
+
     if (isValid(formData)) {
         sendData(JSON.stringify(Object.fromEntries(formData)))
     }
@@ -32,15 +34,14 @@ function sendData(data) {
                 errorLogIn()
             } else {
                 return response.json()
+                    .then((json) => {
+                        localStorage.setItem('accessToken', `${json['accessToken']}`)
+                        localStorage.setItem('refreshToken', `${json['refreshToken']}`)
+                        checkStatus()
+                    })
             }
         })
-        .then((json) => {
-            localStorage.setItem('accessToken', `${json['accessToken']}`)
-            localStorage.setItem('refreshToken', `${json['refreshToken']}`)
 
-            location.href = '../adminPanel/adminPanel.html'
-        
-        })
 }
 
 function errorLogIn() {

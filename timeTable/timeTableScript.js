@@ -1,3 +1,5 @@
+import logOut from "../navbar/logOut.js";
+
 $(document).ready(function () {
     loadGroups();
     changeDate();
@@ -26,6 +28,12 @@ $(document).ready(function () {
         e.preventDefault();
         createTimetable(decrementWeek($("#week-date").val()), $("#groups-list").val());
     });
+
+    if (localStorage.getItem('ROLE') === 'ROLE_ADMIN') {
+        $('.nav-admin').removeClass('d-none');
+    }
+
+    $('#schedule').addClass('active')
 });
 
 const decrementWeek = (date) => {
@@ -179,3 +187,20 @@ const clearTimetable = () => {
     $(".pair-cell").remove();
 }
 
+$('.log-out-btn').click(function (e) { 
+    e.preventDefault();
+    logOut();
+  });
+  
+$('#users_list').click(function (e) { 
+    e.preventDefault();
+    localStorage.setItem('location', 'users_list')
+    location.href = '../adminPanel/adminPanel.html'
+});
+
+$('#app_employee, #app_schedule-maker, #app_student').click(function (e) { 
+    e.preventDefault();
+    console.log($(this).attr('id'))
+    localStorage.setItem('location', $(this).attr('id'))
+    location.href = '../adminPanel/adminPanel.html'
+});

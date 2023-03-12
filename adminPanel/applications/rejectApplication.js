@@ -1,3 +1,5 @@
+import needToRefreshToken from "../../authorize/needToRefreshToken.js"
+
 function rejectApplication(typeOfUser, id) {
     fetch(`http://94.103.87.164:8081/api/v1/${typeOfUser}-requests/${id}/reject`, {
         method: 'POST',
@@ -6,6 +8,7 @@ function rejectApplication(typeOfUser, id) {
         }
     })
     .then ((response) => {
+        needToRefreshToken(response)
         if (response.ok) {
             $('.account-status').removeClass('d-none')
             location.reload()
