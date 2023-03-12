@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TimeFlow</title>
+    <link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="addEnityStyles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="./images/logo.png" alt="Logo" width="30" height="30"
+                    class="d-inline-block align-text-top logo">
+                <span class="navbar-name">TimeFlow</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Переключатель навигации">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Список пользователей</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Заявки
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="#">Заявки сотрудников</a></li>
+                            <li><a class="dropdown-item" href="#">Заявки составителей</a></li>
+                            <li><a class="dropdown-item" href="#">Заявки студентов</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Добавление сущности</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <button type="button" class="btn time-flow-button">Выйти</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="row container mt-5 text-center me-auto ms-auto justify-content-center">
+        <div class="col-lg-2 col-md-3 col-sm-12 add mb-sm-2 mb-2">
+            <span class="addEntity">Добавить</span>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-12">
+            <select class="form-select enity" name="enity">
+                <option selected disabled>Выберите сущность</option>
+                <option value="1">Преподаватель</option>
+                <option value="2">Аудитория</option>
+                <option value="3">Пара</option>
+                <option value="4">Группа</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="container text-center mt-5">
+        <div class="container-form" id="container">
+
+            <form class="teacher-form d-none" id="teacher_form">
+                <div class="mb-3">
+                    <label class="form-label">Фамилия</label>
+                    <input id="surname" class="form-control upperFirst" placeholder="Иванов" name="surname">
+                    <div class="invalid-feedback">Используйте кириллицу</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Имя</label>
+                    <input id="name" class="form-control upperFirst" placeholder="Иван" name="name">
+                    <div class="invalid-feedback">Используйте кириллицу</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Отчество</label>
+                    <input id="patronymic" class="form-control upperFirst" placeholder="Иванович" name="patronymic">
+                    <div class="invalid-feedback">Используйте кириллицу</div>
+                </div>
+                <button id="add" type="submit" class="btn time-flow-button mt-2">Добавить</button>
+            </form>
+
+            <form class="subject-form d-none" id="subject_form">
+                <div class="mb-3">
+                    <label class="form-label">Название предмета</label>
+                    <input id="subject" class="form-control upperFirst" placeholder="Английский язык" name="subject">
+                    <div class="invalid-feedback">Используйте кириллицу</div>
+                </div>
+                <button id="add" type="submit" class="btn time-flow-button mt-2">Добавить</button>
+            </form>
+
+            <form class="classroom-form d-none" id="classroom_form">
+                <div class="mb-3">
+                    <label class="form-label">Номер аудитории</label>
+                    <input id="classroom" class="form-control" placeholder="220" name="classroom">
+                    <div class="invalid-feedback">Поле должно содержать только цифры</div>
+                </div>
+                <button id="add" type="submit" class="btn time-flow-button mt-2">Добавить</button>
+            </form>
+
+            <form class="group-form d-none" id="group_form">
+                <div class="mb-3">
+                    <label class="form-label">Номер группы</label>
+                    <input id="group" class="form-control" placeholder="92101" name="group">
+                    <div class="invalid-feedback">Поле должно содержать только цифры</div>
+                </div>
+                <button id="add" type="submit" class="btn time-flow-button mt-2">Добавить</button>
+            </form>
+
+        </div>
+    </div>
+</body>
+
+<script src="/jquery/jquery.js"></script>
+<script src="/bootstrap/bootstrap.min.js"></script>
+<script src="addEnityScript.js"></script>
+
+</html>
