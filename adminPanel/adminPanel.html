@@ -61,6 +61,9 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item nav-admin">
+                        <a class="nav-link navbar-active" id="add_entity" href="#">Добавление сущности</a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
@@ -72,6 +75,77 @@
             </div>
         </div>
     </nav>
+
+    <div class="add_entity d-none">
+        <div class="row container mt-5 text-center me-auto ms-auto justify-content-center">
+            <div class="col-lg-2 col-md-3 col-sm-12 add mb-sm-2 mb-2">
+                <span class="addEntity">Добавить</span>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-12">
+                <select class="form-select enity" name="enity">
+                    <option selected disabled>Выберите сущность</option>
+                    <option value="1">Преподаватель</option>
+                    <option value="2">Аудитория</option>
+                    <option value="3">Предмет</option>
+                    <option value="4">Группа</option>
+                </select>
+            </div>
+        </div>
+    
+        <div class="container text-center mt-5">
+            <div class="container-form" id="container-add-entity">
+    
+                <form class="teacher-form add-entity-form d-none" id="teacher_form">
+                    <div class="mb-3">
+                        <label class="form-label">Фамилия</label>
+                        <input id="surname" class="form-control upperFirst" placeholder="Иванов" name="surname">
+                        <div class="invalid-feedback">Используйте кириллицу</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Имя</label>
+                        <input id="name" class="form-control upperFirst" placeholder="Иван" name="name">
+                        <div class="invalid-feedback">Используйте кириллицу</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Отчество</label>
+                        <input id="patronymic" class="form-control upperFirst" placeholder="Иванович" name="patronymic">
+                        <div class="invalid-feedback">Используйте кириллицу</div>
+                    </div>
+                    <button id="add" type="submit" class="btn time-flow-button mt-2">Добавить</button>
+                </form>
+    
+                <form class="subject-form add-entity-form d-none" id="subject_form">
+                    <div class="mb-3">
+                        <label class="form-label">Название предмета</label>
+                        <input id="subject" class="form-control upperFirst" placeholder="Английский язык" name="name">
+                        <div class="invalid-feedback">Используйте кириллицу</div>
+                    </div>
+                    <button id="add" type="submit" class="btn time-flow-button mt-2">Добавить</button>
+                </form>
+    
+                <form class="classroom-form add-entity-form d-none" id="classroom_form">
+                    <div class="mb-3">
+                        <label class="form-label">Номер аудитории</label>
+                        <input id="classroom" class="form-control" placeholder="220" name="number">
+                        <div class="invalid-feedback">Поле должно содержать только цифры</div>
+                    </div>
+                    <button id="add" type="submit" class="btn time-flow-button mt-2">Добавить</button>
+                </form>
+    
+                <form class="group-form add-entity-form d-none" id="group_form">
+                    <div class="mb-3">
+                        <label class="form-label">Номер группы</label>
+                        <input id="group" class="form-control" placeholder="92101" name="number">
+                        <div class="invalid-feedback">Поле должно содержать только цифры</div>
+                    </div>
+
+                    <button id="add" type="submit" class="btn time-flow-button mt-2">Добавить</button>
+                </form>
+                <span class="invalid-add-entity text-danger d-none"></span>
+            </div>
+        </div>
+    </div>
+
 
     <div class="container text-center mt-5">
         <div class="container" id="container">
@@ -269,5 +343,6 @@
 <script src="../jquery/jquery.js"></script>
 <script src="../bootstrap/bootstrap.min.js"></script>
 <script type="module" src="adminPanel.js"></script>
+<script type="module" src="addEnityScript.js"></script>
 
 </html>

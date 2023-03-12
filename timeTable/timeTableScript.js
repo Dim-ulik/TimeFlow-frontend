@@ -192,15 +192,8 @@ $('.log-out-btn').click(function (e) {
     logOut();
   });
   
-$('#users_list').click(function (e) { 
+$('#users_list, #app_employee, #app_schedule-maker, #app_student, #add_entity').click(function (e) { 
     e.preventDefault();
-    localStorage.setItem('location', 'users_list')
-    location.href = '../adminPanel/adminPanel.html'
-});
-
-$('#app_employee, #app_schedule-maker, #app_student').click(function (e) { 
-    e.preventDefault();
-    console.log($(this).attr('id'))
     localStorage.setItem('location', $(this).attr('id'))
     location.href = '../adminPanel/adminPanel.html'
 });

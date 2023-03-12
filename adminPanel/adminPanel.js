@@ -1,7 +1,6 @@
 import loadApllications from "./applications/loadApplications.js";
 import loadUsersList from "./loadUsersList.js";
 import logOut from "../navbar/logOut.js";
-import loadPagination from "./pagination/loadPagination.js";
 const pageSize = 5;
 
 $(document).ready(function () {
@@ -44,6 +43,9 @@ $(".navbar-active").click(function (e) {
 });
 
 function changeContent(activePage) {
+  $('.add_entity').addClass('d-none')
+  $("#container").removeClass('d-none')
+  $(".pagination-block").removeClass('d-none');
   switch (activePage) {
     case "users_list":
       $(".header").text("Список пользователей");
@@ -67,6 +69,12 @@ function changeContent(activePage) {
       $(".header").attr("value", "student");
       loadApllications($(".header").attr("value"), 0, pageSize);
 
+      break;
+    case "add_entity":
+      console.log('add-entity')
+      $(".pagination-block").addClass('d-none');
+      $("#container").addClass('d-none')
+      $('.add_entity').removeClass('d-none');
       break;
     default:
       break;
