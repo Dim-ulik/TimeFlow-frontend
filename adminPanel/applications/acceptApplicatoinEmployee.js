@@ -22,10 +22,9 @@ function acceptApplicationEmployee(id, postIds, teacherId) {
                 }
 
                 return postIdsQuery
-                
             })
             .then((postIdsResult) => {
-                fetch(`http://94.103.87.164:8081/api/v1/employee-requests/${id}/accept?${postIdsResult}${teacherId}`, {
+                fetch(`http://94.103.87.164:8081/api/v1/employee-requests/${id}/accept?${postIdsResult}teacherId=${teacherId}`, {
                     method: 'POST',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
