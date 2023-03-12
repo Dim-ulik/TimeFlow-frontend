@@ -4,7 +4,6 @@ function loadPagination(json) {
     $('.pagination-container').empty()
     let paginationItem = $('.page-item-number')
 
-    console.log(json)
     for (let i = 0; i < json['totalPages']; i++) {
 
         let newPaginationItem = paginationItem.clone()
@@ -13,15 +12,15 @@ function loadPagination(json) {
         newPaginationItem.find('.page-link').text(i + 1)
         newPaginationItem.attr('id', `paginationItem${i + 1}`)
 
-        newPaginationItem.click(function (e) { 
+        newPaginationItem.click(function (e) {
             e.preventDefault();
-            updateApplications(newPaginationItem.text()-1, json['pageable']['pageSize'])
+            updateApplications(newPaginationItem.text() - 1, json['pageable']['pageSize'])
         });
 
         $('.pagination-container').append(newPaginationItem)
     }
 
-    $(`#paginationItem${json['pageable']['pageNumber']+1}`).addClass('active')
+    $(`#paginationItem${json['pageable']['pageNumber'] + 1}`).addClass('active')
 }
 
 export default loadPagination

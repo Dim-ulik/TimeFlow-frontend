@@ -7,13 +7,13 @@ function acceptApplicationStudent(id) {
             'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
         }
     })
-    .then ((response) => {
-        needToRefreshToken(response)
-        if (response.ok) {
-            location.reload()
-            return response.json()
-        }
-    })
+        .then((response) => {
+            needToRefreshToken(response)
+            if (response.ok) {
+                location.reload()
+                return response.json()
+            }
+        })
 
 }
 export default acceptApplicationStudent

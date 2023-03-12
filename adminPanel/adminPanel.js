@@ -71,7 +71,6 @@ function changeContent(activePage) {
 
       break;
     case "add_entity":
-      console.log('add-entity')
       $(".pagination-block").addClass('d-none');
       $("#container").addClass('d-none')
       $('.add_entity').removeClass('d-none');
