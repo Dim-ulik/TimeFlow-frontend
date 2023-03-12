@@ -5,10 +5,10 @@ import loadPagination from "./pagination/loadPagination.js";
 const pageSize = 5;
 
 $(document).ready(function () {
-  let activePage = "users_list";
-  if (localStorage.getItem('location') != '') {
-    activePage = localStorage.getItem('location');
+  if (localStorage.getItem('location') == null) {
+    localStorage.setItem('location', 'users_list')
   }
+  let activePage = localStorage.getItem('location');
   changeNavbar(activePage);
   changeFiltration(activePage);
   changeContent(activePage);
@@ -108,12 +108,12 @@ $(".apply-users-list-filters").click(function (e) {
   );
 });
 
-$('.log-out-btn').click(function (e) { 
+$('.log-out-btn').click(function (e) {
   e.preventDefault();
   logOut();
 });
 
-$('#schedule').click(function(e) {
+$('#schedule').click(function (e) {
   e.preventDefault()
   location.href = '../timeTable/timeTable.html'
 })
