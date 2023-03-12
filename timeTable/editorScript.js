@@ -1,7 +1,18 @@
 import needToRefreshToken from "../authorize/needToRefreshToken.js";
 import logOut from "../navbar/logOut.js";
 
+let flag = 0;
+
 $(document).ready(function() {
+    $(document).click(function () {
+        if (!$('#editModal').attr('aria-hidden')) {
+            flag = 1;
+        }
+        else {
+            flag = 0;
+        }
+    });
+
     if (localStorage.getItem('accessToken') === null) {
         window.location.href = '../authorize/index.html';
         return;
@@ -234,7 +245,7 @@ const createTimetableToEdit = (currentPairs) => {
         let pairTimeId = cell.attr('timeslot-id');
         let pairTime = cell.find('.pair-time').text();
         localStorage.setItem('timeslot-id', pairTimeId);
-        $('#select-pair-time').val(pairTimeId).trigger('change');
+        $('#select-pair-time').val(pairTimeId);
         if (pairTypeId === undefined) {
             $("#delete-pair-btn").addClass('d-none');
             $("#edit-pair-btn").addClass('d-none');
@@ -264,6 +275,20 @@ const createTimetableToEdit = (currentPairs) => {
         loadFreeRooms(pairTimeId, date, pairRoomId, pairRoom);
     });
 }
+
+const changeTeachersAndRooms = () => {
+    let pairTimeId = $("#select-pair-time").val();
+    let date = localStorage.getItem('cell-date');
+    localStorage.setItem('teacher-id', $("#select-teacher").val());
+    localStorage.setItem('room-id', $("#select-pair-room").val());
+    loadFreeTeachers(pairTimeId, date);
+    loadFreeRooms(pairTimeId, date);
+    flag = 1;
+}
+
+$("#select-pair-time").change(function () {
+    changeTeachersAndRooms();
+});
 
 $("#select-pair-room").select2({
     dropdownParent: '#editModal'
@@ -297,15 +322,15 @@ const loadFreeTimeslots = (groupId, date, alreadyChosen, pairTime) => {
     }).then((response) => {
         let field = $("#select-pair-time");
         field.empty();
+        if (alreadyChosen !== undefined) {
+            let newOption = new Option(pairTime, alreadyChosen);
+            field.append(newOption);
+            field.val(alreadyChosen);
+        }
         for (let i = 0; i < response.length; i++) {
             let time = response[i].beginTime + " - " + response[i].endTime;
             let newOption = new Option(time, response[i].id);
             field.append(newOption);
-        }
-        if (alreadyChosen !== undefined) {
-            let newOption = new Option(pairTime, alreadyChosen);
-            field.append(newOption);
-            field.val(alreadyChosen).trigger('change');
         }
     });
 }
@@ -331,15 +356,22 @@ const loadFreeTeachers = (timeslotId, date, alreadyChosen, teacherName) => {
     }).then((response) => {
         let field = $("#select-teacher");
         field.empty();
+        if (alreadyChosen !== undefined) {
+            let newOption = new Option(rewriteTeacherName(teacherName), alreadyChosen);
+            field.append(newOption);
+            field.val(alreadyChosen).trigger('change');
+        }
         for (let i = 0; i < response.length; i++) {
             let name = createTeacherShortName(response[i].surname, response[i].name, response[i].patronymic);
             let newOption = new Option(name, response[i].id);
             field.append(newOption);
         }
-        if (alreadyChosen !== undefined) {
-            let newOption = new Option(rewriteTeacherName(teacherName), alreadyChosen);
-            field.append(newOption);
-            field.val(alreadyChosen).trigger('change');
+        if (flag) {
+            let teacherId = localStorage.getItem('teacher-id');
+            if (checkOption(teacherId, "select-teacher")) {
+                field.val(teacherId).trigger('change');
+            }
+            flag = 0;
         }
     });
 }
@@ -356,14 +388,14 @@ const loadSubjects = (alreadyChosen, pairName) => {
     }).then((response) => {
         let field = $("#select-pair-name");
         field.empty();
-        for (let i = 0; i < response.length; i++) {
-            let newOption = new Option(response[i].name, response[i].id);
-            field.append(newOption);
-        }
         if (alreadyChosen !== undefined) {
             let newOption = new Option(pairName, alreadyChosen);
             field.append(newOption);
             field.val(alreadyChosen).trigger('change');
+        }
+        for (let i = 0; i < response.length; i++) {
+            let newOption = new Option(response[i].name, response[i].id);
+            field.append(newOption);
         }
     });
 }
@@ -380,18 +412,35 @@ const loadFreeRooms = (timeslotId, date, alreadyChosen, pairRoom) => {
     }).then((response) => {
         let field = $("#select-pair-room");
         field.empty();
-        for (let i = 0; i < response.length; i++) {
-            let newOption = new Option(response[i].number, response[i].id);
-            field.append(newOption);
-        }
         if (alreadyChosen !== undefined) {
             let newOption = new Option(pairRoom, alreadyChosen);
             field.append(newOption);
             field.val(alreadyChosen).trigger('change');
         }
+        for (let i = 0; i < response.length; i++) {
+            let newOption = new Option(response[i].number, response[i].id);
+            field.append(newOption);
+        }
+        if (flag) {
+            let roomId = localStorage.getItem('room-id');
+            if (checkOption(roomId, "select-pair-room")) {
+                field.val(roomId).trigger('change');
+            }
+        }
     });
 }
 
+function checkOption(testedValue, field){
+    let select = document.getElementById(field);
+    let options = select.options;
+
+    for(let i = 0; i< options.length; i++){
+        if(options[i].value == testedValue){
+            return true;
+        }
+    }
+    return false;
+}
 
 $('.log-out-btn').click(function (e) { 
     e.preventDefault();

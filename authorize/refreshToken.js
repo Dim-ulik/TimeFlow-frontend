@@ -13,7 +13,7 @@ function refreshToken() {
         if (response.ok) {
             return response.json()
         } else {
-            location.href = './index.html'
+            location.href = '../authorize/index.html'
         }
     })
     .then((json) => {
