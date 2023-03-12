@@ -14,9 +14,13 @@ function loadTimeslots() {
     }).then((response) => {
         pairsOnDayAmount = response.length;
         for (let i = 0; i < pairsOnDayAmount; i++) {
-            timesList[i] = {time: response[i].beginTime + " - " + response[i].endTime, timeslotId: response[i].id};
+            timesList[i] = {time: getTimeString(response[i].beginTime, response[i].endTime), timeslotId: response[i].id};
         }
     });
+}
+
+const getTimeString = (startTime, endTime) => {
+    return (startTime + " - " + endTime)
 }
 
 const getPairTime = (pairNumber) => {
@@ -40,12 +44,14 @@ const getRightDateFormat = (date) => {
     let year = date.getFullYear();
     let month = date.getMonth()+1;
     let day = date.getDate();
+
     if (month < 10) {
         month = "0" + month;
     }
     if (day < 10) {
         day = "0" + day;
     }
+
     return `${year}-${month}-${day}`;
 }
 
@@ -62,6 +68,7 @@ const getWeek = (dataDate) => {
     else {
         startDate = new Date(copy.setDate(date.getDate() - (day-1)));
     }
+
     for (let i = 0; i < 6; i++) {
         let temp = new Date(startDate);
         week[i] = getRightDateFormat(new Date(temp.setDate(startDate.getDate() + i)));
@@ -105,15 +112,17 @@ const getDayName = (dateString) => {
         monthNumber = dateString[6];
     }
     else {
-        monthNumber = `${dateString[5]}${dateString[6]}`;
+        monthNumber = dateString[5] + dateString[6];
     }
+
     if (dateString[8] === "0") {
         dayNumber = dateString[9];
     }
     else {
         dayNumber = dateString[8] + dateString[9];
     }
-    return `${dayNumber} ${getMonth(monthNumber)}`;
+
+    return dayNumber + " " + getMonth(monthNumber);
 }
 
 const chooseDay = (day) => {
@@ -183,6 +192,7 @@ const createPair = (pairType, pairNumber, pairDay, pairName, pairRoom, teacherNa
     else {
         pair = $("#no-pair-template").clone();
     }
+
     setText(pair.find(".pair-time"), getPairTime(pairNumber));
     pair.find(".pair-time").attr('pair-time-id', getTimeslotId(pairNumber));
     pair.attr('id', pairId);
@@ -191,19 +201,23 @@ const createPair = (pairType, pairNumber, pairDay, pairName, pairRoom, teacherNa
         setText(pair.find(".pair-type"), pairTypeString);
         setText(pair.find(".pair-name"), pairName.name);
         pair.find(".pair-name").attr('pair-name-id', pairName.id);
+
         setText(pair.find(".pair-room"), pairRoom.number);
-        pair.find(".pair-room").attr('pair-room-id', pairRoom.id)
+        pair.find(".pair-room").attr('pair-room-id', pairRoom.id);
+
         setText(pair.find(".teacher-name"), teacherName.name);
         pair.find(".teacher-name").attr('pair-teacher-id', teacherName.id)
     }
 
     pair.addClass('pair-cell');
     pair.removeClass("d-none");
+
     return pair;
 }
 
 const loadTimetable = (groupId, startDate, endDate, func) => {
     let url = hostname + "/api/v1/lessons/group/" + groupId + "?startDate=" + startDate + "&endDate=" + endDate;
+
     fetch(url).then((response) => {
         if (response.ok) {
             return response.json();
@@ -223,7 +237,9 @@ const changeDays = (week) => {
     for (let i = 0; i < 6; i++) {
         let dayName = getDayName(week[i]);
         let dayInf = $(chooseDay(i+1)).find('.day-date');
+
         setText(dayInf, dayName);
+
         $(chooseDay(i+1)).attr('day-date', week[i]);
     }
 }
@@ -231,14 +247,17 @@ const changeDays = (week) => {
 const createTimetableMatrix = (response) => {
     let pairsArray = response.lessons;
     let timetableMatrix = [];
+
     for(let i = 0; i < 6; i++) {
         timetableMatrix[i] = [];
     }
+
     for (let i = 0; i < 6; i++) {
         for (let j =  0; j < pairsOnDayAmount; j++) {
             timetableMatrix[i][j] = {};
         }
     }
+
     for (let i = 0; i < pairsArray.length; i++) {
         let pairId = pairsArray[i].id;
         let pairName = {
@@ -257,6 +276,7 @@ const createTimetableMatrix = (response) => {
         let day = date.getDay();
         let lessonType = pairsArray[i].lessonType;
         let pairNumber = pairsArray[i].timeslot.sequenceNumber;
+
         timetableMatrix[day-1][pairNumber-1] = {
             pairNumber: pairNumber,
             pairDay: day,
@@ -267,6 +287,7 @@ const createTimetableMatrix = (response) => {
             id: pairId
         }
     }
+
     return timetableMatrix;
 }
 

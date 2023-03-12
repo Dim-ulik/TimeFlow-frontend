@@ -63,6 +63,7 @@ const changeDate = () => {
     let weekInput = $("#week-date");
     let localWeek = localStorage.getItem('week');
     let date = getRightDateFormat(new Date());
+
     if (localWeek === null) {
         weekInput.attr('value', date);
         localStorage.setItem('week', date);
@@ -70,6 +71,7 @@ const changeDate = () => {
     else {
         weekInput.attr('value', localWeek);
     }
+
     let week = getWeek(weekInput.val());
     changeDays(week);
 }
@@ -107,9 +109,11 @@ const createFreeDay = (day) => {
 
 const checkLastEmptyPair = (matrix, i, j) => {
     let emptyCount = 0;
+
     for(let x = j+1; x < matrix[i].length; x++) {
         if (jQuery.isEmptyObject(matrix[i][x])) emptyCount++;
     }
+
     return (emptyCount + j) === (matrix[i].length - 1);
 }
 
@@ -119,6 +123,7 @@ const checkEmptyDay = (day) => {
             return false;
         }
     }
+
     return true;
 }
 
@@ -146,11 +151,13 @@ const showTimetable = (matrix) => {
 const chooseLocalGroup = () => {
     let localGroup = localStorage.getItem('group');
     selectOption('groups-list', localGroup);
+
     validation();
 }
 
 const loadGroups = () => {
     let url = hostname + "/api/v1/groups";
+
     fetch(url).then((response) => {
         if (response.ok) {
             return response.json();
