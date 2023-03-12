@@ -4,6 +4,10 @@ import logOut from "../navbar/logOut.js";
 const pageSize = 5;
 
 $(document).ready(function () {
+  if (localStorage.getItem('accessToken') === null) {
+    window.location.href = '../authorize/index.html';
+    return;
+  }
   if (localStorage.getItem('location') == null || localStorage.getItem('location') == 'schedule') {
     localStorage.setItem('location', 'users_list')
   }
