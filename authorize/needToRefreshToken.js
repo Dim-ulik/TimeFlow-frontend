@@ -5,8 +5,8 @@ function needToRefreshToken(response) {
         refreshToken()
     } else if (response.status == 451) {
         localStorage.removeItem('ROLE')
-        localStorage.removeItem('accessToken') 
-        localStorage.removeItem('refreshToken') 
+        localStorage.removeItem('accessToken')
+        localStorage.removeItem('refreshToken')
         location.href = './index.html'
     }
 }
