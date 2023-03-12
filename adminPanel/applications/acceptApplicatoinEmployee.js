@@ -1,3 +1,5 @@
+import needToRefreshToken from "../../authorize/needToRefreshToken.js"
+
 function acceptApplicationEmployee(id, postIds, teacherId) {
     fetch('http://94.103.87.164:8081/api/v1/employee-posts', {
         headers: {

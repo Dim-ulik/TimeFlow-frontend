@@ -1,3 +1,5 @@
+import needToRefreshToken from "./needToRefreshToken.js";
+
 function checkStatus() {
     fetch('http://94.103.87.164:8081/api/v1/account/employee', {
         headers: {
