@@ -6,17 +6,25 @@ function loadTimeslots() {
     let url = hostname + "/api/v1/timeslots";
     fetch(url).then((response) => {
         if (response.ok) {
-            return response.json();
+            setTimetableData(response);
         }
         else {
             return 0;
         }
-    }).then((response) => {
-        pairsOnDayAmount = response.length;
-        for (let i = 0; i < pairsOnDayAmount; i++) {
-            timesList[i] = {time: response[i].beginTime + " - " + response[i].endTime, timeslotId: response[i].id};
-        }
     });
+}
+
+const setTimetableData = (jsonData) => {
+    let data = jsonData.json();
+    pairsOnDayAmount = data.length;
+
+    for (let i = 0; i < pairsOnDayAmount; i++) {
+        timesList[i] = {time: createStringPairTime(data[i].beginTime, data[i].endTime), timeslotId: data[i].id};
+    }
+}
+
+const createStringPairTime = (beginTime, endTime) => {
+    return beginTime + " - " + endTime;
 }
 
 const getPairTime = (pairNumber) => {
@@ -40,13 +48,16 @@ const getRightDateFormat = (date) => {
     let year = date.getFullYear();
     let month = date.getMonth()+1;
     let day = date.getDate();
+
     if (month < 10) {
         month = "0" + month;
     }
+
     if (day < 10) {
         day = "0" + day;
     }
-    return `${year}-${month}-${day}`;
+
+    return year + "-" + month + "-" + day;
 }
 
 const getWeek = (dataDate) => {
