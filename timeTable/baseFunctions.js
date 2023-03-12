@@ -270,8 +270,9 @@ const createTimetableMatrix = (response) => {
     return timetableMatrix;
 }
 
-const checkToken = () => {
-
-}
-
+$(document).ready(function () {
+    $("#admin-btn").click(function () {
+        window.location.href = '../adminPanel/adminPanel.html';
+    });
+});
 

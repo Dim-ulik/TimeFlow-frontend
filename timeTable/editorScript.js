@@ -28,9 +28,6 @@ $(document).ready(function() {
                 loadTimetable(group, week[0], week[week.length - 1], createTimetableToEdit);
                 $(".btn-close").trigger("click");
             }
-            if (response.status === 450) {
-                window.location.href = '../authorize/index.html';
-            }
         });
     });
 
@@ -79,12 +76,7 @@ $(document).ready(function() {
                 $(".btn-close").trigger("click");
             }
             else {
-                if (response.status === 450) {
-                    window.location.href = '../authorize/index.html';
-                }
-                else {
-                    alert("Невозможно добавить пару - произошло наложение");
-                }
+                alert("Невозможно добавить пару - произошло наложение");
             }
         });
     });
@@ -109,12 +101,7 @@ $(document).ready(function() {
                 $(".btn-close").trigger("click");
             }
             else {
-                if (response.status === 450) {
-                    window.location.href = '../authorize/index.html';
-                }
-                else {
-                    alert("Невозможно добавить пару - произошло наложение");
-                }
+                alert("Невозможно добавить пару - произошло наложение");
             }
         });
     });
@@ -140,9 +127,6 @@ const deletePair = (cellId) => {
             clearAllTimeslots();
             loadTimetable(group, week[0], week[week.length - 1], createTimetableToEdit);
             $(".btn-close").trigger("click");
-        }
-        else {
-            window.location.href = '../authorize/index.html';
         }
     });
 }
