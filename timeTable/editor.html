@@ -18,10 +18,11 @@
 <body>
 <nav class="navbar navbar-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <img src="./images/logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top logo">
+        <a class="navbar-brand" draggable="false">
+            <img src="./images/logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top logo" draggable="false">
             <span class="navbar-name">TimeFlow</span>
         </a>
+        <button type="button" class="btn time-flow-button admin-btn" id="admin-btn">Перейти в панель администратора</button>
         <button type="button" class="btn time-flow-button">Выйти</button>
     </div>
 </nav>
@@ -30,15 +31,15 @@
         <div class="row group-information mt-4">
             <div class="col-xl-5 col-lg-7">
                 <span>Редактирование расписания для группы: </span>
-                <span id="group-number">972101</span>
+                <span id="group-number"></span>
             </div>
             <div class="col-xl-5 col-lg-5">
                 <span>Неделя: </span>
-                <span id="group-dates">20.02.2023 - 26.02.2023</span>
+                <span id="group-dates"></span>
             </div>
         </div>
         <div class="mt-2">
-            <button class="btn time-flow-button">Выйти из режима редактирования</button>
+            <button class="btn time-flow-button" id="go-back-btn">Выйти из режима редактирования</button>
         </div>
         <div class="row mt-4" id="timetable-body">
             <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12 day-col" id="monday-col">
@@ -91,7 +92,7 @@
             </div>
         </div>
         <div class="text-center mb-4">
-            <button class="btn delete-button" id="clear-timetable">Очистить раписание</button>
+            <button class="btn delete-button" id="clear-timetable">Очистить расписание</button>
         </div>
     </div>
 </div>
@@ -138,62 +139,82 @@
             </div>
             <div class="modal-body">
                 <div class="mb-3">
+                    <label for="select-pair-time" class="form-label">Время пары</label>
+                    <div>
+                        <select id="select-pair-time" class="form-select"></select>
+                    </div>
+                </div>
+                <div class="mb-3">
                     <label for="select-pair-type" class="form-label">Тип пары</label>
                     <div>
                         <select id="select-pair-type" class="form-select">
-                            <option id="LECTURE">Лекция</option>
-                            <option id="SEMINAR">Семинар</option>
-                            <option id="PRACTICAL-LESSON">Практика</option>
-                            <option id="LABORATORY-LESSON">Лабораторная</option>
-                            <option id="EXAM">Экзамен</option>
+                            <option value="LECTURE">Лекция</option>
+                            <option value="SEMINAR">Семинар</option>
+                            <option value="PRACTICAL_LESSON">Практика</option>
+                            <option value="LABORATORY_LESSON">Лабораторная</option>
+                            <option value="EXAM">Экзамен</option>
                         </select>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="select-pair-name" class="form-label">Предмет</label>
                     <div>
-                        <select id="select-pair-name" class="form-select">
-                            <option>Пример 1</option>
-                        </select>
+                        <select id="select-pair-name" class="form-select"></select>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="select-pair-room" class="form-label">Аудитория</label>
                     <div>
-                        <select id="select-pair-room" class="form-select">
-                            <option>2323</option>
-                            <option>233</option>
-                            <option>423</option>
-                            <option>523</option>
-                        </select>
+                        <select id="select-pair-room" class="form-select"></select>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="select-teacher" class="form-label">Преподаватель</label>
                     <div>
-                        <select id="select-teacher" class="form-select">
-                            <option>Пример 1</option>
+                        <select id="select-teacher" class="form-select"></select>
+                    </div>
+                </div>
+                <div id="repeat">
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="repeat-check">
+                            <label class="form-check-label" for="repeat-check">
+                                Повторять пару
+                            </label>
+                        </div>
+                    </div>
+                    <div class="mb-3 d-none repeat-block">
+                        <label for="select-repeat" class="form-label">Как часто повторять</label>
+                        <select id="select-repeat" class="form-select">
+                            <option value="2">Эта неделя и следующая</option>
+                            <option value="3">Эта неделя и 2 следующих</option>
+                            <option value="4">Эта неделя и 3 следующих</option>
+                            <option value="5">Эта неделя и 4 следующих</option>
+                            <option value="6">Эта неделя и 5 следующих</option>
+                            <option value="7">Эта неделя и 6 следующих</option>
+                            <option value="8">Эта неделя и 7 следующих</option>
+                            <option value="9">Эта неделя и 8 следующих</option>
+                            <option value="10">Эта неделя и 9 следующих</option>
+                            <option value="11">Эта неделя и 10 следующих</option>
+                            <option value="12">Эта неделя и 11 следующих</option>
+                            <option value="13">Эта неделя и 12 следующих</option>
+                            <option value="14">Эта неделя и 13 следующих</option>
+                            <option value="15">Эта неделя и 14 следующих</option>
+                            <option value="16">Эта неделя и 15 следующих</option>
+                            <option value="17">Эта неделя и 16 следующих</option>
+                            <option value="18">Эта неделя и 17 следующих</option>
+                            <option value="19">Эта неделя и 18 следующих</option>
+                            <option value="20">Эта неделя и 19 следующих</option>
+                            <option value="21">Эта неделя и 20 следующих</option>
+                            <option value="22">Эта неделя и 21 следующих</option>
                         </select>
                     </div>
                 </div>
-                <div class="mb-3">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="repeat-check">
-                        <label class="form-check-label" for="repeat-check">
-                            Повторять пару
-                        </label>
-                    </div>
-                </div>
-                <div class="mb-3 d-none repeat-block">
-                    <label for="select-repeat" class="form-label">Как часто повторять</label>
-                    <select id="select-repeat" class="form-select">
-                        <option>Пример 1</option>
-                    </select>
-                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn delete-button">Удалить пару</button>
-                <button type="button" class="btn time-flow-button">Применить изменения</button>
+                <button type="button" class="btn delete-button" id="delete-pair-btn">Удалить пару</button>
+                <button type="button" class="btn time-flow-button" id="edit-pair-btn">Изменить</button>
+                <button type="button" class="btn time-flow-button" id="create-pair-btn">Создать</button>
             </div>
         </form>
     </div>

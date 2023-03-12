@@ -17,10 +17,11 @@
 <body>
 <nav class="navbar navbar-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <img src="./images/logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top logo">
+        <a class="navbar-brand" draggable="false">
+            <img src="./images/logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top logo" draggable="false">
             <span class="navbar-name">TimeFlow</span>
         </a>
+        <button type="button" class="btn time-flow-button admin-btn" id="admin-btn">Перейти в панель администратора</button>
         <button type="button" class="btn time-flow-button">Выйти</button>
     </div>
 </nav>
@@ -39,8 +40,8 @@
             <button class="btn time-flow-button ms-md-2 ms-sm-2 ms-2" id="btn-edit-timetable">Редактировать</button>
         </div>
         <div class="mt-sm-3 col-12 text-center mt-3">
-            <button class="btn week-slider align-middle"><span class="arrow">< </span>Предыдущая <span class="d-none d-sm-inline">неделя</span></button>
-            <button class="btn week-slider">Следующая <span class="d-none d-sm-inline">неделя</span> <span class="arrow">></span></button>
+            <button class="btn week-slider align-middle" id="last-week"><span class="arrow">< </span>Предыдущая <span class="d-none d-sm-inline">неделя</span></button>
+            <button class="btn week-slider" id="next-week">Следующая <span class="d-none d-sm-inline">неделя</span> <span class="arrow">></span></button>
         </div>
     </form>
    <div class="row">
@@ -96,14 +97,14 @@
 </div>
 
 <!-- Шаблон для свободного дня-->
-<div class="pair-cell free-day-cell no-pair d-none mb-4" id="free-day-template">
+<div class="free-day-cell no-pair d-none mb-4" id="free-day-template">
     <div class="pair-inf no-pair-inf">
         <div>На сегодня пар нет!</div>
     </div>
 </div>
 
 <!-- Шаблон для "Нет пары" -->
-<div class="pair-cell no-pair mb-4 d-none" id="no-pair-template">
+<div class="no-pair mb-4 d-none" id="no-pair-template">
     <div class="pair-inf no-pair-inf">
         <div class="pair-time"></div>
         <div>Пары нет</div>
@@ -111,7 +112,7 @@
 </div>
 
 <!-- Шаблон -->
-<div class="pair-cell pair-cell-hover d-none mb-4" id="pair-template">
+<div class="pair-cell-hover d-none mb-4" id="pair-template">
     <div class="pair-inf">
         <div class="pair-time"></div>
         <div class="pair-type"></div>

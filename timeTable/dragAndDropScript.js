@@ -1,10 +1,12 @@
 const pairElements = document.querySelector(`body`);
 let startId = 0;
 let ok = 0;
+let cellId;
 
 pairElements.addEventListener(`dragstart`, (evt) => {
     evt.target.classList.add(`selected`);
     startId = evt.target.parentNode.id;
+    cellId = evt.target.id;
 })
 
 pairElements.addEventListener(`dragover`, (evt) => {
@@ -22,7 +24,6 @@ pairElements.addEventListener(`dragover`, (evt) => {
 
 pairElements.addEventListener(`dragend`, (evt) => {
     evt.target.classList.remove(`selected`);
-    if (ok) $(`#${startId}`).empty();
-    appendPair(createFreeCell(startId[2]), startId[0], startId[2]);
+    if (ok) deletePair(cellId);
     $('.delete-view').addClass('d-none');
 });
