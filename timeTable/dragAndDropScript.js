@@ -1,3 +1,5 @@
+import deletePair from "./editorScript.js";
+
 const pairElements = document.querySelector(`body`);
 let startId = 0;
 let ok = 0;

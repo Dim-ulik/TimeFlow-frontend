@@ -135,6 +135,7 @@ const deletePair = (cellId) => {
         headers:
             new Headers ({ "Authorization" : "Bearer " + token, 'Content-Type': 'application/json'}),
     }).then((response) => {
+        needToRefreshToken(response)
         if (response.ok) {
             clearAllTimeslots();
             loadTimetable(group, week[0], week[week.length - 1], createTimetableToEdit);
@@ -397,3 +398,5 @@ $('.log-out-btn').click(function (e) {
     localStorage.setItem('location', $(this).attr('id'))
     location.href = '../adminPanel/adminPanel.html'
 });
+
+  export default deletePair;
