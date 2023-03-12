@@ -4,8 +4,10 @@ const ALL_LETTERS_WITH_HYPHEN = /^[А-Яа-я- ]+$/
 const ONLY_NUMBERS = /^\d+$/
 
 $(document).ready(function () {
+    $('.invalid-add-entity').toggleClass('d-none', true);
     $('select[name="enity"]').change(function (e) {
         e.preventDefault()
+        $('.invalid-add-entity').toggleClass('d-none', true);
         var el = $(this).val();
         if (el == 1) {
             view($('#teacher_form'), $('#classroom_form'), $('#subject_form'), $('#group_form'));
