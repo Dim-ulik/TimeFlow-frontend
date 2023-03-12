@@ -4,7 +4,7 @@ import logOut from "../navbar/logOut.js";
 const pageSize = 5;
 
 $(document).ready(function () {
-  if (localStorage.getItem('location') == null) {
+  if (localStorage.getItem('location') == null || localStorage.getItem('location') == 'schedule') {
     localStorage.setItem('location', 'users_list')
   }
   let activePage = localStorage.getItem('location');
