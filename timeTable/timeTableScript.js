@@ -5,9 +5,6 @@ $(document).ready(function () {
     changeDate();
     loadTimeslots();
 
-    localStorage.setItem('nav-location', 'schedule')
-
-
     $("#btn-show-timetable").click(function (e) {
         e.preventDefault();
         createTimetable($("#week-date").val(), $("#groups-list").val());

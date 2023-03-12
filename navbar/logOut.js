@@ -8,6 +8,7 @@ function logOut() {
   }).then(() => {
     localStorage.removeItem("refreshToken")
     localStorage.removeItem("accessToken")
+    localStorage.removeItem('ROLE')
 
     location.href = "../authorize/index.html"
   })
