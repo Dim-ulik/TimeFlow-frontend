@@ -4,22 +4,23 @@ function refreshToken() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json'
       },
-        body: {
-            "refreshToken": localStorage.getItem('refreshToken')
-        }
+        body: JSON.stringify({"refreshToken": localStorage.getItem('refreshToken')})
     })
     .then((response) => {
-        //console.log(response.json())        
+        console.log(response)        
         if (response.ok) {
             return response.json()
-            .then((json) => {
-                localStorage.setItem('accessToken', json.accessToken)
-                localStorage.setItem('refreshToken', json.refreshToken)
-            })
+        } else {
+            location.href = './index.html'
         }
     })
-    
+    .then((json) => {
+        localStorage.setItem('accessToken', json.accessToken)
+        localStorage.setItem('refreshToken', json.refreshToken)
+        location.reload()
+    })
 }
 
 

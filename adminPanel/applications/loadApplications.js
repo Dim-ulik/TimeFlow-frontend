@@ -11,6 +11,7 @@ function loadApllications(typeOfUser, pageNumber, pageSize, sortDirection = 'ASC
         }
     })
     .then((response) => {
+        needToRefreshToken(response)
         return response.json()
     })
     .then((json) => {

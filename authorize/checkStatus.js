@@ -5,6 +5,7 @@ function checkStatus() {
         },
     })
     .then((response) => {
+        needToRefreshToken(response)
         if (response.ok) {
             return response.json()
             .then((json) => {

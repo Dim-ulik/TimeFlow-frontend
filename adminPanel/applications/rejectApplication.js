@@ -6,6 +6,7 @@ function rejectApplication(typeOfUser, id) {
         }
     })
     .then ((response) => {
+        needToRefreshToken(response)
         if (response.ok) {
             $('.account-status').removeClass('d-none')
             location.reload()

@@ -6,6 +6,7 @@ function acceptApplicationScheduleMaker(id) {
         }
     })
     .then ((response) => {
+        needToRefreshToken(response)
         if (response.ok) {
             location.reload()
             return response.json()
