@@ -18,7 +18,7 @@ function checkStatus() {
                     case 'DENIED':
                         location.href = '../bannedPage/bannedPage.html'
                         break;
-                    case 'ACTIVATE':
+                    case 'ACTIVATED':
                         
                         for (let post of json.posts) {
                             if (post.postRole === 'ROLE_SCHEDULE_MAKER') {

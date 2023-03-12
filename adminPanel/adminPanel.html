@@ -117,7 +117,7 @@
                 <form class="subject-form add-entity-form d-none" id="subject_form">
                     <div class="mb-3">
                         <label class="form-label">Название предмета</label>
-                        <input id="subject" class="form-control upperFirst" placeholder="Английский язык" name="name">
+                        <input id="subject" class="form-control upperFirst" placeholder="Английский язык" name="subject">
                         <div class="invalid-feedback">Используйте кириллицу</div>
                     </div>
                     <button id="add" type="submit" class="btn time-flow-button mt-2">Добавить</button>
@@ -126,7 +126,7 @@
                 <form class="classroom-form add-entity-form d-none" id="classroom_form">
                     <div class="mb-3">
                         <label class="form-label">Номер аудитории</label>
-                        <input id="classroom" class="form-control" placeholder="220" name="number">
+                        <input id="classroom" class="form-control" placeholder="220" name="classroom">
                         <div class="invalid-feedback">Поле должно содержать только цифры</div>
                     </div>
                     <button id="add" type="submit" class="btn time-flow-button mt-2">Добавить</button>
@@ -135,8 +135,8 @@
                 <form class="group-form add-entity-form d-none" id="group_form">
                     <div class="mb-3">
                         <label class="form-label">Номер группы</label>
-                        <input id="group" class="form-control" placeholder="92101" name="number">
-                        <div class="invalid-feedback">Поле должно содержать только цифры</div>
+                        <input id="group" class="form-control" placeholder="921011" name="group">
+                        <div class="invalid-feedback">Поле должно содержать 6 цифр</div>
                     </div>
 
                     <button id="add" type="submit" class="btn time-flow-button mt-2">Добавить</button>
@@ -297,18 +297,18 @@
                                         <div class="overSelect"></div>
                                     </div>
                                     <div class="checkboxes">
-                                        <label for="one">
-                                            <input type="checkbox" class="teacher-checkbox" value="Преподаватель"/>Преподаватель</label>
+                                        <label class="ms-1" for="one">
+                                            <input type="checkbox" class="teacher-checkbox me-1" value="Преподаватель"/>Преподаватель</label>
                                             <div class="col-12 teachers p-2 d-none">
                                                 <select class="form-select teachers-list" aria-label="Default select example">
                                                     <option selected disabled>Преподаватель</option>
                                                     <option class="d-none" value="1" id="teacher-template">One</option>
                                                 </select>
                                             </div>
-                                        <label for="two">
-                                            <input type="checkbox" value="Администратор" />Администратор</label>
-                                        <label for="three">
-                                            <input type="checkbox" value="Составитель расписания" />Составитель</label>
+                                        <label class="ms-1" for="two">
+                                            <input type="checkbox" value="Администратор" class="me-1"/>Администратор</label>
+                                        <label class="ms-1" for="three">
+                                            <input type="checkbox" value="Составитель расписания" class="me-1"/>Составитель</label>
                                     </div>
                                 </div>
                             </div>
@@ -343,6 +343,6 @@
 <script src="../jquery/jquery.js"></script>
 <script src="../bootstrap/bootstrap.min.js"></script>
 <script type="module" src="adminPanel.js"></script>
-<script type="module" src="addEnityScript.js"></script>
+<script type="module" src="addEntityScript.js"></script>
 
 </html>

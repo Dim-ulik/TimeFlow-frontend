@@ -88,8 +88,9 @@ function isValid( formData ) {
         }
     }
 
+    let groupLength = 6
     if (formData.has('group')) {
-        if (!isFieldValid(formData.get('group')) || formData.get('group') == '') {
+        if (!isFieldValid(formData.get('group')) || formData.get('group').length != groupLength || formData.get('group') == '') {
             $('#group').toggleClass('is-invalid', true)
             isValidData = false
         } else {
@@ -112,7 +113,7 @@ $('.add-entity-form').submit(function (e) {
     e.preventDefault()
     $('.invalid-add-entity').toggleClass('d-none', true);
     let formData = new FormData(this)
-    console.log(JSON.stringify(Object.fromEntries(formData)))
+    console.log('aaaaa' + JSON.stringify(Object.fromEntries(formData)))
     $(`#${$(this).attr('id')} .form-control`).removeClass('is-invalid')
     handleFormSubmit($(this).attr('id'), formData)
 });
@@ -120,6 +121,20 @@ $('.add-entity-form').submit(function (e) {
 function handleFormSubmit(component, formData) {
     component = `${component.split('_', 1)}s`
     if (isValid(formData)) {
+        for (let key of formData.keys()) {
+            if (key == 'subject') {
+                formData.append('name', formData.get('subject'));
+                formData.delete('subject')
+            }
+            if (key == 'classroom') {
+                formData.append('number', formData.get('classroom'));
+                formData.delete('classroom')
+            }
+            if (key == 'group') {
+                formData.append('number', formData.get('group'));
+                formData.delete('group')
+            }
+        }
         console.log(JSON.stringify(Object.fromEntries(formData)))
         sendData(component, JSON.stringify(Object.fromEntries(formData)))
     }
