@@ -7,12 +7,12 @@ function rejectApplication(typeOfUser, id) {
             'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
         }
     })
-    .then ((response) => {
-        needToRefreshToken(response)
-        if (response.ok) {
-            $('.account-status').removeClass('d-none')
-            location.reload()
-        }
-    })
+        .then((response) => {
+            needToRefreshToken(response)
+            if (response.ok) {
+                $('.account-status').removeClass('d-none')
+                location.reload()
+            }
+        })
 }
 export default rejectApplication

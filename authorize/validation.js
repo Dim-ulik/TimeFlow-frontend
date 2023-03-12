@@ -5,7 +5,7 @@ const CONTRACT_NUMBER = /^\d{4}-\d{2}\/\d{2}$/
 const ONLY_LETTERS_AND_NUMBERS = /^[A-Za-z0-9]+$/
 
 
-$('#surname, #name').change(function (e) { 
+$('#surname, #name').change(function (e) {
     e.preventDefault();
     if (!isNameValid($(this).val()) || $(this).val() == '') {
         $(this).toggleClass('is-invalid', true)
@@ -14,7 +14,7 @@ $('#surname, #name').change(function (e) {
     }
 });
 
-$('#patronymic').change(function (e) { 
+$('#patronymic').change(function (e) {
     e.preventDefault();
     if (!isNameValid($(this).val())) {
         $(this).toggleClass('is-invalid', true)
@@ -23,7 +23,7 @@ $('#patronymic').change(function (e) {
     }
 });
 
-$('#contractNumber').change(function (e) { 
+$('#contractNumber').change(function (e) {
     e.preventDefault();
     if (!isContractNumberValid($(this).val()) || $(this).val() == '') {
         $(this).toggleClass('is-invalid', true)
@@ -32,7 +32,7 @@ $('#contractNumber').change(function (e) {
     }
 });
 
-$('#email').change(function (e) { 
+$('#email').change(function (e) {
     e.preventDefault();
     if (!isEmailValid($(this).val()) || $(this).val() == '') {
         $(this).toggleClass('is-invalid', true)
@@ -42,20 +42,20 @@ $('#email').change(function (e) {
 });
 
 
-$('#password').change(function (e) { 
+$('#password').change(function (e) {
     e.preventDefault();
     let max_password_len = 32
     let min_password_len = 8
     if (!isNotContainsSpecialSumbols($(this).val()) ||
-    $(this).val().length < min_password_len ||
-    $(this).val().length > max_password_len) {
+        $(this).val().length < min_password_len ||
+        $(this).val().length > max_password_len) {
         $(this).toggleClass('is-invalid', true)
     } else {
         $(this).removeClass('is-invalid')
     }
 });
 
-$('#password-check').change(function (e) { 
+$('#password-check').change(function (e) {
     e.preventDefault();
     if ($(this).val() !== $(this).val()) {
         $(this).toggleClass('is-invalid', true)
@@ -65,7 +65,7 @@ $('#password-check').change(function (e) {
 
 });
 
-function isValid( formData ) {
+function isValid(formData) {
     let isValidData = true
     if (!isNameValid(formData.get('surname')) || formData.get('surname') == '') {
         $('#surname').toggleClass('is-invalid', true)
@@ -73,7 +73,7 @@ function isValid( formData ) {
     } else {
         $('#surname').removeClass('is-invalid')
     }
-    
+
     if (!isNameValid(formData.get('name')) || formData.get('name') == '') {
         $('#name').toggleClass('is-invalid', true)
         isValidData = false
@@ -105,8 +105,8 @@ function isValid( formData ) {
     let max_password_len = 32
     let min_password_len = 8
     if (!isNotContainsSpecialSumbols(formData.get('password')) ||
-    formData.get('password').length < min_password_len ||
-    formData.get('password').length > max_password_len) {
+        formData.get('password').length < min_password_len ||
+        formData.get('password').length > max_password_len) {
         $('#password').toggleClass('is-invalid', true)
         isValidData = false
     } else {
