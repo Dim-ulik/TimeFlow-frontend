@@ -39,7 +39,7 @@ body {
     border-radius: 5px;
     width: 110px;
     height: 98px;
-    margin-left: 500px;
+    margin: auto;
     background-color: rgb(40, 38, 38);
     animation: dip 1s;
     animation-delay: 1s;
